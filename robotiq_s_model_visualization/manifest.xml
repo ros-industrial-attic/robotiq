@@ -1,0 +1,14 @@
+<package>
+  <description brief="robotiq_s_model_visualization">
+
+     robotiq
+
+  </description>
+  <author>Shaun Edwards</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robotiq_s_model_visualization</url>
+
+</package>
+
+

@@ -1,0 +1,3 @@
+pymodbus:
+  ubuntu: 
+    python-pymodbus

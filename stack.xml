@@ -1,0 +1,10 @@
+<stack>
+  <description brief="Stack for Robotiq grippers users">
+    Code to control and visualize Robotiq grippers
+  </description>
+  <author>Nicolas Lauzier (Robotiq inc.)</author>
+  <license>BSD</license>  
+  <url>http://ros.org/wiki/robotiq</url>
+  <depend stack="ros" /> <!-- roslib -->
+  <depend stack="ros_comm" /> <!-- rostest, roscpp, message_filters -->
+</stack>

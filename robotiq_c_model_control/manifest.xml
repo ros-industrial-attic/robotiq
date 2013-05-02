@@ -1,0 +1,14 @@
+<package>
+  <description brief="Robotiq C-Model">
+
+     Package to control a C-Model Gripper from Robotiq inc.
+
+  </description>
+  <author>Nicolas Lauzier (Robotiq inc.)</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robotiq_c_model_control</url>
+
+</package>
+
+

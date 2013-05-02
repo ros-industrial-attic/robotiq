@@ -1,0 +1,14 @@
+<package>
+  <description brief="Robotiq Modbus TCP Communication">
+
+     A stack to communicate with Robotiq grippers using the Modbus TCP protocol
+
+  </description>
+  <author>Nicolas Lauzier (Robotiq inc.)</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robotiq_modbus_tcp</url>
+  <rosdep name="python-pymodbus" />
+</package>
+
+
