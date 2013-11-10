@@ -18,6 +18,8 @@ add_message_files(
   CModel_robot_output.msg
 )
 
+catkin_python_setup()
+
 generate_messages()
 
 ###################################

@@ -17,6 +17,8 @@ add_message_files(
   SModel_robot_output.msg
 )
 
+catkin_python_setup()
+
 generate_messages()
 
 ###################################
