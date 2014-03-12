@@ -4,7 +4,7 @@
 <!-- IT INCLUDES ONLY FIXED JOINTS (WHICH ARE NOT PUBLISHED BY THE JOINT -->
 <!-- STATE PUBLISHER.                                                    -->
 <robot name="s-model_mesh" xmlns:xacro="http://ros.org/wiki/xacro">
-	<include filename="$(find robotiq_s_model_visualization)/cfg/s-model_mesh_macro.xacro" />
+	<xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_mesh_macro.xacro" />
 	<xacro:s-model_mesh prefix=""/>
 </robot>
 
