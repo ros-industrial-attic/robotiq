@@ -28,6 +28,11 @@ finger(i.e. finger_1, etc...).
 					<color rgba="0 1 1 1"/>
 				</material>
 			</collision>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="0.05"/>
+                <inertia ixx="0.01" ixy="-0.00002" ixz="0.00001" iyy="0.0008" iyz="0" izz="0.001" />
+            </inertial>         
 		</link>
 		<link name="${prefix}link_1">
 			<visual>
@@ -44,6 +49,11 @@ finger(i.e. finger_1, etc...).
 				</geometry>
 				<material name="yellow"/>
 			</collision>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="0.15"/>
+                <inertia ixx="0.001859" ixy="-0.000376" ixz="0.000028" iyy="0.012756" iyz="0" izz="0.0024" />
+            </inertial>
 		</link>
 		<link name="${prefix}link_2">
 			<!--
@@ -65,6 +75,11 @@ finger(i.e. finger_1, etc...).
 				</geometry>
 				<material name="yellow"/>
 			</collision>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="0.15"/>
+                <inertia ixx="0.001859" ixy="-0.000376" ixz="0.000028" iyy="0.012756" iyz="0" izz="0.0024" />
+            </inertial>
 		</link>
 		<link name="${prefix}link_3">
 			<visual>
@@ -81,6 +96,11 @@ finger(i.e. finger_1, etc...).
 				</geometry>
 				<material name="yellow"/>
 			</collision>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="0.05"/>
+                <inertia ixx="0.001239" ixy="-0.000251" ixz="0.000019" iyy="0.00085" iyz="0" izz="0.001632" />
+            </inertial>
 		</link>
 
 		<!-- end of link list -->

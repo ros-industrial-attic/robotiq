@@ -7,7 +7,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
 
 -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-	<include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
+	<xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
 	<xacro:macro name="s-model_articulated" params="prefix">
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_1_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_2_"/>
@@ -31,6 +31,12 @@ there are multiple hands then a prefix followed by an "_" is needed.
 				</material>
 			</collision>
 		</link>
+        
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1.3"/>
+            <inertia ixx="0.006012" ixy="0.000079" ixz="-0.00024" iyy="0.012892" iyz="0" izz="0.002435" />
+        </inertial>
 		<!-- end of link list -->
 		<!-- joint list -->
 
