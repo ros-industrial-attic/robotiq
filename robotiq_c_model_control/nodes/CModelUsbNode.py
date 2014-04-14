@@ -45,7 +45,7 @@ import roslib; roslib.load_manifest('robotiq_c_model_control')
 roslib.load_manifest('robotiq_modbus_tcp')
 import rospy
 import robotiq_c_model_control.baseCModel
-import robotiq_modbus_usb.comModbusUsb
+import robotiq_modbus_tcp.comModbusUsb
 import os, sys
 from robotiq_c_model_control.msg import _CModel_robot_input  as inputMsg
 from robotiq_c_model_control.msg import _CModel_robot_output as outputMsg
@@ -54,7 +54,7 @@ def mainLoop(device):
     
     #Gripper is a C-Model with a TCP connection
     gripper = robotiq_c_model_control.baseCModel.robotiqBaseCModel()
-    gripper.client = robotiq_modbus_usb.comModbusUsb.communication()
+    gripper.client = robotiq_modbus_tcp.comModbusUsb.communication()
 
     #We connect to the address received as an argument
     gripper.client.connectToDevice(device)
