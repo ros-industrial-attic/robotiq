@@ -42,5 +42,5 @@ catkin_package(
 # See http://ros.org/doc/groovy/api/catkin/html/adv_user_guide/variables.html
 
 install(PROGRAMS nodes/CModelSimpleController.py nodes/CModelStatusListener.py 
-	nodes/CModelTcpNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+    nodes/CModelTcpNode.py nodes/CModelRtuNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
