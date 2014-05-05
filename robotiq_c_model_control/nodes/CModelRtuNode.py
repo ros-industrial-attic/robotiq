@@ -36,16 +36,16 @@
 # Revision $Id$
 
 """@package docstring
-ROS node for controling a Robotiq C-Model gripper using the Modbus TCP protocol.
+ROS node for controling a Robotiq C-Model gripper using the Modbus RTU protocol.
 
 The script takes as an argument the IP address of the gripper. It initializes a baseCModel object and adds a comModbusTcp client to it. It then loops forever, reading the gripper status and updating its command. The gripper status is published on the 'CModelRobotInput' topic using the 'CModel_robot_input' msg type. The node subscribes to the 'CModelRobotOutput' topic for new commands using the 'CModel_robot_output' msg type. Examples are provided to control the gripper (CModelSimpleController.py) and interpreting its status (CModelStatusListener.py).
 """
 
 import roslib; roslib.load_manifest('robotiq_c_model_control')
-roslib.load_manifest('robotiq_modbus_tcp')
+roslib.load_manifest('robotiq_modbus_rtu')
 import rospy
 import robotiq_c_model_control.baseCModel
-import robotiq_modbus_tcp.comModbusRtu
+import robotiq_modbus_rtu.comModbusRtu
 import os, sys
 from robotiq_c_model_control.msg import _CModel_robot_input  as inputMsg
 from robotiq_c_model_control.msg import _CModel_robot_output as outputMsg
@@ -54,7 +54,7 @@ def mainLoop(device):
     
     #Gripper is a C-Model with a TCP connection
     gripper = robotiq_c_model_control.baseCModel.robotiqBaseCModel()
-    gripper.client = robotiq_modbus_tcp.comModbusRtu.communication()
+    gripper.client = robotiq_modbus_rtu.comModbusRtu.communication()
 
     #We connect to the address received as an argument
     gripper.client.connectToDevice(device)

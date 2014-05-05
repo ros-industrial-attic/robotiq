@@ -38,9 +38,9 @@
 
 
 """@package docstring
-Module comModbusUsb: defines a class which communicates with Robotiq Grippers using the Modbus USB protocol. 
+Module comModbusRtu: defines a class which communicates with Robotiq Grippers using the Modbus RTU protocol. 
 
-The module depends on pymodbus (http://code.google.com/p/pymodbus/) for the Modbus USB client.
+The module depends on pymodbus (http://code.google.com/p/pymodbus/) for the Modbus RTU client.
 """
 
 from pymodbus.client.sync import ModbusSerialClient
