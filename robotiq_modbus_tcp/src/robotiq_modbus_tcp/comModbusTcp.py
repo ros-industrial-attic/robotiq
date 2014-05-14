@@ -42,7 +42,9 @@ The module depends on pymodbus (http://code.google.com/p/pymodbus/) for the Modb
 """
 
 from pymodbus.client.sync import ModbusTcpClient
+from pymodbus.register_read_message import ReadInputRegistersResponse
 from math import ceil
+import time
 
 class communication:	
 
@@ -79,7 +81,10 @@ class communication:
 
       #To do!: Implement try/except 
       #Get status from the device
-      response = self.client.read_input_registers(0, numRegs)
+      response = None
+      while not isinstance(response, ReadInputRegistersResponse):
+         response = self.client.read_input_registers(0, numRegs)
+         time.sleep(0.1)
 
       #Instantiate output as an empty list
       output = []
