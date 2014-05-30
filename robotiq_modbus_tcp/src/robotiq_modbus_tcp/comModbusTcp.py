@@ -45,11 +45,13 @@ from pymodbus.client.sync import ModbusTcpClient
 from pymodbus.register_read_message import ReadInputRegistersResponse
 from math import ceil
 import time
+import threading
 
-class communication:	
+class communication:
 
    def __init__(self):
       self.client = None
+      self.lock = threading.Lock()
       
    def connectToDevice(self, address):
       """Connection to the client - the method takes the IP address (as a string, e.g. '192.168.1.11') as an argument."""
@@ -72,8 +74,9 @@ class communication:
       for i in range(0, len(data)/2):
          message.append((data[2*i] << 8) + data[2*i+1])
 
-      #To do!: Implement try/except 
-      self.client.write_registers(0, message)
+      #To do!: Implement try/except
+      with self.lock:
+         self.client.write_registers(0, message)
 
    def getStatus(self, numBytes):
       """Sends a request to read, wait for the response and returns the Gripper status. The method gets the number of bytes to read as an argument"""
@@ -81,10 +84,8 @@ class communication:
 
       #To do!: Implement try/except 
       #Get status from the device
-      response = None
-      while not isinstance(response, ReadInputRegistersResponse):
+      with self.lock:
          response = self.client.read_input_registers(0, numRegs)
-         time.sleep(0.1)
 
       #Instantiate output as an empty list
       output = []
