@@ -123,7 +123,7 @@ def askForCommand(command):
     currentCommand += ', rGTO = ' + str(command.rGTO)
     currentCommand += ', rATR = ' + str(command.rATR)
 ##    currentCommand += ', rGLV = ' + str(command.rGLV)
-##    currentCommand += ', rICF = ' + str(command.rICF)
+    currentCommand += ', rICF = ' + str(command.rICF)
 ##    currentCommand += ', rICS = ' + str(command.rICS)
     currentCommand += ', rPRA = ' + str(command.rPRA)
     currentCommand += ', rSPA = ' + str(command.rSPA)
