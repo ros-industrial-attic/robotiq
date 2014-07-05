@@ -47,8 +47,10 @@ import rospy
 from robotiq_s_model_control.msg import _SModel_robot_output  as outputMsg
 from time import sleep
 
+icf_case = 0
 
 def genCommand(char, command):
+    global icf_case
     """Update the command according to the character entered by the user."""    
         
     if char == 'a':
@@ -82,11 +84,30 @@ def genCommand(char, command):
 
     #If the command entered is a int, assign this value to rPRA
     try: 
-        command.rPRA = int(char)
-        if command.rPRA > 255:
-            command.rPRA = 255
-        if command.rPRA < 0:
-            command.rPRA = 0
+        if icf_case == 0 or icf_case == 1:
+            command.rPRA = int(char)
+            if command.rPRA > 255:
+                command.rPRA = 255
+            if command.rPRA < 0:
+                command.rPRA = 0
+        if icf_case == 2:
+            command.rPRB = int(char)
+            if command.rPRB > 255:
+                command.rPRB = 255
+            if command.rPRB < 0:
+                command.rPRB = 0
+        if icf_case == 3:
+            command.rPRC = int(char)
+            if command.rPRC > 255:
+                command.rPRC = 255
+            if command.rPRC < 0:
+                command.rPRC = 0
+        if icf_case == 4:
+            command.rPRS = int(char)
+            if command.rPRS > 255:
+                command.rPRS = 255
+            if command.rPRS < 0:
+                command.rPRS = 0
     except ValueError:
         pass                    
         
@@ -111,6 +132,18 @@ def genCommand(char, command):
         if command.rFRA < 0:
             command.rFRA = 0
 
+    if char == 'y':
+        icf_case += 1
+        if icf_case > 4:
+            icf_case = 0
+        command.rICF = 0
+        command.rICS = 0
+        if icf_case != 0:
+            command.rICF = 1
+        if icf_case == 4:
+            command.rICS = 1
+
+
     return command
         
 
@@ -130,15 +163,15 @@ def askForCommand(command):
     currentCommand += ', rFRA = ' + str(command.rFRA)
 
     #We only show the simple control mode
-##    currentCommand += ', rPRB = ' + str(command.rPRB)
-##    currentCommand += ', rSPB = ' + str(command.rSPB)
-##    currentCommand += ', rFRB = ' + str(command.rFRB)
-##    currentCommand += ', rPRC = ' + str(command.rPRC)
-##    currentCommand += ', rSPC = ' + str(command.rSPC)
-##    currentCommand += ', rFRC = ' + str(command.rFRC)
-##    currentCommand += ', rPRS = ' + str(command.rPRS)
-##    currentCommand += ', rSPS = ' + str(command.rSPS)
-##    currentCommand += ', rFRS = ' + str(command.rFRS)
+    currentCommand += ', rPRB = ' + str(command.rPRB)
+    currentCommand += ', rSPB = ' + str(command.rSPB)
+    currentCommand += ', rFRB = ' + str(command.rFRB)
+    currentCommand += ', rPRC = ' + str(command.rPRC)
+    currentCommand += ', rSPC = ' + str(command.rSPC)
+    currentCommand += ', rFRC = ' + str(command.rFRC)
+    currentCommand += ', rPRS = ' + str(command.rPRS)
+    currentCommand += ', rSPS = ' + str(command.rSPS)
+    currentCommand += ', rFRS = ' + str(command.rFRS)
 
     print currentCommand
 
@@ -151,7 +184,8 @@ def askForCommand(command):
     strAskForCommand += 'p: Pinch mode\n'
     strAskForCommand += 'w: Wide mode\n'
     strAskForCommand += 's: Scissor mode\n'
-    strAskForCommand += '(0-255): Go to that position\n'
+    strAskForCommand += 'y: Individual Control Finger (ICF)\n'
+    strAskForCommand += '(0-255): All fingers go to that position (Finger A on ICF)\n'
     strAskForCommand += 'f: Faster\n'
     strAskForCommand += 'l: Slower\n'
     strAskForCommand += 'i: Increase force\n'
