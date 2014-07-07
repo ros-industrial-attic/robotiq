@@ -55,7 +55,7 @@ def SModelStatusListener():
     """Initialize the node and subscribe to the SModelRobotInput topic."""
 
     rospy.init_node('SModelStatusListener')
-    rospy.Subscriber("SModelRobotInput", inputMsg.SModel_robot_input, printStatus)
+    rospy.Subscriber("/robotiq_hands/l_hand/SModelRobotInput", inputMsg.SModel_robot_input, printStatus)
     rospy.spin()
 
 def statusInterpreter(status):
