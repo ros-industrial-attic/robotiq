@@ -200,7 +200,7 @@ def publisher():
 
     rospy.init_node('SModelSimpleController')
     
-    pub = rospy.Publisher('SModelRobotOutput', outputMsg.SModel_robot_output)
+    pub = rospy.Publisher('/robotiq_hands/l_hand/SModelRobotOutput', outputMsg.SModel_robot_output)
 
     command = outputMsg.SModel_robot_output();
 
