@@ -48,9 +48,11 @@ from robotiq_s_model_control.msg import _SModel_robot_output  as outputMsg
 from time import sleep
 
 icf_case = 0
+ics_case = 0
 
 def genCommand(char, command):
     global icf_case
+    global ics_case
     """Update the command according to the character entered by the user."""    
         
     if char == 'a':
@@ -132,6 +134,24 @@ def genCommand(char, command):
         if command.rFRA < 0:
             command.rFRA = 0
 
+    if char == 't':
+        if command.rICS == 0:
+            command.rICS -= 1
+        else
+            command.rICS -= 0
+
+
+    if char == 'm':
+        command.rPRS += 5
+        if command.rPRS > 255:
+            command.rPRS = 255
+
+    if char == 'n':
+        command.rPRS -= 5
+        if command.rPRS < 0:
+            command.rPRS = 0
+
+
     if char == 'y':
         icf_case += 1
         if icf_case > 4:
@@ -157,7 +177,7 @@ def askForCommand(command):
     currentCommand += ', rATR = ' + str(command.rATR)
 ##    currentCommand += ', rGLV = ' + str(command.rGLV)
     currentCommand += ', rICF = ' + str(command.rICF)
-##    currentCommand += ', rICS = ' + str(command.rICS)
+    currentCommand += ', rICS = ' + str(command.rICS)
     currentCommand += ', rPRA = ' + str(command.rPRA)
     currentCommand += ', rSPA = ' + str(command.rSPA)
     currentCommand += ', rFRA = ' + str(command.rFRA)
@@ -185,6 +205,7 @@ def askForCommand(command):
     strAskForCommand += 'w: Wide mode\n'
     strAskForCommand += 's: Scissor mode\n'
     strAskForCommand += 'y: Individual Control Finger (ICF)\n'
+    strAskForCommand += 't: Individual Control Scissors (ICS)\n'
     strAskForCommand += '(0-255): All fingers go to that position (Finger A on ICF)\n'
     strAskForCommand += 'f: Faster\n'
     strAskForCommand += 'l: Slower\n'
