@@ -128,11 +128,17 @@ def genCommand(char, command):
         command.rFRA += 25
         if command.rFRA > 255:
             command.rFRA = 255
+        command.rFRS += 25
+        if command.rFRS > 255:
+            command.rFRS = 255
             
     if char == 'd':
         command.rFRA -= 25
         if command.rFRA < 0:
             command.rFRA = 0
+        command.rFRS -= 25
+        if command.rFRS < 0:
+            command.rFRS = 0
 
     if char == 't':
         if command.rICS == 0:
