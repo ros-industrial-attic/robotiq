@@ -136,9 +136,9 @@ def genCommand(char, command):
 
     if char == 't':
         if command.rICS == 0:
-            command.rICS -= 1
+            command.rICS = 1
         else:
-            command.rICS -= 0
+            command.rICS = 0
 
 
     if char == 'm':
