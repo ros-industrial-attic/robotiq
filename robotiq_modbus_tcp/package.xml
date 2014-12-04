@@ -14,6 +14,7 @@
 
   <run_depend>python-pymodbus</run_depend>
   <run_depend>rospy</run_depend>
+  <run_depend>python-pymodbus</run_depend>  
 
   <export>
 
