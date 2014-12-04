@@ -64,4 +64,5 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		</joint>
 		<!-- end of joint list -->
 	</xacro:macro>
+
 </robot>
