@@ -12,7 +12,12 @@ there are multiple hands then a prefix followed by an "_" is needed.
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_1_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_2_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_middle_"/>
-		<!-- link list -->
+
+        <!-- Gazebo plugin for ROS Control -->
+        <!-- <gazebo> 
+            <plugin name="ros_control" filename="libgazebo_ros_control.so"/> -->
+		
+                <!-- link list -->
 		<link name="${prefix}palm">
 			<visual>
 				<geometry>
