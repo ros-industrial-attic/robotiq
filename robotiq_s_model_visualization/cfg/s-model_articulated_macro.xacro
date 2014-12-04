@@ -8,11 +8,16 @@ there are multiple hands then a prefix followed by an "_" is needed.
 -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
-	<xacro:macro name="s-model_articulated" params="prefix parent *origin">
+	<xacro:macro name="s-model_articulated" params="prefix">
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_1_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_2_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_middle_"/>
-		<!-- link list -->
+
+        <!-- Gazebo plugin for ROS Control -->
+        <!-- <gazebo> 
+            <plugin name="ros_control" filename="libgazebo_ros_control.so"/> -->
+		
+                <!-- link list -->
 		<link name="${prefix}palm">
 			<visual>
 				<geometry>
@@ -40,12 +45,6 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		<!-- end of link list -->
 		<!-- joint list -->
 
-    <!-- Joint to conect with robot parent-->
-    <joint name="${prefix}robotiq_hand_joint" type="fixed">
-      <insert_block name="origin"/>
-      <parent link="${parent}"/>
-      <child link="${prefix}palm"/>
-    </joint>
 		<!-- WARNING: LIMITS NOT CORRECT -->
 		<joint name="${prefix}palm_finger_1_joint" type="revolute">
 			<parent link="${prefix}palm"/>
