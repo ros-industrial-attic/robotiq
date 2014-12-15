@@ -30,9 +30,11 @@ there are multiple hands then a prefix followed by an "_" is needed.
 				</geometry>
 			</collision>
 		</link>
-                <gazebo reference="${prefix}palm">
-                    <material>Gazebo/Black</material>
-                </gazebo>
+
+
+        <gazebo reference="${prefix}palm">
+            <selfCollide>true</selfCollide>
+        </gazebo>        
 
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>

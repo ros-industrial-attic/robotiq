@@ -28,9 +28,10 @@ finger(i.e. finger_1, etc...).
                 <inertia ixx="0.01" ixy="-0.00002" ixz="0.00001" iyy="0.0008" iyz="0" izz="0.001" />
             </inertial>         
 		</link>
-  <gazebo reference="${prefix}link_0">
-                            <material>Gazebo/Black</material>
-                        </gazebo>
+                <gazebo reference="${prefix}link_0">
+                    <material>Gazebo/Black</material>
+                    <selfCollide>true</selfCollide>
+                </gazebo>
 
 		<link name="${prefix}link_1">
 			<visual>
@@ -51,9 +52,10 @@ finger(i.e. finger_1, etc...).
                 <inertia ixx="0.001859" ixy="-0.000376" ixz="0.000028" iyy="0.012756" iyz="0" izz="0.0024" />
             </inertial>
 		</link>
- <gazebo reference="${prefix}link_1">
+                 <gazebo reference="${prefix}link_1">
                             <material>Gazebo/Black</material>
-                        </gazebo>
+                            <selfCollide>true</selfCollide>
+                 </gazebo>
 		<link name="${prefix}link_2">
 			<!--
 			NOTE: This link has an offset in the z-direction based on the models that were
@@ -80,6 +82,7 @@ finger(i.e. finger_1, etc...).
 		</link>
  <gazebo reference="${prefix}link_2">
 				<material>Gazebo/Black</material>
+                                <selfCollide>true</selfCollide>
                                 </gazebo>
 		<link name="${prefix}link_3">
 			<visual>
@@ -102,6 +105,7 @@ finger(i.e. finger_1, etc...).
 		</link>
 <gazebo reference="${prefix}link_2">
 				<material>Gazebo/Black</material>
+                                <selfCollide>true</selfCollide>
                                 </gazebo>
 		<!-- end of link list -->
 		<!-- joint list -->
