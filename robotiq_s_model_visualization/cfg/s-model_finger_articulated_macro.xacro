@@ -30,7 +30,7 @@ finger(i.e. finger_1, etc...).
 		</link>
                 <gazebo reference="${prefix}link_0">
                     <material>Gazebo/Black</material>
-                    <selfCollide>true</selfCollide>
+                    <selfCollide>false</selfCollide>
                 </gazebo>
 
 		<link name="${prefix}link_1">
@@ -54,7 +54,7 @@ finger(i.e. finger_1, etc...).
 		</link>
                  <gazebo reference="${prefix}link_1">
                             <material>Gazebo/Black</material>
-                            <selfCollide>true</selfCollide>
+                            <selfCollide>false</selfCollide>
                  </gazebo>
 		<link name="${prefix}link_2">
 			<!--
@@ -82,7 +82,7 @@ finger(i.e. finger_1, etc...).
 		</link>
  <gazebo reference="${prefix}link_2">
 				<material>Gazebo/Black</material>
-                                <selfCollide>true</selfCollide>
+                                <selfCollide>false</selfCollide>
                                 </gazebo>
 		<link name="${prefix}link_3">
 			<visual>
@@ -105,7 +105,7 @@ finger(i.e. finger_1, etc...).
 		</link>
 <gazebo reference="${prefix}link_2">
 				<material>Gazebo/Black</material>
-                                <selfCollide>true</selfCollide>
+                                <selfCollide>false</selfCollide>
                                 </gazebo>
 		<!-- end of link list -->
 		<!-- joint list -->
