@@ -17,12 +17,12 @@ finger(i.e. finger_1, etc...).
 				</geometry>
 			</visual>
                         <!-- This collision link is broken and not proper, it prevents the whole gripper from being used in MoveIt! -->
-			<!-- <collision>	
+			<collision>	
 				<origin xyz="-0.0455 0.0414 0.036" rpy="0 3.1416 -1.57"/>
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.STL" />
 				</geometry>
-			</collision> -->
+			</collision> 
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <mass value="0.05"/>
@@ -31,7 +31,7 @@ finger(i.e. finger_1, etc...).
 		</link>
                 <gazebo reference="${prefix}link_0">
                     <material>Gazebo/Black</material>
-                    <selfCollide>false</selfCollide>
+                    <selfCollide>true</selfCollide>
                 </gazebo>
 
 		<link name="${prefix}link_1">
@@ -41,12 +41,12 @@ finger(i.e. finger_1, etc...).
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.STL" />
 				</geometry>
 			</visual>
-			<collision>
+			 <collision>
 				<origin xyz="0.050 -.028 0" rpy="0 0 -0.52"/>
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.STL" />
 				</geometry>
-			</collision>
+			</collision> 
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <mass value="0.15"/>
@@ -55,7 +55,7 @@ finger(i.e. finger_1, etc...).
 		</link>
                  <gazebo reference="${prefix}link_1">
                             <material>Gazebo/Black</material>
-                            <selfCollide>false</selfCollide>
+                            <selfCollide>true</selfCollide>
                  </gazebo>
 		<link name="${prefix}link_2">
 			<!--
@@ -69,12 +69,12 @@ finger(i.e. finger_1, etc...).
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.STL" />
 				</geometry>
 			</visual>
-			<collision>
+			 <collision>
 				<origin xyz="0.039 0 0.0075" rpy="0 0 0"/>
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.STL" />
 				</geometry>
-			</collision>
+			</collision> 
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <mass value="0.15"/>
@@ -83,7 +83,7 @@ finger(i.e. finger_1, etc...).
 		</link>
  <gazebo reference="${prefix}link_2">
 				<material>Gazebo/Black</material>
-                                <selfCollide>false</selfCollide>
+                                <selfCollide>true</selfCollide>
                                 </gazebo>
 		<link name="${prefix}link_3">
 			<visual>
@@ -92,12 +92,12 @@ finger(i.e. finger_1, etc...).
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.STL" />
 				</geometry>
 			</visual>
-			<collision>
+			 <collision>
 				<origin xyz="0 0 0" rpy="0 0 0.52"/>
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.STL" />
 				</geometry>
-			</collision>
+			</collision> 
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <mass value="0.05"/>
@@ -106,7 +106,7 @@ finger(i.e. finger_1, etc...).
 		</link>
 <gazebo reference="${prefix}link_2">
 				<material>Gazebo/Black</material>
-                                <selfCollide>false</selfCollide>
+                                <selfCollide>true</selfCollide>
                                 </gazebo>
 		<!-- end of link list -->
 		<!-- joint list -->

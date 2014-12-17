@@ -24,15 +24,16 @@ there are multiple hands then a prefix followed by an "_" is needed.
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/palm.STL" />
 				</geometry>
 			</visual>
-			<collision>
+			 <collision>
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/palm.STL" />
 				</geometry>
-			</collision>
+			</collision> 
 		</link>
 
                 <gazebo reference="${prefix}palm">
                         <material>Gazebo/Blue</material>
+                        <selfCollide>true</selfCollide>
                 </gazebo>
 
         <inertial>
