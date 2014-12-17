@@ -11,12 +11,13 @@ there are multiple hands then a prefix followed by an "_" is needed.
             <plugin name="ros_control" filename="libgazebo_ros_control.so"/> 
 -->		
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-	<!-- <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" /> -->
+	<xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
 	<xacro:macro name="s-model_articulated" params="prefix">
-	<!-- <xacro:s-model_finger_articulated prefix="${prefix}finger_1_"/>
+
+	<xacro:s-model_finger_articulated prefix="${prefix}finger_1_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_2_"/>
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_middle_"/>
--->
+
 		<link name="${prefix}palm">
 			<visual>
 				<geometry>
@@ -40,12 +41,13 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		<!-- joint list -->
 
 		<!-- WARNING: LIMITS NOT CORRECT -->
-	<!--	<joint name="${prefix}palm_finger_1_joint" type="revolute">
+		<joint name="${prefix}palm_finger_1_joint" type="revolute">
 			<parent link="${prefix}palm"/>
 			<child link="${prefix}finger_1_link_0"/>
 			<axis xyz="0 1 0"/>
 			<origin xyz="-0.0455 0.0214 0.036" rpy="0 3.1416 -1.57"/>
-			<limit lower="-0.16" upper="0.25" effort="100" velocity="100"/>
+			<limit lower="-0.16" upper="0.25" effort="100" velocity="100"/> 
+                </joint>
 		<joint name="${prefix}palm_finger_2_joint" type="revolute">
 			<parent link="${prefix}palm"/>
 			<child link="${prefix}finger_2_link_0"/>
@@ -58,6 +60,6 @@ there are multiple hands then a prefix followed by an "_" is needed.
 			<child link="${prefix}finger_middle_link_0"/>
 			<axis xyz="0 0 1"/>
 			<origin xyz="0.0455 0.0214 0" rpy="0 0 1.57"/>
-		</joint> -->
+		</joint>
 	</xacro:macro>
 </robot>
