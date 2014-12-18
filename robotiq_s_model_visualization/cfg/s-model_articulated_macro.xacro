@@ -6,7 +6,7 @@ is only one hand in the urdf then an empty prefix can be used "".  If
 there are multiple hands then a prefix followed by an "_" is needed.
 
 -->
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="tests">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
 	<xacro:macro name="s-model_articulated" params="prefix">
 	<xacro:s-model_finger_articulated prefix="${prefix}finger_1_"/>
@@ -65,5 +65,4 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		<!-- end of joint list -->
 	</xacro:macro>
 
-     <xacro:s-model_articulated prefix=""/>
 </robot>
