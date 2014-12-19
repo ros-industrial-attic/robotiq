@@ -132,22 +132,6 @@ finger(i.e. finger_1, etc...).
 		</joint>
 		<!-- end of joint list -->
 
-                <!-- Gazebo configs for links -->
-                <gazebo reference="${prefix}link_1">
-                    <selfCollide>true</selfCollide>
-                </gazebo>
-
-                <gazebo reference="${prefix}link_2">
-                    <selfCollide>true</selfCollide>
-                </gazebo>
-
-                <gazebo reference="${prefix}link_3">
-                    <selfCollide>true</selfCollide>
-                </gazebo>
-
-                <gazebo reference="${prefix}link_0">
-                    <selfCollide>true</selfCollide>
-                </gazebo>
 	</xacro:macro>
 
        
