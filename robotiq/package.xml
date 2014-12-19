@@ -7,12 +7,13 @@
   <url type="website">http://ros.org/wiki/motoman</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>robotiq_s_model_articulated_gazebo_plugins</run_depend>
+  <run_depend>robotiq_s_model_articulated_msgs</run_depend>
+  <run_depend>robotiq_s_model_articulated_gazebo</run_depend>
   <run_depend>robotiq_s_model_visualization</run_depend>
   <run_depend>robotiq_modbus_tcp</run_depend>
   <run_depend>robotiq_s_model_control</run_depend>
   <run_depend>robotiq_c_model_control</run_depend>
-
-
 
   <export>
     <metapackage/>
