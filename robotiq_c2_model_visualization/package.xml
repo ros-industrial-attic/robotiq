@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_c2_model_visualization</name>
+  <version>1.0.0</version>
+  <description>
+    <p>
+      Package containing visual components (urdfs, meshes, etc.) for use in simulating
+      the 2F-85 or C2 model gripper developed by Robotiq. This package was adapted
+      from https://github.com/jhu-lcsr-forks/robotiq.
+    </p>
+  </description>
+
+  <maintainer email="jonathan.meyer@swri.org">Jonathan Meyer</maintainer>
+  <author>Kel Guerin </author>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/robotiq</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>xacro</run_depend>
+
+</package>
