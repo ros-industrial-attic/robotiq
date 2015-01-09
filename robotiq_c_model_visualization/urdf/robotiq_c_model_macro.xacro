@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+
+<!--
+  robotiq_c_model(prefix)
+
+  Creates a c-model hand with the passed in prefix. If there
+  is only one hand in the urdf then an empty prefix can be used "". If
+  there are multiple hands then a prefix followed by an "_" is needed.
+-->
+
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="robotiq_c_model" params="prefix">
+
+    <link name="${prefix}robotiq_85_adapter_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_adapter_plate.dae"/>
+      </geometry>
+      <origin rpy="1.5707 0 1.5707" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <!--  /\  -->
+  <joint name="robotiq_85_base_joint" type="fixed">
+    <parent link="robotiq_85_adapter_link"/>
+    <child link="robotiq_85_base_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz=".0085 0 -.0041"/>
+  </joint>
+  <!--  \/  -->
+
+  <link name="${prefix}robotiq_85_base_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_base.dae"/>
+      </geometry>
+      <origin rpy="3.1415 0 1.5707" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <!--  /\  -->
+  <!--  /\  -->
+  <joint name="robotiq_85_left_knuckle_joint" type="revolute">
+    <parent link="robotiq_85_base_link"/>
+    <child link="robotiq_85_left_knuckle_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="-1.5707 1.5707 0" xyz=".04191 .0306 0"/>
+    <limit lower="0" upper=".8575" velocity="2.0" effort="1000"/>
+  </joint>
+
+  <joint name="robotiq_85_right_knuckle_joint" type="revolute">
+    <parent link="robotiq_85_base_link"/>
+    <child link="robotiq_85_right_knuckle_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="1.5707 -1.5707 0" xyz=".04191 -.0306 0"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+    <mimic joint="robotiq_85_left_knuckle_joint" multiplier="1"/>
+  </joint>
+  <!--  \/  -->
+  <!--  \/  -->
+
+  <link name="${prefix}robotiq_85_left_knuckle_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_0_L.dae"/>
+      </geometry>
+      <origin rpy="3.14159 -1.5707 0" xyz="0 .04191 -.0306"/>
+    </visual>
+  </link> 
+
+  <link name="${prefix}robotiq_85_right_knuckle_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_0_R.dae"/>
+      </geometry>
+      <origin rpy="3.14159 1.5707 0" xyz="0 .04191 -.0306"/>
+    </visual>
+  </link>
+
+  <!--  /\  -->
+  <!--  /\  -->
+  <joint name="robotiq_85_left_finger_joint" type="fixed">
+    <parent link="robotiq_85_left_knuckle_link"/>
+    <child link="robotiq_85_left_finger_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="3.1415 0 0" xyz="0 .00508 .03134"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+  </joint>
+
+  <joint name="robotiq_85_right_finger_joint" type="fixed">
+    <parent link="robotiq_85_right_knuckle_link"/>
+    <child link="robotiq_85_right_finger_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="3.1415 0 0" xyz="0 .00508 .03134"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+  </joint>
+  <!--  \/  --> 
+  <!--  \/  -->  
+
+  <link name="${prefix}robotiq_85_left_finger_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_1_L.dae"/>
+      </geometry>
+      <origin rpy="0 1.5707 0" xyz="0 -.03683 .06194"/>
+    </visual>
+  </link> 
+
+  <link name="${prefix}robotiq_85_right_finger_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_1_R.dae"/>
+      </geometry>
+      <origin rpy="0 -1.5707 0" xyz="0 -.03683 .06194"/>
+    </visual>
+  </link> 
+
+  <!--  /\  -->
+  <!--  /\  -->
+  <joint name="robotiq_85_left_inner_knuckle_joint" type="revolute">
+    <parent link="robotiq_85_base_link"/>
+    <child link="robotiq_85_left_inner_knuckle_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="1.5707 1.5707 0" xyz=".04843 .0127 0"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+    <mimic joint="robotiq_85_left_knuckle_joint" offset="0"/>
+  </joint> 
+
+  <joint name="robotiq_85_right_inner_knuckle_joint" type="revolute">
+    <parent link="robotiq_85_base_link"/>
+    <child link="robotiq_85_right_inner_knuckle_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="-1.5707 -1.5707 0" xyz=".04843 -.0127 0"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+    <mimic joint="robotiq_85_left_knuckle_joint" offset="0"/>
+  </joint>
+  <!--  \/  --> 
+  <!--  \/  -->  
+
+  <link name="${prefix}robotiq_85_left_inner_knuckle_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_2_L.dae"/>
+      </geometry>
+      <origin rpy="0 1.5707 0" xyz="0 -.04843 .0127"/>
+    </visual>
+  </link>
+
+  <link name="${prefix}robotiq_85_right_inner_knuckle_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_2_R.dae"/>
+      </geometry>
+      <origin rpy="0 -1.5707 0" xyz="0 -.04843 .0127"/>
+    </visual>
+  </link>
+
+  <!--  /\  -->
+  <!--  /\  -->
+  <joint name="robotiq_85_left_finger_tip_joint" type="revolute">
+    <parent link="robotiq_85_left_inner_knuckle_link"/>
+    <child link="robotiq_85_left_finger_tip_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz="0 .04196 -.0388"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+    <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/>
+  </joint>
+
+  <joint name="robotiq_85_right_finger_tip_joint" type="revolute">
+    <parent link="robotiq_85_right_inner_knuckle_link"/>
+    <child link="robotiq_85_right_finger_tip_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz="0 .04196 -.0388"/>
+    <limit lower="0" upper="1.5707" velocity="2.0" effort="1000"/>
+    <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/>
+  </joint>
+  <!--  \/  --> 
+  <!--  \/  -->  
+
+  <link name="${prefix}robotiq_85_left_finger_tip_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_3_L.dae"/>
+      </geometry>
+      <origin rpy="0 1.5707 0" xyz="0 -.090381 .051505"/>
+    </visual>
+  </link> 
+
+  <link name="${prefix}robotiq_85_right_finger_tip_link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://robotiq_c_model_visualization/meshes/robotiq_85_gripper_joint_3_R.dae"/>
+      </geometry>
+      <origin rpy="0 -1.5707 0" xyz="0 -.090381 .051505"/>
+    </visual>
+  </link>
+
+  </xacro:macro>
+</robot>

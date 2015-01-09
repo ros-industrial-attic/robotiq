@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_c_model_visualization</name>
+  <version>1.0.0</version>
+  <description>The robotiq_c_model_visualization package</description>
+
+  <maintainer email="jonathan.meyer@swri.org">Jonathan Meyer</maintainer>
+  <author>Kel Guerin (Robotiq Inc.)</author>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/robotiq</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>urdf</build_depend>
+  <run_depend>urdf</run_depend>
+
+  <export>
+  </export>
+</package>
