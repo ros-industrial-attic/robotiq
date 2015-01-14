@@ -57,11 +57,15 @@ there are multiple hands then a prefix followed by an "_" is needed.
 			<origin xyz="-0.0455 0.0214 -0.036" rpy="0 3.1416 -1.57"/>
 			<limit lower="-0.25" upper="0.16" effort="100" velocity="100"/>
 		</joint>
-		<joint name="${prefix}palm_finger_middle_joint" type="fixed">
+
+                <!-- WARNING: LIMITS NOT CORRECT -->
+                <!-- Changed to revolute so gazebo doesn't flip tables -->
+		<joint name="${prefix}palm_finger_middle_joint" type="revolute">
 			<parent link="${prefix}palm"/>
 			<child link="${prefix}finger_middle_link_0"/>
 			<axis xyz="0 0 1"/>
 			<origin xyz="0.0455 0.0214 0" rpy="0 0 1.57"/>
+                        <limit lower="-0.25" upper="0.16" effort="100" velocity="100"/>
 		</joint>
 		<!-- end of joint list -->
 	</xacro:macro>
