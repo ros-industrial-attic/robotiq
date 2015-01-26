@@ -5,7 +5,7 @@
   <description>Messages for the robotiq_s_model_articulated model.</description>
 
   <maintainer email="dash@clearpathrobotics.com">Devon Ash</maintainer>
-  <license>BSD</license>
+  <license>Apache 2.0</license>
   <author email="dash@clearpathrobotics.com">Devon Ash</author>
 
   <buildtool_depend>catkin</buildtool_depend>

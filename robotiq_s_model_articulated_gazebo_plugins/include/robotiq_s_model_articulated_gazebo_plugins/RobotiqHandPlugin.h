@@ -1,5 +1,6 @@
 /*
  * Copyright 2014 Open Source Robotics Foundation
+ * Copyright 2015 Clearpath Robotics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +15,6 @@
  * limitations under the License.
  *
 */
-/*
-    This file has been modified from the original, by Devon Ash
-*/ 
 
 #ifndef GAZEBO_ROBOTIQ_HAND_PLUGIN_HH
 #define GAZEBO_ROBOTIQ_HAND_PLUGIN_HH
