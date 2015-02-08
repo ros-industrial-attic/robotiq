@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="robotiq_c_model_control" type="c_model_ethercat_node" name="gripper_server" output="screen">
+      <param name="ifname" value="eth2" type="str"/>
+      <param name="slave_number" value="1" type="int"/>
+    </node>
+</launch>
