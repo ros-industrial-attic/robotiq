@@ -14,6 +14,7 @@
   to the same network, you'll need to edit the source file.
 */
 
+// Note that you will likely need to run the following on your binary:
 // sudo setcap cap_net_raw+ep <filename>
 
 
@@ -38,10 +39,8 @@ int main(int argc, char** argv)
 
   // Parameter names
   std::string ifname;
-  std::string gripper_name;
   int slave_no;
-  bool activate;
-  
+  bool activate;  
 
   nh.param<std::string>("ifname", ifname, "eth0");
   nh.param<int>("slave_number", slave_no, 1);
