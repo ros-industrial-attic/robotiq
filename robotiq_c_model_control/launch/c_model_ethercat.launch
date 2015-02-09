@@ -1,6 +1,10 @@
 <launch>
+  <!-- Also optionally takes a gripper_name argument -->
   <node pkg="robotiq_c_model_control" type="c_model_ethercat_node" name="gripper_server" output="screen">
       <param name="ifname" value="eth2" type="str"/>
+      <param name="activate" type="bool" value="true" />
       <param name="slave_number" value="1" type="int"/>
+      <remap from="/CModelRobotOutput" to="/gripper/output" />
+      <remap from="/CModelRobotInput" to="/gripper/input" />
     </node>
 </launch>

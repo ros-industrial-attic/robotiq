@@ -38,15 +38,28 @@ int main(int argc, char** argv)
 
   // Parameter names
   std::string ifname;
+  std::string gripper_name;
   int slave_no;
+  bool activate;
+  
 
   nh.param<std::string>("ifname", ifname, "eth0");
   nh.param<int>("slave_number", slave_no, 1);
+  nh.param<bool>("activate", activate, true);
 
   // Start ethercat manager
   EtherCatManager manager(ifname);
   // register client 
   CModelEtherCatClient client(manager, slave_no);
+
+  // conditionally activate the gripper
+  if (activate)
+  {
+    // Check to see if resetting is required? Or always reset?
+    GripperOutput out;
+    out.rACT = 0x1;
+    client.writeOutputs(out);
+  }
 
   // Sorry for the indentation, trying to keep it under 100 chars
   ros::Subscriber sub = 
