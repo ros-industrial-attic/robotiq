@@ -21,6 +21,8 @@ include_directories(
   ${robotiq_action_server_INCLUDE_DIRS}
 )
 
+
+# The action server
 add_executable(robotiq_c_model_action_server_node
     src/robotiq_c_model_action_server_node.cpp
     src/robotiq_c_model_action_server.cpp
@@ -34,7 +36,27 @@ add_dependencies(robotiq_c_model_action_server_node
    ${catkin_LIBRARIES}
  )
 
-install(TARGETS robotiq_action_server_node
+ # The test server
+add_executable(robotiq_action_server_client_test
+  src/robotiq_action_server_client_test.cpp
+)
+
+add_dependencies(robotiq_action_server_client_test
+  robotiq_action_server_generate_messages_cpp
+  ${robotiq_action_server_EXPORTED_TARGETS})
+
+ target_link_libraries(robotiq_action_server_client_test
+   ${catkin_LIBRARIES}
+ )
+
+
+install(TARGETS robotiq_c_model_action_server_node
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
+
+ install(TARGETS robotiq_action_server_client_test
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

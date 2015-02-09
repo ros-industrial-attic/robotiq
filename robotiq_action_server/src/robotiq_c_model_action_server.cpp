@@ -45,8 +45,10 @@ namespace
     double dist_per_tick = (params.max_gap_ - params.min_gap_) / 255;
     double eff_per_tick = (params.max_effort_ - params.min_effort_) / 255;
 
-    result.rPR = static_cast<uint8_t>((goal.command.position - params.min_gap_) / dist_per_tick);
+    result.rPR = static_cast<uint8_t>((params.max_gap_ - goal.command.position) / dist_per_tick);
     result.rFR = static_cast<uint8_t>((goal.command.max_effort - params.min_effort_) / eff_per_tick);
+
+    ROS_INFO("Setting goal position register to %hhu", result.rPR);
 
     return result;
   }
@@ -159,18 +161,18 @@ void ras::CModelGripperActionServer::analysisCB(const GripperInput::ConstPtr& ms
   if (current_reg_state_.gFLT)
   {
     ROS_WARN("%s faulted with code: %x", action_name_.c_str(), current_reg_state_.gFLT);
-    as_.setAborted(registerStateToResult<GripperCommandResult>(current_reg_state_,
-                                                               gripper_params_,
-                                                               goal_reg_state_.rPR));
+    as_.setAborted(registerStateToResult(current_reg_state_,
+                                         gripper_params_,
+                                         goal_reg_state_.rPR));
   }
   else if (current_reg_state_.gGTO && current_reg_state_.gOBJ && current_reg_state_.gPR == goal_reg_state_.rPR)
   {
     // If commanded to move and if at a goal state and if the position request matches the echo'd PR, we're
     // done with a move
     ROS_INFO("%s succeeded", action_name_.c_str());
-    as_.setSucceeded(registerStateToResult<GripperCommandResult>(current_reg_state_,
-                                                                 gripper_params_,
-                                                                 goal_reg_state_.rPR));
+    as_.setSucceeded(registerStateToResult(current_reg_state_,
+                                           gripper_params_,
+                                           goal_reg_state_.rPR));
   }
   else
   {
