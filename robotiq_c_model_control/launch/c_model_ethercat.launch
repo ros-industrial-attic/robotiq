@@ -8,8 +8,8 @@
       <param name="ifname" type="str" value="$(arg ifname)" />
       <param name="activate" type="bool" value="$(arg activate)" />
       <param name="slave_number" type="int" value="$(arg slave_number)"/>
-      <!-- Remove these remaps to make the node compatible with the existing python scripts  -->
-      <remap from="/CModelRobotOutput" to="/$(arg gripper_name)/output" />
-      <remap from="/CModelRobotInput" to="/$(arg gripper_name)/input" />
+      
+      <remap from="output" to="/$(arg gripper_name)/output" />
+      <remap from="input" to="/$(arg gripper_name)/input" />
     </node>
 </launch>
