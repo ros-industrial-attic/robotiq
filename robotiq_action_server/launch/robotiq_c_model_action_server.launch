@@ -14,6 +14,9 @@
     <param name="max_gap" type="double" value="$(arg max_gap)" />
     <param name="min_effort" type="double" value="$(arg min_effort)" />
     <param name="max_effort" type="double" value="$(arg max_effort)" />
+
+    <remap from="input" to="$(arg gripper_name)/input" />
+    <remap from="output" to="$(arg gripper_name)/output" />
   </node>
 
 </launch>

@@ -47,9 +47,7 @@ struct CModelGripperParams
  * @brief The CModelGripperActionServer class. Takes as arguments the name of the gripper it is to command,
  *        and a set of parameters that define the physical characteristics of the particular gripper.
  *        
- *        The name parameter controls what topics this server listens to. For a given name `grippername`, 
- *        it listens for input and output messages on `grippername/input` and 
- *        `grippername/output` respectively.
+ *        Listens for messages on input and publishes on output. Remap these.
  */
 class CModelGripperActionServer
 {
