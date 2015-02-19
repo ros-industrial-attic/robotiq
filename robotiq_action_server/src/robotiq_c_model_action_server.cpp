@@ -6,12 +6,11 @@
 #include "robotiq_action_server/robotiq_c_model_action_server.h"
 
 // To keep the fully qualified names managable
-namespace ras = robotiq_action_server;
 
 //Anonymous namespaces are file local -> sort of like global static objects
 namespace
 {
-  using namespace ras;
+  using namespace robotiq_action_server;
 
   /*  This struct is declared for the sole purpose of being used as an exception internally
       to keep the code clean (i.e. no output params). It is caught by the action_server and 
@@ -87,8 +86,10 @@ namespace
 
 } // end of anon namespace
 
+namespace robotiq_action_server
+{
 
-ras::CModelGripperActionServer::CModelGripperActionServer(const std::string& name, const CModelGripperParams& params)
+CModelGripperActionServer::CModelGripperActionServer(const std::string& name, const CModelGripperParams& params)
   : nh_()
   , as_(nh_, name, false)
   , action_name_(name)
@@ -97,13 +98,13 @@ ras::CModelGripperActionServer::CModelGripperActionServer(const std::string& nam
   as_.registerGoalCallback(boost::bind(&CModelGripperActionServer::goalCB, this));
   as_.registerPreemptCallback(boost::bind(&CModelGripperActionServer::preemptCB, this));
 
-  state_sub_ = nh_.subscribe(name + "/input", 1, &CModelGripperActionServer::analysisCB, this);
-  goal_pub_ = nh_.advertise<GripperOutput>(name + "/output", 1);
+  state_sub_ = nh_.subscribe("input", 1, &CModelGripperActionServer::analysisCB, this);
+  goal_pub_ = nh_.advertise<GripperOutput>("output", 1);
 
   as_.start();
 }
 
-void ras::CModelGripperActionServer::goalCB()
+void CModelGripperActionServer::goalCB()
 {
   // Check to see if the gripper is in an active state where it can take goals
   if (current_reg_state_.gSTA != 0x3)
@@ -130,13 +131,13 @@ void ras::CModelGripperActionServer::goalCB()
   }
 }
 
-void ras::CModelGripperActionServer::preemptCB()
+void CModelGripperActionServer::preemptCB()
 {
   ROS_INFO("%s: Preempted", action_name_.c_str());
   as_.setPreempted();
 }
 
-void ras::CModelGripperActionServer::analysisCB(const GripperInput::ConstPtr& msg)
+void CModelGripperActionServer::analysisCB(const GripperInput::ConstPtr& msg)
 {
   current_reg_state_ = *msg;
 
@@ -183,7 +184,7 @@ void ras::CModelGripperActionServer::analysisCB(const GripperInput::ConstPtr& ms
   }
 }
 
-void ras::CModelGripperActionServer::issueActivation()
+void CModelGripperActionServer::issueActivation()
 {
   ROS_INFO("Activating gripper for gripper action server: %s", action_name_.c_str());
   GripperOutput out;
@@ -192,3 +193,4 @@ void ras::CModelGripperActionServer::issueActivation()
   goal_reg_state_ = out;
   goal_pub_.publish(out);
 }
+} // end robotiq_action_server namespace
