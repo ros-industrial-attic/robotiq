@@ -5,9 +5,10 @@
 // See Robotiq's documentation for the register mapping
 
 // An effort to keep the lines less than 100 char long
-namespace c_model = robotiq_c_model_control;
+namespace robotiq_c_model_control
+{
 
-c_model::CModelEtherCatClient::CModelEtherCatClient(robotiq_ethercat::EtherCatManager& manager, 
+CModelEtherCatClient::CModelEtherCatClient(robotiq_ethercat::EtherCatManager& manager, 
                                                     int slave_no)
   : manager_(manager)
   , slave_no_(slave_no)
@@ -16,7 +17,7 @@ c_model::CModelEtherCatClient::CModelEtherCatClient(robotiq_ethercat::EtherCatMa
 /*
   See support.robotiq.com -> manual for the register output meanings
 */
-void c_model::CModelEtherCatClient::writeOutputs(const GripperOutput& output)
+void CModelEtherCatClient::writeOutputs(const GripperOutput& output)
 {
   uint8_t map[6] = {0}; // array containing all 6 output registers
 
@@ -33,7 +34,7 @@ void c_model::CModelEtherCatClient::writeOutputs(const GripperOutput& output)
   }
 }
 
-c_model::CModelEtherCatClient::GripperInput c_model::CModelEtherCatClient::readInputs() const
+CModelEtherCatClient::GripperInput CModelEtherCatClient::readInputs() const
 {
   uint8_t map[6];
 
@@ -57,7 +58,7 @@ c_model::CModelEtherCatClient::GripperInput c_model::CModelEtherCatClient::readI
   return input;
 }
 
-c_model::CModelEtherCatClient::GripperOutput c_model::CModelEtherCatClient::readOutputs() const
+CModelEtherCatClient::GripperOutput CModelEtherCatClient::readOutputs() const
 {
   uint8_t map[6];
   for (unsigned i = 0; i < 6; ++i)
@@ -75,3 +76,4 @@ c_model::CModelEtherCatClient::GripperOutput c_model::CModelEtherCatClient::read
 
   return output;
 }
+} // end of robotiq_c_model_control namespace

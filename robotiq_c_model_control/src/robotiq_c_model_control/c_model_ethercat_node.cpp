@@ -33,7 +33,7 @@ int main(int argc, char** argv)
   typedef CModelEtherCatClient::GripperOutput GripperOutput;
   typedef CModelEtherCatClient::GripperInput GripperInput;
 
-  ros::init(argc, argv, "robotiqCModel");
+  ros::init(argc, argv, "robotiq_c_model_gripper_node");
   
   ros::NodeHandle nh ("~");
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
   int slave_no;
   bool activate;  
 
-  nh.param<std::string>("ifname", ifname, "eth0");
+  nh.param<std::string>("ifname", ifname, "eth1");
   nh.param<int>("slave_number", slave_no, 1);
   nh.param<bool>("activate", activate, true);
 
@@ -62,10 +62,10 @@ int main(int argc, char** argv)
 
   // Sorry for the indentation, trying to keep it under 100 chars
   ros::Subscriber sub = 
-        nh.subscribe<GripperOutput>("/CModelRobotOutput", 1,
+        nh.subscribe<GripperOutput>("output", 1,
                                     boost::bind(changeCallback, boost::ref(client), _1));
 
-  ros::Publisher pub = nh.advertise<GripperInput>("/CModelRobotInput", 100);
+  ros::Publisher pub = nh.advertise<GripperInput>("input", 100);
 
   ros::Rate rate(10); // 10 Hz
 
