@@ -53,7 +53,7 @@ class communication:
       
    def connectToDevice(self, device):
       """Connection to the client - the method takes the IP address (as a string, e.g. '192.168.1.11') as an argument."""
-      self.client = ModbusSerialClient(method='rtu',port=device,stopbits=1, bytesize=8, baudrate=115200, timeout=0.01)
+      self.client = ModbusSerialClient(method='rtu',port=device,stopbits=1, bytesize=8, baudrate=115200, timeout=0.2)
       if not self.client.connect():
           print "Unable to connect to %s" % device
           return False
