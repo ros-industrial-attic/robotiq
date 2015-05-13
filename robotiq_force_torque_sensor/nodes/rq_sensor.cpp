@@ -45,6 +45,7 @@
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "geometry_msgs/WrenchStamped.h"
 #include "robotiq_force_torque_sensor/rq_sensor_state.h"
 #include "robotiq_force_torque_sensor/ft_sensor.h"
 #include "robotiq_force_torque_sensor/sensor_accessor.h"
@@ -105,15 +106,18 @@ static void wait_for_other_connection(void)
 {
 	INT_8 ret;
 
-	while(1)
+	while(ros::ok())
 	{
+		ROS_INFO("Waiting for sensor connection...");
 		usleep(1000000);//Attend 1 seconde.
-		ret = rq_sensor_state();
 
+		ret = rq_sensor_state();
 		if(ret == 0)
 		{
+			ROS_INFO("Sensor connected!");
 			break;
 		}
+
 		ros::spinOnce();
 	}
 }
@@ -146,7 +150,6 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 	INT_8 ret; 
 
-
 	//If we can't initialize, we return an error
 	ret = rq_sensor_state();
 	if(ret == -1)
@@ -169,31 +172,45 @@ int main(int argc, char **argv)
 	}
 	
 	ros::Publisher sensor_pub = n.advertise<robotiq_force_torque_sensor::ft_sensor>("robotiq_force_torque_sensor", 512);
+	ros::Publisher wrench_pub = n.advertise<geometry_msgs::WrenchStamped>("robotiq_force_torque_wrench", 512);
 	ros::ServiceServer service = n.advertiseService("robotiq_force_torque_sensor_acc", receiverCallback);
 
 	//std_msgs::String msg;
+	geometry_msgs::WrenchStamped wrenchMsg;
+	ros::param::param<std::string>("~frame_id", wrenchMsg.header.frame_id, "robotiq_force_torque_frame_id");
 
-	while(1)
+	ROS_INFO("Starting Sensor");
+	while(ros::ok())
 	{
- 		ret = rq_sensor_state();
+		ret = rq_sensor_state();
 
- 		if(ret == -1)
+		if(ret == -1)
 		{
- 			wait_for_other_connection();
- 		}
+			wait_for_other_connection();
+		}
 
- 		if(rq_sensor_get_current_state() == RQ_STATE_RUN)
+		if(rq_sensor_get_current_state() == RQ_STATE_RUN)
 		{
- 			strcpy(bufStream,"");
+			strcpy(bufStream,"");
 			msgStream = get_data();
 
 			if(rq_state_got_new_message())
 			{
 				sensor_pub.publish(msgStream);
+
+				//compose WrenchStamped Msg
+				wrenchMsg.header.stamp = ros::Time::now();
+				wrenchMsg.wrench.force.x = msgStream.Fx;
+				wrenchMsg.wrench.force.y = msgStream.Fy;
+				wrenchMsg.wrench.force.z = msgStream.Fz;
+				wrenchMsg.wrench.torque.x = msgStream.Mx;
+				wrenchMsg.wrench.torque.y = msgStream.My;
+				wrenchMsg.wrench.torque.z = msgStream.Mz;
+				wrench_pub.publish(wrenchMsg);
 			}
- 		}
+		}
 
 		ros::spinOnce();
- 	}
- 	return 0;
+	}
+	return 0;
 }
