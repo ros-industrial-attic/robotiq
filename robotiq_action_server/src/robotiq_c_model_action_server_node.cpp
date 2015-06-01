@@ -8,7 +8,7 @@ namespace
     robotiq_action_server::CModelGripperParams params;
     params.min_gap_ = -.017;
     params.max_gap_ = 0.085;
-    params.min_effort_ = 30.0; // This is a guess. Could not find data with quick search.
+    params.min_effort_ = 40.0; // This is a guess. Could not find data with quick search.
     params.max_effort_ = 100.0;
 
     return params;
