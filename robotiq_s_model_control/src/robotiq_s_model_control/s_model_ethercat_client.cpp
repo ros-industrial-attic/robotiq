@@ -76,8 +76,8 @@ SModelEtherCatClient::GripperInput SModelEtherCatClient::readInputs() const
   // Object Status
   input.gDTA = map[1] & 0x3;
   input.gDTB = (map[1] >> 0x2) & 0x3;
-  input.gDTB = (map[1] >> 0x4) & 0x3;
-  input.gDTB = (map[1] >> 0x6) & 0x3;
+  input.gDTC = (map[1] >> 0x4) & 0x3;
+  input.gDTS = (map[1] >> 0x6) & 0x3;
 
   // Fault Status
   input.gFLT = map[2] & 0xF;
