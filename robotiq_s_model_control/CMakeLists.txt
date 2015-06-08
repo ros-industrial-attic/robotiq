@@ -49,7 +49,7 @@ target_link_libraries(s_model_ethercat_node
    ${catkin_LIBRARIES}
 )
 
-add_dependencies(c_model_ethercat_node robotiq_c_model_control_generate_messages_cpp)
+add_dependencies(s_model_ethercat_node robotiq_s_model_control_generate_messages_cpp)
 #############
 ## Install ##
 #############
