@@ -1,7 +1,7 @@
 # http://ros.org/doc/groovy/api/catkin/html/user_guide/supposed.html
 cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_s_model_control)
-find_package(catkin REQUIRED rospy message_generation)
+find_package(catkin REQUIRED rospy message_generation roscpp robotiq_ethercat)
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
@@ -30,9 +30,26 @@ generate_messages()
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-    CATKIN_DEPENDS rospy message_runtime
+    CATKIN_DEPENDS rospy message_runtime roscpp robotiq_ethercat
 )
 
+include_directories(include)
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+  ${robotiq_ethercat_INCLUDE_DIRS}
+)
+
+add_executable(s_model_ethercat_node
+  src/robotiq_s_model_control/s_model_ethercat_node.cpp
+  src/robotiq_s_model_control/s_model_ethercat_client.cpp
+)
+
+target_link_libraries(s_model_ethercat_node
+   ${robotiq_ethercat_LIBRARIES}
+   ${catkin_LIBRARIES}
+)
+
+add_dependencies(s_model_ethercat_node robotiq_s_model_control_generate_messages_cpp)
 #############
 ## Install ##
 #############
