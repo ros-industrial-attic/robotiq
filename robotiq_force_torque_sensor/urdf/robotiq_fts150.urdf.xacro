@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotiq_fts150">
 
-
     <xacro:macro name="robotiq_fts150" params="parent prefix *origin">
 
         <!-- mount the fts to the robot -->
@@ -35,7 +34,6 @@
             </collision>
         </link>
 
-
         <!-- virtual measurement frame -->
         <joint name="${prefix}measurment_joint" type="fixed" >
             <origin xyz="0 0 0.01625" rpy="0 0 0" />
@@ -50,7 +48,6 @@
             <parent link="${prefix}fts_robotside" />
             <child link="${prefix}fts_toolside" />
         </joint>
-
         <link name="${prefix}fts_toolside"/>
 
     </xacro:macro>
