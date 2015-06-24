@@ -1,0 +1,15 @@
+<launch>
+  <arg name="gripper_name" default="gripper" />
+  <arg name="slave_number" default="1" />
+  <arg name="activate" default="True" />
+  <arg name="ifname" default="enp0s20u1" />
+
+  <node pkg="robotiq_s_model_control" type="s_model_ethercat_node" name="gripper_server" output="screen">
+      <param name="ifname" type="str" value="$(arg ifname)" />
+      <param name="activate" type="bool" value="$(arg activate)" />
+      <param name="slave_number" type="int" value="$(arg slave_number)"/>
+
+      <remap from="output" to="/$(arg gripper_name)/output" />
+      <remap from="input" to="/$(arg gripper_name)/input" />
+    </node>
+</launch>
