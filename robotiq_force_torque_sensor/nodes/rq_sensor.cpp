@@ -46,6 +46,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "robotiq_force_torque_sensor/rq_sensor_state.h"
+#include "robotiq_force_torque_sensor/rq_sensor_com.h"
 #include "robotiq_force_torque_sensor/ft_sensor.h"
 #include "robotiq_force_torque_sensor/sensor_accessor.h"
 
@@ -106,7 +107,8 @@ static void wait_for_other_connection(void)
 	INT_8 ret;
 
 	while(1)
-	{
+	{	
+		ROS_WARN("Waiting for Connection.");
 		usleep(1000000);//Attend 1 seconde.
 		ret = rq_sensor_state();
 
@@ -148,6 +150,7 @@ int main(int argc, char **argv)
 
 
 	//If we can't initialize, we return an error
+	ROS_WARN("Attempting to Initialize");
 	ret = rq_sensor_state();
 	if(ret == -1)
 	{
@@ -155,6 +158,7 @@ int main(int argc, char **argv)
 	}
 
 	//Reads basic info on the sensor
+	ROS_WARN("Reading Sensor State");
 	ret = rq_sensor_state();
 	if(ret == -1)
 	{
@@ -163,6 +167,7 @@ int main(int argc, char **argv)
 
 	//Starts the stream
 	ret = rq_sensor_state();
+	ROS_WARN("Starting Sensor Stream");
 	if(ret == -1)
 	{
 		wait_for_other_connection();
@@ -173,12 +178,13 @@ int main(int argc, char **argv)
 
 	//std_msgs::String msg;
 
-	while(1)
+	while(ros::ok())
 	{
  		ret = rq_sensor_state();
 
  		if(ret == -1)
 		{
+			ROS_WARN("Waiting for Connections");
  			wait_for_other_connection();
  		}
 
@@ -195,5 +201,6 @@ int main(int argc, char **argv)
 
 		ros::spinOnce();
  	}
+ 	stop_connection();
  	return 0;
 }
