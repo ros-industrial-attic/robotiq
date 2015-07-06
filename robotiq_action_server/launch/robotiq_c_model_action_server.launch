@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <arg name="gripper_name" default="gripper" />
+  <arg name="min_gap" default="-0.017" />
+  <arg name="max_gap" default="0.085" /> <!-- meters -->
+  <arg name="min_effort" default="30.0" />
+  <arg name="max_effort" default="100.0" />
+
+  <node name="robotiq_c_model_action_server" pkg="robotiq_action_server" 
+    type="robotiq_c_model_action_server_node">
+    <param name="gripper_name" type="str" value="$(arg gripper_name)" />
+    <param name="min_gap" type="double" value="$(arg min_gap)" />
+    <param name="max_gap" type="double" value="$(arg max_gap)" />
+    <param name="min_effort" type="double" value="$(arg min_effort)" />
+    <param name="max_effort" type="double" value="$(arg max_effort)" />
+
+    <remap from="input" to="$(arg gripper_name)/input" />
+    <remap from="output" to="$(arg gripper_name)/output" />
+  </node>
+
+</launch>
