@@ -2,20 +2,23 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_ethercat)
 
 find_package(catkin REQUIRED COMPONENTS
-  ethercat_soem
+  soem
   roscpp
 )
 
 catkin_package(
    INCLUDE_DIRS include
    LIBRARIES robotiq_ethercat
-   CATKIN_DEPENDS ethercat_soem roscpp
+   CATKIN_DEPENDS soem roscpp
 )
 
 include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  ##/opt/ros/indigo/include/soem
 )
+
+Message("Include directories: " ${robotiq_ethercat_INCLUDE_DIRS})
 
 add_library(robotiq_ethercat
  include/robotiq_ethercat/ethercat_manager.h
