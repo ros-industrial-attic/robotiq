@@ -12,13 +12,13 @@ catkin_package(
    CATKIN_DEPENDS soem roscpp
 )
 
-include_directories(include)
-include_directories(
+include_directories(include
   ${catkin_INCLUDE_DIRS}
-  ##/opt/ros/indigo/include/soem
+  ## The following work around allows SOEM headers to include other SOEM headers.
+  ## SOEM headers assume all headers are installed in a flat directory structure
+  ## See https://github.com/smits/soem/issues/4 for more information.
+  ${soem_INCLUDE_DIRS}/soem
 )
-
-Message("Include directories: " ${robotiq_ethercat_INCLUDE_DIRS})
 
 add_library(robotiq_ethercat
  include/robotiq_ethercat/ethercat_manager.h
