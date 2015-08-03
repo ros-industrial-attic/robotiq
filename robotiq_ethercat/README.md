@@ -4,10 +4,6 @@ This package provides an interface for interfacing with an ethercat network. Wit
 ### Maintainer
 - Jonathan Meyer (jonathan.meyer@swri.org)
 
-### Dependencies
-
-This package uses a 'catkinized' version of the [OpenEtherCAT Society's Master Library](https://github.com/OpenEtherCATsociety/SOEM).
-
 ## Common Issues
 Please note:
  - VMs probably won't work.
