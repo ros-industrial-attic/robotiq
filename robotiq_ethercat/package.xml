@@ -14,9 +14,9 @@
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>ethercat_soem</build_depend>
+  <build_depend>soem</build_depend>
   <build_depend>roscpp</build_depend>
-  <run_depend>ethercat_soem</run_depend>
+  <run_depend>soem</run_depend>
   <run_depend>roscpp</run_depend>
 
 </package>
