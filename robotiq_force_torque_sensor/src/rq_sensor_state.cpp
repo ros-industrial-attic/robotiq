@@ -154,14 +154,27 @@ static void rq_state_start_stream()
  */
 static void rq_state_run()
 {
+	static unsigned char retries = 0;
+
 	rq_com_listen_stream();
 
 	if(rq_com_get_valid_stream() == false)
 	{
+		retries++;
+		printf("invalid stream : retry #%d\n", retries);
+
+		if (retries >= 100)
+		{
 #if defined(_WIN32)||defined(WIN32) //For Windows
-		stop_connection();
+			stop_connection();
 #endif
-		current_state = RQ_STATE_INIT;
+			current_state = RQ_STATE_INIT;
+			retries = 0;
+		}
+	}
+	else
+	{
+		retries = 0;
 	}
 }
 
