@@ -52,6 +52,7 @@
 
 static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret);
 static void wait_for_other_connection(void);
+static int max_retries_(100);
 
 ros::Publisher sensor_pub_acc;
 
@@ -111,7 +112,7 @@ static void wait_for_other_connection(void)
 		ROS_INFO("Waiting for sensor connection...");
 		usleep(1000000);//Attend 1 seconde.
 
-		ret = rq_sensor_state();
+		ret = rq_sensor_state(max_retries_);
 		if(ret == 0)
 		{
 			ROS_INFO("Sensor connected!");
@@ -144,28 +145,29 @@ static robotiq_force_torque_sensor::ft_sensor get_data(void)
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "robotiq_force_torque_sensor");
+	ros::NodeHandle n;
+	n.param("~max_retries", max_retries_, 100);
 
 	INT_8 bufStream[512];
 	robotiq_force_torque_sensor::ft_sensor msgStream;
-	ros::NodeHandle n;
 	INT_8 ret; 
 
 	//If we can't initialize, we return an error
-	ret = rq_sensor_state();
+	ret = rq_sensor_state(max_retries_);
 	if(ret == -1)
 	{
 		wait_for_other_connection();
 	}
 
 	//Reads basic info on the sensor
-	ret = rq_sensor_state();
+	ret = rq_sensor_state(max_retries_);
 	if(ret == -1)
 	{
 		wait_for_other_connection();
 	}
 
 	//Starts the stream
-	ret = rq_sensor_state();
+	ret = rq_sensor_state(max_retries_);
 	if(ret == -1)
 	{
 		wait_for_other_connection();
@@ -182,7 +184,7 @@ int main(int argc, char **argv)
 	ROS_INFO("Starting Sensor");
 	while(ros::ok())
 	{
-		ret = rq_sensor_state();
+		ret = rq_sensor_state(max_retries_);
 
 		if(ret == -1)
 		{
