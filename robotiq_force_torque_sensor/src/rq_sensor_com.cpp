@@ -297,6 +297,7 @@ static INT_8 set_com_attribs (INT_32 fd, speed_t speed)
 	tty.c_cflag &= ~CSTOPB;
 	tty.c_cflag &= ~PARENB;
 	tty.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+	tty.c_iflag &= ~ICRNL;
 	tty.c_iflag &= ~INPCK;
 	tty.c_iflag &= ~(IXON | IXOFF | IXANY);
 	tty.c_cc[VMIN]  = 0;			// read doesn't block
