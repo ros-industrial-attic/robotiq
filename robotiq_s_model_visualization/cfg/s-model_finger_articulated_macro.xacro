@@ -20,7 +20,7 @@ finger(i.e. finger_1, etc...).
 				</material>
 			</visual>
 			<collision>	
-				<origin xyz="-0.0455 0.0414 0.036" rpy="0 3.1416 -1.57"/>
+				<origin xyz="0.020 0 0" rpy="0 0 0"/>
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.STL" />
 				</geometry>
