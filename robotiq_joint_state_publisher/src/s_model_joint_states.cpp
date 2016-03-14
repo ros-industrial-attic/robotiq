@@ -88,7 +88,6 @@ inline double Finger::joint_3() const {
 /**
  * Robotiq S-model with three Fingers.
  */
-
 class Robotiq3 {
  public:
   Robotiq3() { mode = BASIC; scissor = 137; joint_positions.resize(11, 0.0); }		///< Default constructor for creating Robotiq3
