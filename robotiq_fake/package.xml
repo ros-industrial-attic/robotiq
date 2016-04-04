@@ -3,7 +3,7 @@
   <name>robotiq_fake</name>
   <version>0.0.0</version>
   <description>Robotiq stand-in</description>
-  <maintainer email="mwhorn@utexas.edu">Matt</maintainer>
+  <maintainer email="mwhorn1008@gmail.com">Matt</maintainer>
   <license>specified in-file</license>
 
   <buildtool_depend>catkin</buildtool_depend>

@@ -57,7 +57,7 @@
  * @version 1.0
  * 
  * @author  Adam Allevato <adam.d.allevato@gmail.com>
- * @author  Matt Horn <mwhorn@utexas.edu>
+ * @author  Matt Horn <mwhorn@utexas.edu, mwhorn1008@gmail.com>
  * @copyright BSD 3-paragraph
  * @date    Nov 23, 2015
  */

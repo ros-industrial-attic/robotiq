@@ -4,10 +4,8 @@
   <version>0.0.1</version>
   <description>Easy connection to and control of robotiq gripper</description>
 
-  <!-- One maintainer tag required, multiple allowed, one person per tag --> 
-  <!-- Example:  -->
-  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="mwhorn@utexas.edu">Matt Horn</maintainer>
+ 
+  <maintainer email="mwhorn1008@gmail.com">Matt Horn</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
