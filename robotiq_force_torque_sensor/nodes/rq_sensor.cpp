@@ -146,7 +146,7 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "robotiq_force_torque_sensor");
 	ros::NodeHandle n;
-	n.param("~max_retries", max_retries_, 100);
+	ros::param::param<int>("~max_retries", max_retries_, 100);
 
 	INT_8 bufStream[512];
 	robotiq_force_torque_sensor::ft_sensor msgStream;
