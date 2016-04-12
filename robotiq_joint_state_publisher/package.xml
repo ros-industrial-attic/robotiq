@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_joint_state_publisher</name>
+  <version>0.0.0</version>
+  <description>Publishes joint states of Robotiq gripper</description>
+  <maintainer email="karl.kruusamae@utexas.edu">Karl Kruusamäe</maintainer>
+  <license>3-clause BSD</license>
+  <author email="jack.thompson@utexas.edu">Jack Thompson</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslib</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>robotiq_s_model_control</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>robotiq_s_model_control</run_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- You can specify that this package is a metapackage here: -->
+    <!-- <metapackage/> -->
+
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>
