@@ -7,11 +7,17 @@
 // An effort to keep the lines less than 100 char long
 namespace robotiq_s_model_control
 {
-SModelEtherCatClient::SModelEtherCatClient(robotiq_ethercat::EtherCatManager& manager, 
-                                                    int slave_no)
-  : manager_(manager)
-  , slave_no_(slave_no)
-{}
+void SModelEtherCatClient::init(ros::NodeHandle nh)
+{
+    // Parameter names
+    std::string ifname;
+
+    nh.param<std::string>("ifname", ifname, "enp9s0");
+    nh.param<int>("slave_number", slave_no_, 1);
+
+    // Start ethercat manager
+    manager_.reset(new robotiq_ethercat::EtherCatManager(ifname));
+}
 
 /*
   See support.robotiq.com -> manual for the register output meanings
@@ -50,17 +56,17 @@ void SModelEtherCatClient::writeOutputs(const GripperOutput& output)
 
   for (unsigned i = 0; i < 15; ++i)
   {
-    manager_.write(slave_no_, i, map[i]);
+    manager_->write(slave_no_, i, map[i]);
   }
 }
 
-SModelEtherCatClient::GripperInput SModelEtherCatClient::readInputs() const
+SModelEtherCatClient::GripperInput SModelEtherCatClient::readInputs()
 {
   uint8_t map[15];
 
   for (unsigned i = 0; i < 15; ++i)
   {
-    map[i] = manager_.readInput(slave_no_, i);
+    map[i] = manager_->readInput(slave_no_, i);
   }
 
   // Decode Input Registers
@@ -105,12 +111,12 @@ SModelEtherCatClient::GripperInput SModelEtherCatClient::readInputs() const
   return input;
 }
 
-SModelEtherCatClient::GripperOutput SModelEtherCatClient::readOutputs() const
+SModelEtherCatClient::GripperOutput SModelEtherCatClient::readOutputs()
 {
   uint8_t map[15];
   for (unsigned i = 0; i < 15; ++i)
   {
-    map[i] = manager_.readOutput(slave_no_, i);
+    map[i] = manager_->readOutput(slave_no_, i);
   }
 
   GripperOutput output;

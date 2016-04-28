@@ -1,8 +1,7 @@
 #ifndef S_MODEL_ETHERCAT_CLIENT_H
 #define S_MODEL_ETHERCAT_CLIENT_H
 
-#include <robotiq_s_model_control/SModel_robot_output.h>
-#include <robotiq_s_model_control/SModel_robot_input.h>
+#include <robotiq_s_model_control/s_model_client_base.h>
 
 // Forward declaration of EtherCatManager
 namespace robotiq_ethercat
@@ -19,11 +18,11 @@ namespace robotiq_s_model_control
  *        the underlying IO Map.
  */
 
-class SModelEtherCatClient
+class SModelEtherCatClient : public SModelClientBase
 {
 public:
-  typedef robotiq_s_model_control::SModel_robot_output GripperOutput;
-  typedef robotiq_s_model_control::SModel_robot_input GripperInput;
+
+  SModelEtherCatClient() {}
 
   /**
    * \brief Constructs a control interface to a S Model Robotiq gripper on
@@ -35,7 +34,7 @@ public:
    * @param[in] slave_no The slave number of the gripper on the EtherCAT network
    *                     (>= 1)
    */
-  SModelEtherCatClient(robotiq_ethercat::EtherCatManager& manager, int slave_no);
+  void init(ros::NodeHandle nh);
 
   /**
    * \brief Write the given set of control flags to the memory of the gripper
@@ -48,17 +47,17 @@ public:
    * \brief Reads set of input-register values from the gripper.
    * \return The gripper input registers as read from the controller IOMap
    */
-  GripperInput readInputs() const;
+  GripperInput readInputs();
 
   /**
    * \brief Reads set of output-register values from the gripper.
    * \return The gripper output registers as read from the controller IOMap
    */
-  GripperOutput readOutputs() const;
+  virtual GripperOutput readOutputs();
 
 private:
-  robotiq_ethercat::EtherCatManager& manager_;
-  const int slave_no_;
+  boost::shared_ptr<robotiq_ethercat::EtherCatManager> manager_;
+  int slave_no_;
 };
 
 }

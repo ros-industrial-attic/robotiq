@@ -38,18 +38,13 @@ int main(int argc, char** argv)
   ros::NodeHandle nh ("~");
 
   // Parameter names
-  std::string ifname;
-  int slave_no;
   bool activate;  
 
-  nh.param<std::string>("ifname", ifname, "enp9s0");
-  nh.param<int>("slave_number", slave_no, 1);
   nh.param<bool>("activate", activate, true);
 
-  // Start ethercat manager
-  EtherCatManager manager(ifname);
   // register client 
-  SModelEtherCatClient client(manager, slave_no);
+  SModelEtherCatClient client;
+  client.init(nh);
 
   // conditionally activate the gripper
   if (activate)
