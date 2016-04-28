@@ -70,8 +70,8 @@ target_link_libraries(robotiq_s_model_control
 add_dependencies(robotiq_s_model_control ${PROJECT_NAME}_gencfg ${PROJECT_NAME}_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
 
 add_executable(s_model_ethercat_node
-  src/robotiq_s_model_control/s_model_ethercat_node.cpp
   src/robotiq_s_model_control/s_model_ethercat_client.cpp
+  src/s_model_ethercat_node.cpp
 )
 
 target_link_libraries(s_model_ethercat_node
