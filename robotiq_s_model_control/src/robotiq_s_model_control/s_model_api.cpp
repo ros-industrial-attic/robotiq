@@ -15,6 +15,16 @@ SModelAPI::SModelAPI(boost::shared_ptr<SModelClientBase> base)
     force_to_ticks_ = 5.7;
     force_offset_ = 15;
     cur_to_ticks_ = 10;
+
+    //! Get current status
+    read();
+    command_.rACT = status_.gACT;
+    command_.rMOD = status_.gMOD;
+    command_.rGTO = status_.gGTO;
+    command_.rPRA = status_.gPRA;
+    command_.rPRB = status_.gPRB;
+    command_.rPRC = status_.gPRC;
+    command_.rPRS = status_.gPRS;
 }
 
 void SModelAPI::setInitialization(InitializationMode mode)
