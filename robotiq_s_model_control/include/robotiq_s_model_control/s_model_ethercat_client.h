@@ -21,9 +21,6 @@ namespace robotiq_s_model_control
 class SModelEtherCatClient : public SModelClientBase
 {
 public:
-
-  SModelEtherCatClient() {}
-
   /**
    * \brief Constructs a control interface to a S Model Robotiq gripper on
    *        the given ethercat network and the given slave_no.
@@ -34,6 +31,7 @@ public:
    * @param[in] slave_no The slave number of the gripper on the EtherCAT network
    *                     (>= 1)
    */
+  SModelEtherCatClient(boost::shared_ptr<robotiq_ethercat::EtherCatManager> manager, int slave_no);
   void init(ros::NodeHandle nh);
 
   /**
@@ -53,11 +51,11 @@ public:
    * \brief Reads set of output-register values from the gripper.
    * \return The gripper output registers as read from the controller IOMap
    */
-  virtual GripperOutput readOutputs();
+  GripperOutput readOutputs();
 
 private:
   boost::shared_ptr<robotiq_ethercat::EtherCatManager> manager_;
-  int slave_no_;
+  const int slave_no_;
 };
 
 }

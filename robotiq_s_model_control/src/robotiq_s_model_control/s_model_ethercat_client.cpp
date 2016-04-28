@@ -7,16 +7,14 @@
 // An effort to keep the lines less than 100 char long
 namespace robotiq_s_model_control
 {
+SModelEtherCatClient::SModelEtherCatClient(boost::shared_ptr<robotiq_ethercat::EtherCatManager> manager, 
+                                                    int slave_no)
+  : manager_(manager)
+  , slave_no_(slave_no)
+{}
+
 void SModelEtherCatClient::init(ros::NodeHandle nh)
 {
-    // Parameter names
-    std::string ifname;
-
-    nh.param<std::string>("ifname", ifname, "enp9s0");
-    nh.param<int>("slave_number", slave_no_, 1);
-
-    // Start ethercat manager
-    manager_.reset(new robotiq_ethercat::EtherCatManager(ifname));
 }
 
 /*
