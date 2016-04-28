@@ -1,24 +1,20 @@
 # http://ros.org/doc/groovy/api/catkin/html/user_guide/supposed.html
 cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_s_model_control)
-find_package(catkin REQUIRED
-  rospy
-  message_generation
-  roscpp
-  robotiq_ethercat
+find_package(catkin REQUIRED COMPONENTS
   controller_manager
+  dynamic_reconfigure
   hardware_interface
-  socketcan_interface
+  message_generation
+  robotiq_ethercat
+  roscpp
+  rospy
   sensor_msgs
+  socketcan_interface
   std_srvs
-  dynamic_reconfigure)
+)
 
-include(FindPkgConfig)
-
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+find_package(PkgConfig)
 
 ###################################
 ## catkin message generation     ##
@@ -46,47 +42,58 @@ generate_dynamic_reconfigure_options(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-    LIBRARIES robotiq_s_model_control
-    CATKIN_DEPENDS rospy message_runtime roscpp robotiq_ethercat controller_manager hardware_interface socketcan_interface sensor_msgs std_srvs
+    LIBRARIES ${PROJECT_NAME}
+    CATKIN_DEPENDS
+        controller_manager
+        dynamic_reconfigure
+        hardware_interface
+        message_runtime
+        robotiq_ethercat
+        roscpp
+        rospy
+        sensor_msgs
+        socketcan_interface
+        std_srvs
 )
 
-include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
-  ${robotiq_ethercat_INCLUDE_DIRS}
 )
 
-link_directories(${catkin_LIBRARY_DIRS})
-
-add_library(robotiq_s_model_control
-  src/robotiq_s_model_control/s_model_api.cpp
-  src/robotiq_s_model_control/s_model_diagnostics.cpp
-  src/robotiq_s_model_control/s_model_ros.cpp
-  src/robotiq_s_model_control/s_model_hw_interface.cpp
+add_library(${PROJECT_NAME}
+  src/${PROJECT_NAME}/s_model_api.cpp
+  src/${PROJECT_NAME}/s_model_diagnostics.cpp
+  src/${PROJECT_NAME}/s_model_hw_interface.cpp
+  src/${PROJECT_NAME}/s_model_ros.cpp
 )
-target_link_libraries(robotiq_s_model_control
+target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
-add_dependencies(robotiq_s_model_control ${PROJECT_NAME}_gencfg ${PROJECT_NAME}_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}
+  ${PROJECT_NAME}_gencfg
+  ${PROJECT_NAME}_generate_messages_cpp
+  ${catkin_EXPORTED_TARGETS}
+)
 
 add_executable(s_model_ethercat_node
-  src/robotiq_s_model_control/s_model_ethercat_client.cpp
+  src/${PROJECT_NAME}/s_model_ethercat_client.cpp
   src/s_model_ethercat_node.cpp
 )
 
 target_link_libraries(s_model_ethercat_node
-   robotiq_s_model_control
+   ${PROJECT_NAME}
    ${robotiq_ethercat_LIBRARIES}
    ${catkin_LIBRARIES}
 )
 
 add_executable(s_model_can_node
-  src/robotiq_s_model_control/s_model_can_client.cpp
+  src/${PROJECT_NAME}/s_model_can_client.cpp
   src/s_model_can_node.cpp
 )
 
 target_link_libraries(s_model_can_node
-  robotiq_s_model_control
+  ${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
 
@@ -101,7 +108,7 @@ install(PROGRAMS nodes/SModelSimpleController.py nodes/SModelStatusListener.py
 	nodes/SModelTcpNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 ## Mark executables and/or libraries for installation
-install(TARGETS robotiq_s_model_control s_model_ethercat_node s_model_can_node
+install(TARGETS ${PROJECT_NAME} s_model_can_node s_model_ethercat_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

@@ -5,9 +5,12 @@
   <maintainer email="sedwards@swri.org">Shaun Edwards</maintainer>
   <license>BSD</license>
   <url type="website">http://ros.org/wiki/robotiq</url>
+
   <author>Nicolas Lauzier (Robotiq inc.)</author>
+  <author email="althackston@gmail.com">Allison Thackston</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>message_generation</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>roscpp</build_depend>
