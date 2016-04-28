@@ -1,83 +1,162 @@
-#include "ros/ros.h"
+#include <robotiq_s_model_control/s_model_api.h>
+#include <robotiq_s_model_control/s_model_ethercat_client.h>
+#include <robotiq_ethercat/ethercat_manager.h>
+#include <robotiq_s_model_control/s_model_hw_interface.h>
+#include <controller_manager/controller_manager.h>
+#include <ros/ros.h>
 
-#include <boost/bind.hpp>
-#include <boost/ref.hpp>
+// Used to convert seconds elapsed to nanoseconds
+static const double BILLION = 1000000000.0;
 
-#include "robotiq_s_model_control/s_model_ethercat_client.h"
-#include <robotiq_s_model_control/SModel_robot_input.h>
-#include "robotiq_ethercat/ethercat_manager.h"
-
-
-/*
-  Note that this code currently works only to control ONE SModel gripper
-  attached to ONE network interface. If you want to add more grippers
-  to the same network, you'll need to edit the source file.
-*/
-
-// Note that you will likely need to run the following on your binary:
-// sudo setcap cap_net_raw+ep <filename>
-
-
-void changeCallback(robotiq_s_model_control::SModelEtherCatClient& client,
-                    const robotiq_s_model_control::SModelEtherCatClient::GripperOutput::ConstPtr& msg)
+class GenericHWLoop
 {
-  client.writeOutputs(*msg);
-}
+public:
+    GenericHWLoop(
+            ros::NodeHandle& nh,
+            boost::shared_ptr<robotiq_s_model_control::SModelHWInterface> hardware_interface)
+        : nh_(nh), name_("generic_hw_control_loop"), hardware_interface_(hardware_interface)
+    {
+        ROS_DEBUG("creating loop");
 
+        //! Create the controller manager
+        controller_manager_.reset(new controller_manager::ControllerManager(hardware_interface_.get(), nh_));
+        ROS_DEBUG("created controller manager");
+
+        //! Load rosparams
+        ros::NodeHandle rpsnh(nh, name_);
+
+        loop_hz_ = rpsnh.param<double>("loop_hz", 30);
+        cycle_time_error_threshold_ = rpsnh.param<double>("cycle_time_error_threshold", 0.1);
+
+        //! Get current time for use with first update
+        clock_gettime(CLOCK_MONOTONIC, &last_time_);
+
+        //! Start timer
+        ros::Duration desired_update_freq_ = ros::Duration(1 / loop_hz_);
+        non_realtime_loop_ = nh_.createTimer(desired_update_freq_, &GenericHWLoop::update, this);
+        ROS_DEBUG("created timer");
+    }
+
+    /** \brief Timer event
+     *         Note: we do not use the TimerEvent time difference because it does NOT guarantee that
+     * the time source is
+     *         strictly linearly increasing
+     */
+    void update(const ros::TimerEvent& e)
+    {
+        //! Get change in time
+        clock_gettime(CLOCK_MONOTONIC, &current_time_);
+        elapsed_time_ =
+                ros::Duration(current_time_.tv_sec - last_time_.tv_sec + (current_time_.tv_nsec - last_time_.tv_nsec) / BILLION);
+        last_time_ = current_time_;
+        ROS_DEBUG_STREAM_THROTTLE_NAMED(1, "GenericHWLoop","Sampled update loop with elapsed time " << elapsed_time_.toSec());
+
+        //! Error check cycle time
+        const double cycle_time_error = (elapsed_time_ - desired_update_freq_).toSec();
+        if (cycle_time_error > cycle_time_error_threshold_)
+        {
+            ROS_WARN_STREAM_NAMED(name_, "Cycle time exceeded error threshold by: "
+                                  << cycle_time_error << ", cycle time: " << elapsed_time_
+                                  << ", threshold: " << cycle_time_error_threshold_);
+        }
+
+        //! Input
+        hardware_interface_->read(elapsed_time_);
+
+        //! Control
+        controller_manager_->update(ros::Time::now(), elapsed_time_);
+
+        //! Output
+        hardware_interface_->write(elapsed_time_);
+    }
+
+protected:
+    // Startup and shutdown of the internal node inside a roscpp program
+    ros::NodeHandle nh_;
+
+    // Name of this class
+    std::string name_;
+
+    // Settings
+    ros::Duration desired_update_freq_;
+    double cycle_time_error_threshold_;
+
+    // Timing
+    ros::Timer non_realtime_loop_;
+    ros::Duration elapsed_time_;
+    double loop_hz_;
+    struct timespec last_time_;
+    struct timespec current_time_;
+
+    /** \brief ROS Controller Manager and Runner
+     *
+     * This class advertises a ROS interface for loading, unloading, starting, and
+     * stopping ros_control-based controllers. It also serializes execution of all
+     * running controllers in \ref update.
+     */
+    boost::shared_ptr<controller_manager::ControllerManager> controller_manager_;
+
+    /** \brief Abstract Hardware Interface for your robot */
+    boost::shared_ptr<robotiq_s_model_control::SModelHWInterface> hardware_interface_;
+};
 
 int main(int argc, char** argv)
 {
-  using robotiq_ethercat::EtherCatManager;
-  using robotiq_s_model_control::SModelEtherCatClient;
 
-  typedef SModelEtherCatClient::GripperOutput GripperOutput;
-  typedef SModelEtherCatClient::GripperInput GripperInput;
+    using robotiq_ethercat::EtherCatManager;
+    using robotiq_s_model_control::SModelEtherCatClient;
+    ros::init(argc, argv, "robotiq_hw_interface");
+    ros::NodeHandle nh;
+    ros::NodeHandle pnh("~");
 
-  ros::init(argc, argv, "robotiq_s_model_gripper_node");
-  
-  ros::NodeHandle nh ("~");
+    // NOTE: We run the ROS loop in a separate thread as external calls such
+    // as service callbacks to load controllers can block the (main) control loop
+    ros::AsyncSpinner spinner(2);
+    spinner.start();
 
-  // Parameter names
-  std::string ifname;
-  int slave_no;
-  bool activate;  
+    // Parameter names
+    std::string ifname;
+    int slave_no;
+    bool activate;
 
-  nh.param<std::string>("ifname", ifname, "enp9s0");
-  nh.param<int>("slave_number", slave_no, 1);
-  nh.param<bool>("activate", activate, true);
+    nh.param<std::string>("ifname", ifname, "enp9s0");
+    nh.param<int>("slave_number", slave_no, 1);
+    nh.param<bool>("activate", activate, true);
 
-  // Start ethercat manager
-  boost::shared_ptr<EtherCatManager> manager(new EtherCatManager(ifname));
+    // Start ethercat manager
+    boost::shared_ptr<EtherCatManager> manager(new EtherCatManager(ifname));
 
-  // register client 
-  SModelEtherCatClient client(manager, slave_no);
-  client.init(nh);
+    // Create the hw client layer
+    boost::shared_ptr<robotiq_s_model_control::SModelEtherCatClient> ethercat_client
+            (new robotiq_s_model_control::SModelEtherCatClient(manager, slave_no));
+    ethercat_client->init(pnh);
 
-  // conditionally activate the gripper
-  if (activate)
-  {
-    // Check to see if resetting is required? Or always reset?
-    GripperOutput out;
-    out.rACT = 0x1;
-    client.writeOutputs(out);
-  }
+    // Create the hw api layer
+    boost::shared_ptr<robotiq_s_model_control::SModelAPI> hw_api
+            (new robotiq_s_model_control::SModelAPI(ethercat_client));
 
-  // Sorry for the indentation, trying to keep it under 100 chars
-  ros::Subscriber sub = 
-        nh.subscribe<GripperOutput>("output", 1,
-                                    boost::bind(changeCallback, boost::ref(client), _1));
+    // Create the hardware interface layer
+    boost::shared_ptr<robotiq_s_model_control::SModelHWInterface> hw_interface
+            (new robotiq_s_model_control::SModelHWInterface(pnh, hw_api));
 
-  ros::Publisher pub = nh.advertise<GripperInput>("input", 100);
+    ROS_DEBUG("created hw interface");
 
-  ros::Rate rate(10); // 10 Hz
+    // Register interfaces
+    hardware_interface::JointStateInterface joint_state_interface;
+    hardware_interface::PositionJointInterface position_cmd_interface;
+    hw_interface->configure(joint_state_interface, position_cmd_interface);
+    hw_interface->registerInterface(&joint_state_interface);
+    hw_interface->registerInterface(&position_cmd_interface);
 
-  while (ros::ok()) 
-  {
-    SModelEtherCatClient::GripperInput input = client.readInputs();
-    pub.publish(input);
-    ros::spinOnce();
-    rate.sleep();
-  }
+    ROS_DEBUG("registered control interfaces");
 
-  return 0;
+    // Start the control loop
+    GenericHWLoop control_loop(pnh, hw_interface);
+    ROS_INFO("started");
+
+    // Wait until shutdown signal recieved
+    ros::waitForShutdown();
+
+    return 0;
 }
+
