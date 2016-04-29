@@ -133,6 +133,14 @@ void SModelAPI::getRaw(SModelClientBase::GripperInput &raw)
     raw = status_;
 }
 
+void SModelAPI::getCommandPos(double &posA, double &posB, double &posC, double &posS)
+{
+    posA = (double)command_.rPRA/pos_to_ticks_ + pos_offset_;
+    posB = (double)command_.rPRB/pos_to_ticks_ + pos_offset_;
+    posC = (double)command_.rPRC/pos_to_ticks_ + pos_offset_;
+    posS = (double)command_.rPRS/sci_to_ticks_ + sci_offset_;
+}
+
 bool SModelAPI::isInitialized()
 {
     return ((InitializationMode)status_.gACT == INIT_ACTIVATION);

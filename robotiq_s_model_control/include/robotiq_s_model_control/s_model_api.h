@@ -47,6 +47,8 @@ public:
     void getObjectStatus(ObjectStatus &fA, ObjectStatus &fB, ObjectStatus &fC, ObjectStatus &fS);
     void getRaw(SModelClientBase::GripperInput &raw);
 
+    void getCommandPos(double &posA, double &posB, double &posC, double &posS);
+
     bool isInitialized();
     bool isReady();
     bool isModeSet(GraspingMode mode);

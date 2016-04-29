@@ -71,6 +71,8 @@ void SModelHWInterface::read(ros::Duration d)
     }
     j_prev_pos = j_curr_pos;
     hw_driver_->getCurrent(j_curr_eff[0], j_curr_eff[1], j_curr_eff[2], j_curr_eff[3]);
+    hw_driver_->getCommandPos(j_cmd_pos[0], j_cmd_pos[1], j_cmd_pos[2], j_cmd_pos[3]);
+
     hw_diagnostics_->update();
     hw_ros_->publish();
 }
@@ -80,4 +82,3 @@ void SModelHWInterface::write(ros::Duration d)
     hw_driver_->setPosition(j_cmd_pos[0], j_cmd_pos[1], j_cmd_pos[2], j_cmd_pos[3]);
     hw_driver_->write();
 }
-
