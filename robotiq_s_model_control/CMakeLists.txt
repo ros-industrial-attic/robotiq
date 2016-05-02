@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_s_model_control)
 find_package(catkin REQUIRED COMPONENTS
   controller_manager
+  diagnostic_updater
   dynamic_reconfigure
   hardware_interface
   message_generation
@@ -45,6 +46,7 @@ catkin_package(
     LIBRARIES ${PROJECT_NAME}
     CATKIN_DEPENDS
         controller_manager
+        diagnostic_updater
         dynamic_reconfigure
         hardware_interface
         message_runtime
