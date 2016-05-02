@@ -8,6 +8,8 @@
   <node name="$(arg gripper_name)" pkg="robotiq_s_model_control" type="s_model_can_node" output="screen" >
     <param name="can_device" value="$(arg can_device)" />
     <param name="can_id" value="$(arg can_id)" />
+    <param name="prefix" value="$(arg prefix)" />
+    <param name="hw_name" value="$(arg gripper_name)" />
   </node>
 
   <group ns="$(arg gripper_name)">
