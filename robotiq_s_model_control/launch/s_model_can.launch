@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="prefix" default="" />
+  <arg name="can_device" default="can0" />
+  <arg name="can_id" default="11" />
+  <arg name="gripper_name" default="gripper" />
 
-  <node name="robotiq_s_controller" pkg="robotiq_s_model_control" type="s_model_can_node" output="screen"/>
+  <node name="$(arg gripper_name)" pkg="robotiq_s_model_control" type="s_model_can_node" output="screen" >
+    <param name="can_device" value="$(arg can_device)" />
+    <param name="can_id" value="$(arg can_id)" />
+  </node>
 
-  <group ns="robotiq_s_controller">
+  <group ns="$(arg gripper_name)">
     <rosparam subst_value="True">
       ## joint_state_controller
       $(arg prefix)joint_state_controller:
