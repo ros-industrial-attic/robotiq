@@ -101,7 +101,7 @@ protected:
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "robotiq_hw_interface");
+  ros::init(argc, argv, "robotiq_s_model_gripper_node");
   ros::NodeHandle nh;
   ros::NodeHandle pnh("~");
 
