@@ -150,10 +150,10 @@ int main(int argc, char** argv)
 
   // Register interfaces
   hardware_interface::JointStateInterface joint_state_interface;
-  hardware_interface::PositionJointInterface position_cmd_interface;
-  hw_interface->configure(joint_state_interface, position_cmd_interface);
+  hardware_interface::PositionJointInterface position_joint_interface;
+  hw_interface->configure(joint_state_interface, position_joint_interface);
   hw_interface->registerInterface(&joint_state_interface);
-  hw_interface->registerInterface(&position_cmd_interface);
+  hw_interface->registerInterface(&position_joint_interface);
 
   ROS_DEBUG("registered control interfaces");
 

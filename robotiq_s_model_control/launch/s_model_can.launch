@@ -27,9 +27,14 @@
            - $(arg prefix)finger_2_joint_1
            - $(arg prefix)finger_middle_joint_1
            - $(arg prefix)palm_finger_1_joint
+
+      ## single command controller
+      $(arg prefix)hand_simple_controller:
+          type: position_controllers/JointPositionController
+          joint: $(arg prefix)finger_1_joint_1
     </rosparam>
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-      output="screen" args="$(arg prefix)joint_state_controller $(arg prefix)hand_group_position_controller" />
+      output="screen" args="$(arg prefix)joint_state_controller $(arg prefix)hand_simple_controller" />
 
   </group>
 </launch>

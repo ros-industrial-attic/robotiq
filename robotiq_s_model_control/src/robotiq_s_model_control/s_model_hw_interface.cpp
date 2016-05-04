@@ -26,12 +26,11 @@ SModelHWInterface::SModelHWInterface(ros::NodeHandle nh, boost::shared_ptr<SMode
         throw std::runtime_error("There must be 4 joint names");
     }
 
-    j_prev_pos.resize(4, 0);
-    j_curr_pos.resize(4, 0);
-    j_curr_vel.resize(4, 0);
-    j_curr_eff.resize(4, 0);
+    j_curr_pos_.resize(4, 0);
+    j_curr_vel_.resize(4, 0);
+    j_curr_eff_.resize(4, 0);
 
-    j_cmd_pos.resize(4, 0);
+    j_cmd_pos_.resize(4, 0);
 
     hw_diagnostics_.reset(new SModelDiagnostics(hw_driver_, hw_name));
     hw_ros_.reset(new SModelROS(nh, hw_driver_, joint_names_, ros::Duration(1/rate)));
@@ -45,9 +44,9 @@ void SModelHWInterface::configure(hardware_interface::JointStateInterface &joint
         // Create joint state interface
         joint_state_interface.registerHandle(hardware_interface::JointStateHandle(
                                                   joint_names_[joint_id],
-                                                  &j_curr_pos[joint_id],
-                                                  &j_curr_vel[joint_id],
-                                                  &j_curr_eff[joint_id]));
+                                                  &j_curr_pos_[joint_id],
+                                                  &j_curr_vel_[joint_id],
+                                                  &j_curr_eff_[joint_id]));
 
     }
 
@@ -57,21 +56,15 @@ void SModelHWInterface::configure(hardware_interface::JointStateInterface &joint
         // Create joint position interface
         joint_position_interface.registerHandle(hardware_interface::JointHandle(
                                                      joint_state_interface.getHandle(joint_names_[joint_id]),
-                                                     &j_cmd_pos[joint_id]));
+                                                     &j_cmd_pos_[joint_id]));
     }
 }
 
 void SModelHWInterface::read(ros::Duration d)
 {
     hw_driver_->read();
-    hw_driver_->getPosition(j_curr_pos[0], j_curr_pos[1], j_curr_pos[2], j_curr_pos[3]);
-    for(std::size_t joint_id = 0; joint_id < 4; ++joint_id)
-    {
-        j_curr_vel[joint_id] = (j_curr_pos[joint_id] - j_prev_pos[joint_id])/d.toSec();
-    }
-    j_prev_pos = j_curr_pos;
-    hw_driver_->getCurrent(j_curr_eff[0], j_curr_eff[1], j_curr_eff[2], j_curr_eff[3]);
-    hw_driver_->getCommandPos(j_cmd_pos[0], j_cmd_pos[1], j_cmd_pos[2], j_cmd_pos[3]);
+    hw_driver_->getPosition(j_curr_pos_[0], j_curr_pos_[1], j_curr_pos_[2], j_curr_pos_[3]);
+    hw_driver_->getCommandPos(j_cmd_pos_[0], j_cmd_pos_[1], j_cmd_pos_[2], j_cmd_pos_[3]);
 
     hw_diagnostics_->update();
     hw_ros_->publish();
@@ -79,6 +72,6 @@ void SModelHWInterface::read(ros::Duration d)
 
 void SModelHWInterface::write(ros::Duration d)
 {
-    hw_driver_->setPosition(j_cmd_pos[0], j_cmd_pos[1], j_cmd_pos[2], j_cmd_pos[3]);
+    hw_driver_->setPosition(j_cmd_pos_[0], j_cmd_pos_[1], j_cmd_pos_[2], j_cmd_pos_[3]);
     hw_driver_->write();
 }

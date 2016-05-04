@@ -27,13 +27,13 @@ public:
      * \brief Reads set of input-register values from the gripper.
      * \return The gripper input registers as read from the controller IOMap
      */
-    virtual GripperInput readInputs() = 0;
+    virtual GripperInput readInputs() const = 0;
 
     /**
      * \brief Reads set of output-register values from the gripper.
      * \return The gripper output registers as read from the controller IOMap
      */
-    virtual GripperOutput readOutputs() = 0;
+    virtual GripperOutput readOutputs() const = 0;
 
     virtual ~SModelClientBase() {}
 

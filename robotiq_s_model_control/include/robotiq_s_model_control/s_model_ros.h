@@ -3,7 +3,6 @@
 
 #include <ros/ros.h>
 #include <std_srvs/Trigger.h>
-#include <sensor_msgs/JointState.h>
 #include <robotiq_s_model_control/SModel_robot_input.h>
 #include <robotiq_s_model_control/SModel_robot_output.h>
 #include <robotiq_s_model_control/s_model_api.h>
@@ -31,6 +30,9 @@ public:
 
     void handle_raw_cmd(const robotiq_s_model_control::SModel_robot_output::ConstPtr &msg);
 
+    void update_config(const robotiq_s_model_control::SModelConfig &config);
+    void get_current_config(robotiq_s_model_control::SModelConfig &config);
+
 private:
     ros::NodeHandle nh_;
     boost::shared_ptr<robotiq_s_model_control::SModelAPI> driver_;
@@ -43,7 +45,6 @@ private:
     ros::ServiceServer shutdown_srv_;
 
     //! Topics
-    ros::Publisher pos_cmd_pub_;
     ros::Publisher input_status_pub_;
     ros::Subscriber output_sub_;
 
@@ -54,9 +55,8 @@ private:
     typedef dynamic_reconfigure::Server<robotiq_s_model_control::SModelConfig> ReconfigureServer;
     boost::shared_ptr<ReconfigureServer> reconfigure_;
     boost::recursive_mutex reconfigure_mutex_;
+    robotiq_s_model_control::SModelConfig config_;
 
-    std::vector<double> pos_cmd_;
-    sensor_msgs::JointState pos_cmd_msg_;
     robotiq_s_model_control::SModel_robot_input input_status_msg_;
 
 };

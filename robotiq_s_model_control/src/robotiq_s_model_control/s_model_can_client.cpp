@@ -9,6 +9,13 @@ SModelCanClient::SModelCanClient(unsigned int can_id, boost::shared_ptr<can::Dri
     resp_header_.id = can_id + 0x580;
 }
 
+SModelCanClient::~SModelCanClient()
+{
+    read_mutex.unlock();
+    driver_->shutdown();
+
+}
+
 void SModelCanClient::init(ros::NodeHandle nh)
 {
     requestStart();
@@ -173,7 +180,7 @@ void SModelCanClient::writeOutputs(const GripperOutput &output)
     }
 }
 
-SModelCanClient::GripperInput SModelCanClient::readInputs()
+SModelCanClient::GripperInput SModelCanClient::readInputs() const
 {
     if(driver_->getState().isReady())
     {
@@ -215,7 +222,7 @@ SModelCanClient::GripperInput SModelCanClient::readInputs()
     return input_;
 }
 
-SModelCanClient::GripperOutput SModelCanClient::readOutputs()
+SModelCanClient::GripperOutput SModelCanClient::readOutputs() const
 {
     return output_;
 }

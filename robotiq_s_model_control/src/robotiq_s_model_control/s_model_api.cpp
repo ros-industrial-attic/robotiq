@@ -156,9 +156,14 @@ bool SModelAPI::isModeSet(GraspingMode mode)
     return ((GraspingMode)status_.gMOD == mode);
 }
 
-bool SModelAPI::isStopped()
+bool SModelAPI::isHalted()
 {
     return ((ActionMode)status_.gGTO == ACTION_STOP);
+}
+
+bool SModelAPI::isMoving()
+{
+    return (status_.gSTA == MOTION_STARTED);
 }
 
 bool SModelAPI::isEmergReleaseComplete()

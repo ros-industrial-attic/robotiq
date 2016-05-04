@@ -124,7 +124,7 @@ int main(int argc, char** argv)
     nh.param<bool>("activate", activate, true);
 
     // Start ethercat manager
-    boost::shared_ptr<EtherCatManager> manager(new EtherCatManager(ifname));
+    EtherCatManager manager(ifname);
 
     // Create the hw client layer
     boost::shared_ptr<robotiq_s_model_control::SModelEtherCatClient> ethercat_client
@@ -143,10 +143,10 @@ int main(int argc, char** argv)
 
     // Register interfaces
     hardware_interface::JointStateInterface joint_state_interface;
-    hardware_interface::PositionJointInterface position_cmd_interface;
-    hw_interface->configure(joint_state_interface, position_cmd_interface);
+    hardware_interface::PositionJointInterface position_joint_interface;
+    hw_interface->configure(joint_state_interface, position_joint_interface);
     hw_interface->registerInterface(&joint_state_interface);
-    hw_interface->registerInterface(&position_cmd_interface);
+    hw_interface->registerInterface(&position_joint_interface);
 
     ROS_DEBUG("registered control interfaces");
 

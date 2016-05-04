@@ -15,7 +15,6 @@ SModelROS::SModelROS(ros::NodeHandle &nh, boost::shared_ptr<SModelAPI> driver, s
     shutdown_srv_ = nh_.advertiseService("shutdown", &SModelROS::handle_shutdown, this);
 
     //! advertise topics
-    pos_cmd_pub_ = nh_.advertise<sensor_msgs::JointState>("joint_cmd_states", 10);
     input_status_pub_ = nh.advertise<robotiq_s_model_control::SModel_robot_input>("input", 10);
 
     //! subscribers
@@ -26,8 +25,6 @@ SModelROS::SModelROS(ros::NodeHandle &nh, boost::shared_ptr<SModelAPI> driver, s
     ReconfigureServer::CallbackType f = boost::bind(&SModelROS::handle_reconfigure, this, _1, _2);
     reconfigure_->setCallback(f);
 
-    pos_cmd_msg_.name = joint_names;
-    pos_cmd_msg_.position.resize(joint_names.size(), 0);
     if(joint_names.size() != 4)
     {
         ROS_FATAL("Joint name size must be 4");
@@ -36,9 +33,6 @@ SModelROS::SModelROS(ros::NodeHandle &nh, boost::shared_ptr<SModelAPI> driver, s
 
 void SModelROS::publish()
 {
-    driver_->getPositionCmd(pos_cmd_msg_.position[0], pos_cmd_msg_.position[1], pos_cmd_msg_.position[2], pos_cmd_msg_.position[3]);
-    pos_cmd_pub_.publish(pos_cmd_msg_);
-
     driver_->getRaw(input_status_msg_);
     input_status_pub_.publish(input_status_msg_);
 }
@@ -57,7 +51,7 @@ bool SModelROS::handle_init(std_srvs::TriggerRequest &req, std_srvs::TriggerResp
     //! set action mode to go (ACTION_GO)
     driver_->setActionMode(ACTION_GO);
     //! wait for controller state (ACTION_GO)
-    while(driver_->isStopped())
+    while(driver_->isHalted())
     {
         desired_update_freq_.sleep();
     }
@@ -89,7 +83,7 @@ bool SModelROS::handle_halt(std_srvs::TriggerRequest &req, std_srvs::TriggerResp
     //! set controller state (ACTION_STOP)
     driver_->setActionMode(ACTION_STOP);
     //! wait for controller state (ACTION_STOP)
-    while(!driver_->isStopped())
+    while(!driver_->isHalted())
     {
         desired_update_freq_.sleep();
     }
@@ -154,6 +148,17 @@ void SModelROS::handle_reconfigure(robotiq_s_model_control::SModelConfig &config
     driver_->setVelocity(config.velocity, config.velocity, config.velocity, config.velocity);
     driver_->setForce(config.force, config.force, config.force, config.force);
 
+    config_ = config;
+}
+
+void SModelROS::update_config(const robotiq_s_model_control::SModelConfig &config)
+{
+    reconfigure_->updateConfig(config);
+}
+
+void SModelROS::get_current_config(robotiq_s_model_control::SModelConfig &config)
+{
+    config = config_;
 }
 
 void SModelROS::handle_raw_cmd(const robotiq_s_model_control::SModel_robot_output::ConstPtr &msg)

@@ -31,8 +31,7 @@ public:
    * @param[in] slave_no The slave number of the gripper on the EtherCAT network
    *                     (>= 1)
    */
-  SModelEtherCatClient(boost::shared_ptr<robotiq_ethercat::EtherCatManager> manager, int slave_no);
-  void init(ros::NodeHandle nh);
+  SModelEtherCatClient(robotiq_ethercat::EtherCatManager& manager, int slave_no);
 
   /**
    * \brief Write the given set of control flags to the memory of the gripper
@@ -45,16 +44,16 @@ public:
    * \brief Reads set of input-register values from the gripper.
    * \return The gripper input registers as read from the controller IOMap
    */
-  GripperInput readInputs();
+  GripperInput readInputs() const;
 
   /**
    * \brief Reads set of output-register values from the gripper.
    * \return The gripper output registers as read from the controller IOMap
    */
-  GripperOutput readOutputs();
+  GripperOutput readOutputs() const;
 
 private:
-  boost::shared_ptr<robotiq_ethercat::EtherCatManager> manager_;
+  robotiq_ethercat::EtherCatManager& manager_;
   const int slave_no_;
 };
 

@@ -52,7 +52,8 @@ public:
     bool isInitialized();
     bool isReady();
     bool isModeSet(GraspingMode mode);
-    bool isStopped();
+    bool isHalted();
+    bool isMoving();
     bool isEmergReleaseComplete();
 
     void read();

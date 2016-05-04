@@ -19,6 +19,8 @@ class SModelCanClient : public SModelClientBase
 public:
     SModelCanClient(unsigned int can_id, boost::shared_ptr<can::DriverInterface> driver);
 
+    virtual ~SModelCanClient();
+
 
     void init(ros::NodeHandle nh);
 
@@ -33,13 +35,13 @@ public:
      * \brief Reads set of input-register values from the gripper.
      * \return The gripper input registers as read from the controller IOMap
      */
-    GripperInput readInputs();
+    GripperInput readInputs() const;
 
     /**
      * \brief Reads set of output-register values from the gripper.
      * \return The gripper output registers as read from the controller IOMap
      */
-    virtual GripperOutput readOutputs();
+    GripperOutput readOutputs() const;
 
 private:
     unsigned int can_id_;
@@ -60,7 +62,7 @@ private:
 
     std::map<unsigned char, unsigned char> prevCmd_;
 
-    boost::timed_mutex read_mutex;
+    mutable boost::timed_mutex read_mutex;
 
     void decodeGripperStatus(const u_int8_t &f);
     void decodeObjectStatus(const u_int8_t &f);

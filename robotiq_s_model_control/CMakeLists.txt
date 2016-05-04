@@ -10,7 +10,6 @@ find_package(catkin REQUIRED COMPONENTS
   robotiq_ethercat
   roscpp
   rospy
-  sensor_msgs
   socketcan_interface
   std_srvs
 )
@@ -53,7 +52,6 @@ catkin_package(
         robotiq_ethercat
         roscpp
         rospy
-        sensor_msgs
         socketcan_interface
         std_srvs
 )
