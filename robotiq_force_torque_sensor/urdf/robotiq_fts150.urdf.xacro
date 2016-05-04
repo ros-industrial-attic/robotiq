@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotiq_fts150">
 
-    <xacro:macro name="robotiq_fts150_hi_res" params="parent prefix *origin">
+    <xacro:macro name="robotiq_fts150" params="parent prefix *origin">
 
         <!-- mount the fts to the robot -->
         <joint name="{prefix}fts_fix" type="fixed" >
             <!--In most cases origin would be flange adapter plate: <origin xyz="0 0 0.009" rpy="0 0 0"/> /-->
-            <insert_block name="origin" /> 
+            <insert_block name="origin" />
             <parent link="${parent}" />
             <child link="${prefix}fts_robotside" />
         </joint>
@@ -21,15 +21,15 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotiq_force_torque_sensor/models/robotiq_fts150.stl"/>
+                    <mesh filename="package://robotiq_force_torque_sensor/meshes/visual/robotiq_fts150.stl"/>
                 </geometry>
                 <material name="black"/>
             </visual>
 
             <collision>
-                <origin xyz="0 0 0.01875" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <cylinder length="0.0375" radius="0.060"/>
+                    <mesh filename="package://robotiq_force_torque_sensor/meshes/collision/robotiq_fts150.stl"/>
                 </geometry>
             </collision>
         </link>
