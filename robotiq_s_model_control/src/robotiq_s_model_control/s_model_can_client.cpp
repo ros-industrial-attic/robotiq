@@ -11,9 +11,7 @@ SModelCanClient::SModelCanClient(unsigned int can_id, boost::shared_ptr<can::Dri
 
 SModelCanClient::~SModelCanClient()
 {
-    read_mutex.unlock();
     driver_->shutdown();
-
 }
 
 void SModelCanClient::init(ros::NodeHandle nh)
