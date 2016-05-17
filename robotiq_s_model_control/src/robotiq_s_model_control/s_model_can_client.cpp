@@ -231,12 +231,11 @@ void SModelCanClient::stateCallback(const can::State &s)
     driver_->translateError(s.internal_error, err);
     if(!s.internal_error)
     {
-        std::cout<<"State: " <<err <<", asio: "<<s.error_code.message()<<std::endl;
-        //throw std::runtime_error(s.error_code.message());
+        ROS_INFO_STREAM("State: " <<err <<", asio: "<<s.error_code.message());
     }
     else
     {
-        std::cout<<"Error: "<<err<<", asio: "<<s.error_code.message()<<std::endl;
+        ROS_ERROR_STREAM("Error: "<<err<<", asio: "<<s.error_code.message());
         throw std::runtime_error(err);
     }
 
