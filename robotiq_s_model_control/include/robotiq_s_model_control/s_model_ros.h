@@ -20,18 +20,18 @@ public:
 
     void publish();
 
-    bool handle_init(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
-    bool handle_reset(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
-    bool handle_halt(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
-    bool handle_emerg_release(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
-    bool handle_shutdown(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
+    bool handleInit(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
+    bool handleReset(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
+    bool handleHalt(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
+    bool handleEmergRelease(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
+    bool handleShutdown(std_srvs::TriggerRequest &req, std_srvs::TriggerResponse &resp);
 
-    void handle_reconfigure(robotiq_s_model_control::SModelConfig &config, uint32_t level=0);
+    void handleReconfigure(robotiq_s_model_control::SModelConfig &config, uint32_t level=0);
 
-    void handle_raw_cmd(const robotiq_s_model_control::SModel_robot_output::ConstPtr &msg);
+    void handleRawCmd(const robotiq_s_model_control::SModel_robot_output::ConstPtr &msg);
 
-    void update_config(const robotiq_s_model_control::SModelConfig &config);
-    void get_current_config(robotiq_s_model_control::SModelConfig &config);
+    void updateConfig(const robotiq_s_model_control::SModelConfig &config);
+    void getCurrentConfig(robotiq_s_model_control::SModelConfig &config);
 
 private:
     ros::NodeHandle nh_;
