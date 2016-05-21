@@ -157,7 +157,7 @@ INT_8 rq_sensor_com()
 	{
 		//Look for a serial device
 		if (strstr(entrydirectory->d_name, "ttyS") || 
-		    strstr(entrydirectory->d_name, "ttyUSB"))
+			strstr(entrydirectory->d_name, "ttyUSB"))
 		{
 			device_found = rq_com_identify_device(entrydirectory->d_name);
 		}
@@ -704,10 +704,10 @@ static INT_32 rq_com_write_port(UINT_8 const * const buf, UINT_32 buf_len)
 	}
 
 #ifdef __unix__ //For Unix
-    return write(fd_connexion, buf, buf_len);
+	return write(fd_connexion, buf, buf_len);
 #elif defined(_WIN32)||defined(WIN32) //For Windows
-    DWORD n_bytes = 0;
-    return (WriteFile(hSerial, buf, buf_len, &n_bytes, NULL)) ? n_bytes: -1;
+	DWORD n_bytes = 0;
+	return (WriteFile(hSerial, buf, buf_len, &n_bytes, NULL)) ? n_bytes: -1;
 #endif
 }
 
@@ -719,9 +719,9 @@ static INT_32 rq_com_write_port(UINT_8 const * const buf, UINT_32 buf_len)
  */
 static UINT_16 rq_com_compute_crc(UINT_8 const * adr, INT_32 length )
 {
-        UINT_16 CRC_calc = 0xFFFF;
-        INT_32 j=0;
-        INT_32 k=0;
+		UINT_16 CRC_calc = 0xFFFF;
+		INT_32 j=0;
+		INT_32 k=0;
 
 	//precondition, null pointer
 	if (adr == NULL)
@@ -753,13 +753,13 @@ static UINT_16 rq_com_compute_crc(UINT_8 const * adr, INT_32 length )
 			{
 				CRC_calc =  (CRC_calc >> 1)^ 0xA001;	//Shift de 1 bit vers la droite et XOR avec le facteur polynomial
 			}
-	    	else
+			else
 			{
 				CRC_calc >>= 1;			//Shift de 1 bit vers la droite
 			}
 	
-    		k++;
-	    }
+			k++;
+		}
 	
 		//Incrémente l'adresse et le compteur d'adresse
 		adr++;
@@ -1122,8 +1122,8 @@ float rq_com_get_received_data(UINT_8 i)
  * \brief Returns true if a new valid stream message has been decoded and
  *        is available.
  * \details When this function is called, the variable that indicates if a 
-            new message is available is set to false even if the message
-            hasn't beed read.
+			new message is available is set to false even if the message
+			hasn't beed read.
  */
 bool rq_com_got_new_message()
 {
@@ -1134,8 +1134,8 @@ bool rq_com_got_new_message()
 
 /**
  * \brief Set the "zero sensor" flag to 1. When the next stream message will
-          be decoded, the effort values will be stored as offsets a
-          substracted from the next values
+		  be decoded, the effort values will be stored as offsets a
+		  substracted from the next values
  */
 void rq_com_do_zero_force_flag()
 {
