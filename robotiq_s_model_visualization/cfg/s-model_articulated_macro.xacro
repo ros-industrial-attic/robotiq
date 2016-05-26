@@ -31,6 +31,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
 				</material>
 			</collision>
 		</link>
+		<link name="${prefix}tool0"/>
         
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -59,6 +60,11 @@ there are multiple hands then a prefix followed by an "_" is needed.
 			<child link="${prefix}finger_middle_link_0"/>
 			<axis xyz="0 0 1"/>
 			<origin xyz="0.0455 0.0214 0" rpy="0 0 1.57"/>
+		</joint>
+		<joint name="${prefix}palm_tool0" type="fixed">
+			<parent link="${prefix}palm"/>
+			<child link="${prefix}tool0"/>
+			<origin xyz="0.0 0.0875 0.0" rpy="0 0 1.5707"/>
 		</joint>
 		<!-- end of joint list -->
 	</xacro:macro>
