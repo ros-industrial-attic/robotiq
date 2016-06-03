@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_s_model_articulated_gazebo</name>
+  <version>1.0.0</version>
+  <description>Launch files for spawning the Robotiq s-model articulated gripper</description>
+
+  <maintainer email="dash@clearpathrobotics.com">Devon Ash</maintainer>
+  <author email="dash@clearpathrobotics.com">Devon Ash</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>robotiq_s_model_visualization</run_depend>
+
+</package>
