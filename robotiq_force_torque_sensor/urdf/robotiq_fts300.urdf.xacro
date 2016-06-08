@@ -21,7 +21,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotiq_force_torque_sensor/meshes/visual/robotiq_fts300.stl"/>
+                    <mesh filename="package://robotiq_force_torque_sensor/meshes/visual/robotiq_fts300.dae"/>
                 </geometry>
                 <material name="black"/>
             </visual>
@@ -29,7 +29,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotiq_force_torque_sensor/meshes/collision/robotiq_fts300.stl"/>
+                    <mesh filename="package://robotiq_force_torque_sensor/meshes/collision/robotiq_fts300.dae"/>
                 </geometry>
             </collision>
         </link>
