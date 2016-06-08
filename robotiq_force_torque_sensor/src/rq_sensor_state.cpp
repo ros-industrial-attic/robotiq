@@ -55,7 +55,7 @@ static enum rq_sensor_state_values current_state = RQ_STATE_INIT;
 static INT_8 rq_state_init_com();
 static void rq_state_read_info_high_lvl();
 static void rq_state_start_stream();
-static void rq_state_run();
+static void rq_state_run(unsigned int max_retries);
 
 //////////////////////
 //Function definitions
@@ -65,7 +65,7 @@ static void rq_state_run();
  * \brief Manages the states of the sensor driver
  * \returns -1 if an error occurs, 0 otherwise
  */
-INT_8 rq_sensor_state(void)
+INT_8 rq_sensor_state(unsigned int max_retries)
 {
 	INT_8 ret;
 
@@ -88,7 +88,7 @@ INT_8 rq_sensor_state(void)
 		break;
 
 	case RQ_STATE_RUN:
-		rq_state_run();
+		rq_state_run(max_retries);
 		break;
 
 	default:
@@ -152,16 +152,27 @@ static void rq_state_start_stream()
  *        If the stream is not valid, return to state
  *        \ref RQ_STATE_INIT
  */
-static void rq_state_run()
+static void rq_state_run(unsigned int max_retries)
 {
+	static unsigned int retries = 0;
+
 	rq_com_listen_stream();
 
 	if(rq_com_get_valid_stream() == false)
 	{
+		retries++;
+		if (retries >= max_retries)
+		{
 #if defined(_WIN32)||defined(WIN32) //For Windows
-		stop_connection();
+			stop_connection();
 #endif
-		current_state = RQ_STATE_INIT;
+			current_state = RQ_STATE_INIT;
+			retries = 0;
+		}
+	}
+	else
+	{
+		retries = 0;
 	}
 }
 

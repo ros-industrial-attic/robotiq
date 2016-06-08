@@ -8,8 +8,8 @@ SModelAPI::SModelAPI(boost::shared_ptr<SModelClientBase> base)
 {
     pos_to_ticks_ = 200;
     pos_offset_ = 0;
-    sci_to_ticks_ = -480;
-    sci_offset_ = 0.28125;
+    sci_to_ticks_ = -532;
+    sci_offset_ = 0.22;
     vel_to_ticks_ = 2.94;
     vel_offset_ = 22;
     force_to_ticks_ = 5.7;

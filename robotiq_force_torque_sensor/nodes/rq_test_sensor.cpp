@@ -63,32 +63,32 @@ void reCallback(const robotiq_force_torque_sensor::ft_sensor& msg)
 int main(int argc, char **argv)
 {
 
-  ros::init(argc, argv, "rq_test_sensor");
+	ros::init(argc, argv, "rq_test_sensor");
 
 
-  ros::NodeHandle n;
+	ros::NodeHandle n;
 
-  ros::ServiceClient client = n.serviceClient<robotiq_force_torque_sensor::sensor_accessor>("robotiq_force_torque_sensor_acc");
-  ros::Subscriber sub1 = n.subscribe("robotiq_force_torque_sensor",100,reCallback);
+	ros::ServiceClient client = n.serviceClient<robotiq_force_torque_sensor::sensor_accessor>("robotiq_force_torque_sensor_acc");
+	ros::Subscriber sub1 = n.subscribe("robotiq_force_torque_sensor",100,reCallback);
 
-  robotiq_force_torque_sensor::sensor_accessor srv;
+	robotiq_force_torque_sensor::sensor_accessor srv;
 
-  int count = 0;
-  while (ros::ok())
-  {
+	int count = 0;
+	while (ros::ok())
+	{
 	if(count == 10000000){
 		srv.request.command = "SET ZRO";
 		if(client.call(srv)){
 			ROS_INFO("ret: %s", srv.response.res.c_str());
 		}
 		count = 0;
-	}	
+	}
 
-    ros::spinOnce();
+		ros::spinOnce();
 
-    ++count;
-  }
+		++count;
+	}
 
 
-  return 0;
+	return 0;
 }

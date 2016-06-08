@@ -11,5 +11,5 @@ Run:
 
 or
 
-`rosrun robotiq_joint_state_publisher s_model_joint_states <gripper_prefix>`
+`rosrun robotiq_joint_state_publisher s_model_joint_states _prefix:=<gripper_prefix>`
 

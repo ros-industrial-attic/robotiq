@@ -31,6 +31,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
 				</material>
 			</collision>
 		</link>
+		<link name="${prefix}tool0"/>
         
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -40,27 +41,30 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		<!-- end of link list -->
 		<!-- joint list -->
 
-		<!-- WARNING: LIMITS NOT CORRECT -->
 		<joint name="${prefix}palm_finger_1_joint" type="revolute">
 			<parent link="${prefix}palm"/>
 			<child link="${prefix}finger_1_link_0"/>
 			<axis xyz="0 1 0"/>
 			<origin xyz="-0.0455 0.0214 0.036" rpy="0 3.1416 -1.57"/>
-			<limit lower="-0.16" upper="0.25" effort="100" velocity="100"/>
+			<limit lower="-0.1784" upper="0.192" effort="100" velocity="100"/>
 		</joint>
-		<!-- WARNING: LIMITS NOT CORRECT -->
 		<joint name="${prefix}palm_finger_2_joint" type="revolute">
 			<parent link="${prefix}palm"/>
 			<child link="${prefix}finger_2_link_0"/>
 			<axis xyz="0 1 0"/>
 			<origin xyz="-0.0455 0.0214 -0.036" rpy="0 3.1416 -1.57"/>
-			<limit lower="-0.25" upper="0.16" effort="100" velocity="100"/>
+			<limit lower="-0.192" upper="0.1784" effort="100" velocity="100"/>
 		</joint>
 		<joint name="${prefix}palm_finger_middle_joint" type="fixed">
 			<parent link="${prefix}palm"/>
 			<child link="${prefix}finger_middle_link_0"/>
 			<axis xyz="0 0 1"/>
 			<origin xyz="0.0455 0.0214 0" rpy="0 0 1.57"/>
+		</joint>
+		<joint name="${prefix}palm_tool0" type="fixed">
+			<parent link="${prefix}palm"/>
+			<child link="${prefix}tool0"/>
+			<origin xyz="0.0 0.0875 0.0" rpy="0 0 1.5707"/>
 		</joint>
 		<!-- end of joint list -->
 	</xacro:macro>
