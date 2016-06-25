@@ -21,11 +21,13 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>actionlib</build_depend>
   <build_depend>actionlib_msgs</build_depend>
+  <build_depend>control_msgs</build_depend>
   <build_depend>robotiq_c_model_control</build_depend>
   <build_depend>roscpp</build_depend>
 
   <run_depend>actionlib</run_depend>
   <run_depend>actionlib_msgs</run_depend>
+  <run_depend>control_msgs</run_depend>
   <run_depend>robotiq_c_model_control</run_depend>
   <run_depend>roscpp</run_depend>
 
