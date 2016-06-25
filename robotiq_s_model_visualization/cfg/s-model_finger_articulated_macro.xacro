@@ -15,8 +15,8 @@ finger(i.e. finger_1, etc...).
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.STL" />
 				</geometry>
-				<material name="green">
-					<color rgba="0 1 0 1"/>
+				<material name="gray">
+					<color rgba="0.2 0.2 0.2 1"/>
 				</material>
 			</visual>
 			<collision>	
@@ -40,7 +40,7 @@ finger(i.e. finger_1, etc...).
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.STL" />
 				</geometry>
-				<material name="green"/>
+				<material name="gray"/>
 			</visual>
 			<collision>
 				<origin xyz="0.050 -.028 0" rpy="0 0 -0.52"/>
@@ -66,7 +66,7 @@ finger(i.e. finger_1, etc...).
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.STL" />
 				</geometry>
-				<material name="green"/>
+				<material name="gray"/>
 			</visual>
 			<collision>
 				<origin xyz="0.039 0 0.0075" rpy="0 0 0"/>
@@ -87,7 +87,7 @@ finger(i.e. finger_1, etc...).
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.STL" />
 				</geometry>
-				<material name="green"/>
+				<material name="gray"/>
 			</visual>
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0.52"/>
