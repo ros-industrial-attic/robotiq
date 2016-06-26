@@ -16,7 +16,7 @@ link_directories(
 )
 
 catkin_package(
-   DEPENDS gazebo_plugins gazebo_ros roscpp
+   DEPENDS gazebo_plugins gazebo_ros robotiq_s_model_articulated_msgs roscpp
 )
 
 add_library(RobotiqHandPlugin src/RobotiqHandPlugin.cpp)
