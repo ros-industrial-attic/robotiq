@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_s_model_articulated_msgs</name>
+  <version>1.0.0</version>
+  <description>Messages for the robotiq_s_model_articulated model.</description>
+
+  <maintainer email="dash@clearpathrobotics.com">Devon Ash</maintainer>
+  <license>Apache 2.0</license>
+  <author email="dash@clearpathrobotics.com">Devon Ash</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_msgs</run_depend>
+
+</package>

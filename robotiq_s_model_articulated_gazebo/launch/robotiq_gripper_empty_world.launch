@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- startup simulated world --> 
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="worlds/empty.world"/>
+    <arg name="paused" value="false"/>
+  </include>
+
+  <!-- upload gripper urdf to robot_description -->
+  <include file="$(find robotiq_s_model_visualization)/launch/robotiq_gripper_upload.launch">
+  </include>
+
+  <!-- Start the publisher for the left hand (the only hand) -->
+  <node pkg="robot_state_publisher" type="state_publisher" name="robotiq_hands_l_hand_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <remap from="joint_states" to="/robotiq_hands/left_hand/joint_states" />
+  </node>
+
+  <!-- spawn in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.1 -timeout 120" respawn="false" output="screen" />
+
+</launch> 
