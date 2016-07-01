@@ -18,8 +18,8 @@ there are multiple hands then a prefix followed by an "_" is needed.
 				<geometry>
 					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/palm.STL" />
 				</geometry>
-				<material name="green">
-					<color rgba="0 1 0 1"/>
+				<material name="gray">
+					<color rgba="0.2 0.2 0.2 1"/>
 				</material>
 			</visual>
 			<collision>
