@@ -51,7 +51,7 @@
 #include "robotiq_force_torque_sensor/sensor_accessor.h"
 
 static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret);
-static void wait_for_other_connection(void);
+static void wait_for_other_connection(std::string& ftdi_id);
 static int max_retries_(100);
 
 ros::Publisher sensor_pub_acc;
@@ -103,7 +103,7 @@ bool receiverCallback(robotiq_force_torque_sensor::sensor_accessor::Request& req
  * \fn static void wait_for_other_connection()
  * \brief Each second, checks for a sensor that has been connected
  */
-static void wait_for_other_connection(void)
+static void wait_for_other_connection(std::string& ftdi_id)
 {
 	INT_8 ret;
 
@@ -112,7 +112,7 @@ static void wait_for_other_connection(void)
 		ROS_INFO("Waiting for sensor connection...");
 		usleep(1000000);//Attend 1 seconde.
 
-		ret = rq_sensor_state(max_retries_);
+		ret = rq_sensor_state(max_retries_, ftdi_id);
 		if(ret == 0)
 		{
 			ROS_INFO("Sensor connected!");
@@ -147,30 +147,32 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "robotiq_force_torque_sensor");
 	ros::NodeHandle n;
 	ros::param::param<int>("~max_retries", max_retries_, 100);
+        std::string ftdi_id;
+        n.getParam("serial_id", ftdi_id);
 
 	INT_8 bufStream[512];
 	robotiq_force_torque_sensor::ft_sensor msgStream;
 	INT_8 ret; 
 
 	//If we can't initialize, we return an error
-	ret = rq_sensor_state(max_retries_);
+	ret = rq_sensor_state(max_retries_, ftdi_id);
 	if(ret == -1)
 	{
-		wait_for_other_connection();
+		wait_for_other_connection(ftdi_id);
 	}
 
 	//Reads basic info on the sensor
-	ret = rq_sensor_state(max_retries_);
+	ret = rq_sensor_state(max_retries_, ftdi_id);
 	if(ret == -1)
 	{
-		wait_for_other_connection();
+		wait_for_other_connection(ftdi_id);
 	}
 
 	//Starts the stream
-	ret = rq_sensor_state(max_retries_);
+	ret = rq_sensor_state(max_retries_, ftdi_id);
 	if(ret == -1)
 	{
-		wait_for_other_connection();
+		wait_for_other_connection(ftdi_id);
 	}
 	
 	ros::Publisher sensor_pub = n.advertise<robotiq_force_torque_sensor::ft_sensor>("robotiq_force_torque_sensor", 512);
@@ -184,11 +186,11 @@ int main(int argc, char **argv)
 	ROS_INFO("Starting Sensor");
 	while(ros::ok())
 	{
-		ret = rq_sensor_state(max_retries_);
+		ret = rq_sensor_state(max_retries_, ftdi_id);
 
 		if(ret == -1)
 		{
-			wait_for_other_connection();
+			wait_for_other_connection(ftdi_id);
 		}
 
 		if(rq_sensor_get_current_state() == RQ_STATE_RUN)

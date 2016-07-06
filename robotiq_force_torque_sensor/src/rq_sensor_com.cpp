@@ -138,7 +138,7 @@ HANDLE hSerial;
  * \details The functions loops  through all the serial com ports 
  *          and polls them to discover the sensor
  */
-INT_8 rq_sensor_com()
+INT_8 rq_sensor_com(std::string& ftdi_id)
 {
 #ifdef __unix__ //For Unix
 	UINT_8 device_found = 0;
@@ -152,16 +152,25 @@ INT_8 rq_sensor_com()
 		return -1;
 	}
 
-	//Loops through the files in the /sys/class/tty/ directory
-	while ((entrydirectory = readdir(dir)) != NULL && device_found == 0)
-	{
-		//Look for a serial device
-		if (strstr(entrydirectory->d_name, "ttyS") || 
-			strstr(entrydirectory->d_name, "ttyUSB"))
-		{
-			device_found = rq_com_identify_device(entrydirectory->d_name);
-		}
-	}
+        //Loops through the files in the /sys/class/tty/ directory
+        // WHY WOULD YOU EVER DO THIS??? NO!!!!
+	//while ((entrydirectory = readdir(dir)) != NULL && device_found == 0)
+	//{
+	//	//Look for a serial device
+	//	if (strstr(entrydirectory->d_name, "ttyS") || 
+	//		strstr(entrydirectory->d_name, "ttyUSB"))
+	//	{
+	//		device_found = rq_com_identify_device(entrydirectory->d_name);
+	//	}
+	//}
+
+
+        // This is also terrible practice, FIX ME!!! No hardcoding!
+
+        // Read device name from parameter.
+        device_found = rq_com_identify_device(ftdi_id.c_str());
+        // I don't have time to fix robotiq's code...
+
 
 	closedir(dir);
 
@@ -297,7 +306,6 @@ static INT_8 set_com_attribs (INT_32 fd, speed_t speed)
 	tty.c_cflag &= ~CSTOPB;
 	tty.c_cflag &= ~PARENB;
 	tty.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-	tty.c_iflag &= ~ICRNL;
 	tty.c_iflag &= ~INPCK;
 	tty.c_iflag &= ~(IXON | IXOFF | IXANY);
 	tty.c_cc[VMIN]  = 0;			// read doesn't block
@@ -524,7 +532,6 @@ INT_8 rq_com_start_stream(void)
 
 	return 0;
 }
-
 /**
  * \brief Sends a read request
  * \param base Address of the first register to read
