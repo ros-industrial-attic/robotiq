@@ -78,6 +78,14 @@ private:
 
 };
 
+template <typename T>
+inline T limit (double value)
+{
+    value = value < std::numeric_limits<T>::min() ? std::numeric_limits<T>::min() : value;
+    value = value > std::numeric_limits<T>::max() ? std::numeric_limits<T>::max() : value;
+    return (T)value;
+}
+
 } //end namespace robotiq_s_model_control
 
 #endif // S_MODEL_API_H

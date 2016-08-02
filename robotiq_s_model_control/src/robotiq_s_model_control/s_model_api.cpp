@@ -29,52 +29,52 @@ SModelAPI::SModelAPI(boost::shared_ptr<SModelClientBase> base)
 
 void SModelAPI::setInitialization(InitializationMode mode)
 {
-    command_.rACT = (u_int8_t)mode;
+    command_.rACT = (SModelClientBase::GripperOutput::_rACT_type)mode;
 }
 
 void SModelAPI::setGraspingMode(GraspingMode mode)
 {
-    command_.rMOD = (u_int8_t)mode;
+    command_.rMOD = (SModelClientBase::GripperOutput::_rMOD_type)mode;
 }
 
 void SModelAPI::setActionMode(ActionMode mode)
 {
-    command_.rGTO = (u_int8_t)mode;
+    command_.rGTO = (SModelClientBase::GripperOutput::_rGTO_type)mode;
 }
 
 void SModelAPI::setEmergencyRelease(EmergencyRelease release)
 {
-    command_.rATR = (u_int8_t)release;
+    command_.rATR = (SModelClientBase::GripperOutput::_rATR_type)release;
 }
 
 void SModelAPI::setInidividualControlMode(IndividualControl fingers, IndividualControl scissor)
 {
-    command_.rICF = (u_int8_t)fingers;
-    command_.rICS = (u_int8_t)scissor;
+    command_.rICF = (SModelClientBase::GripperOutput::_rICF_type)fingers;
+    command_.rICS = (SModelClientBase::GripperOutput::_rICS_type)scissor;
 }
 
 void SModelAPI::setPosition(const double &posA, const double &posB, const double &posC, const double &posS)
 {
-    command_.rPRA = pos_to_ticks_*(posA - pos_offset_);
-    command_.rPRB = pos_to_ticks_*(posB - pos_offset_);
-    command_.rPRC = pos_to_ticks_*(posC - pos_offset_);
-    command_.rPRS = sci_to_ticks_*(posS - sci_offset_);
+    command_.rPRA = limit<SModelClientBase::GripperOutput::_rPRA_type>(pos_to_ticks_*(posA - pos_offset_));
+    command_.rPRB = limit<SModelClientBase::GripperOutput::_rPRB_type>(pos_to_ticks_*(posB - pos_offset_));
+    command_.rPRC = limit<SModelClientBase::GripperOutput::_rPRC_type>(pos_to_ticks_*(posC - pos_offset_));
+    command_.rPRS = limit<SModelClientBase::GripperOutput::_rPRS_type>(sci_to_ticks_*(posS - sci_offset_));
 }
 
 void SModelAPI::setVelocity(const double &velA, const double &velB, const double &velC, const double &velS)
 {
-    command_.rSPA = vel_to_ticks_*(velA - vel_offset_);
-    command_.rSPB = vel_to_ticks_*(velB - vel_offset_);
-    command_.rSPC = vel_to_ticks_*(velC - vel_offset_);
-    command_.rSPS = vel_to_ticks_*(velS - vel_offset_);
+    command_.rSPA = limit<SModelClientBase::GripperOutput::_rSPA_type>(vel_to_ticks_*(velA - vel_offset_));
+    command_.rSPB = limit<SModelClientBase::GripperOutput::_rSPB_type>(vel_to_ticks_*(velB - vel_offset_));
+    command_.rSPC = limit<SModelClientBase::GripperOutput::_rSPC_type>(vel_to_ticks_*(velC - vel_offset_));
+    command_.rSPS = limit<SModelClientBase::GripperOutput::_rSPS_type>(vel_to_ticks_*(velS - vel_offset_));
 }
 
 void SModelAPI::setForce(const double &fA, const double &fB, const double &fC, const double &fS)
 {
-    command_.rFRA = force_to_ticks_*(fA - force_offset_);
-    command_.rFRB = force_to_ticks_*(fB - force_offset_);
-    command_.rFRC = force_to_ticks_*(fC - force_offset_);
-    command_.rFRS = force_to_ticks_*(fS - force_offset_);
+    command_.rFRA = limit<SModelClientBase::GripperOutput::_rFRA_type>(force_to_ticks_*(fA - force_offset_));
+    command_.rFRB = limit<SModelClientBase::GripperOutput::_rFRB_type>(force_to_ticks_*(fB - force_offset_));
+    command_.rFRC = limit<SModelClientBase::GripperOutput::_rFRC_type>(force_to_ticks_*(fC - force_offset_));
+    command_.rFRS = limit<SModelClientBase::GripperOutput::_rFRS_type>(force_to_ticks_*(fS - force_offset_));
 }
 
 void SModelAPI::setRaw(const SModelClientBase::GripperOutput &raw)
