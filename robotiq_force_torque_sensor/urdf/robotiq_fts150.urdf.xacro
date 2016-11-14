@@ -4,7 +4,7 @@
     <xacro:macro name="robotiq_fts150" params="parent prefix *origin">
 
         <!-- mount the fts to the robot -->
-        <joint name="{prefix}fts_fix" type="fixed" >
+        <joint name="${prefix}fts_fix" type="fixed" >
             <!--In most cases origin would be flange adapter plate: <origin xyz="0 0 0.009" rpy="0 0 0"/> /-->
             <insert_block name="origin" />
             <parent link="${parent}" />
