@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_cpp_control</name>
+  <version>0.0.1</version>
+  <description>Easy connection to and control of robotiq gripper</description>
+
+ 
+  <maintainer email="mwhorn1008@gmail.com">Matt Horn</maintainer>
+
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <!-- Commonly used license strings: -->
+  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
+  <license>BSD 3-paragraph</license>
+
+  <!-- Author tags are optional, mutiple are allowed, one per tag -->
+  <!-- Authors do not have to be maintianers, but could be -->
+  <!-- Example: -->
+  <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>obj_interface</build_depend>
+  <run_depend>obj_interface</run_depend>
+  
+  <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
+  
+  <build_depend>std_msgs</build_depend>
+  <run_depend>std_msgs</run_depend>
+
+  <build_depend>robotiq_s_model_control</build_depend>
+  <run_depend>robotiq_s_model_control</run_depend>
+
+  <build_depend>robotiq_c_model_control</build_depend>
+  <run_depend>robotiq_c_model_control</run_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>
