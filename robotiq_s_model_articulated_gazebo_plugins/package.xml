@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package>
+  <name>robotiq_s_model_articulated_gazebo_plugins</name>
+  <version>1.0.0</version>
+  <description>The Robotiq gripper gazebo plugins package. Mainly a port from drcsim, to allow real Robotiq  gripper control and the plugin to have it work in Gazebo simulation. This package will provide the same interface to the gripper as one would have if they were interfacing with hardware. Porting code from software to reality should be seamless with this ROS interface now. </description>
+
+  <maintainer email="dash@clearpathrobotics.com">Devon Ash</maintainer>
+  <license>Apache 2.0</license>
+  <author email="dash@clearpathrobotics.com">Devon Ash</author>
+  <author email="hsu@osrfoundation.com">John Hsu</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+  <build_depend>control_msgs</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>gazebo_plugins</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>gazebo_msgs</build_depend>
+  <build_depend>angles</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>robotiq_s_model_articulated_msgs</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>actionlib</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+  <run_depend>control_msgs</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>gazebo_plugins</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_msgs</run_depend>
+  <run_depend>robotiq_s_model_articulated_msgs</run_depend>
+
+</package>
