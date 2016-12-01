@@ -26,11 +26,17 @@
 
 using namespace robotiq_s_model_control;
 
+namespace
+{
+static unsigned int kResponseOffset = 0x580;
+static unsigned int kRequestOffset = 0x600;
+}
+
 SModelCanClient::SModelCanClient(unsigned int can_id, boost::shared_ptr<can::DriverInterface> driver)
     :can_id_(can_id)
     ,driver_(driver)
 {
-    resp_header_.id = can_id + 0x580;
+    resp_header_.id = can_id + kResponseOffset;
 }
 
 SModelCanClient::~SModelCanClient()
@@ -54,7 +60,7 @@ void SModelCanClient::writeOutputs(const GripperOutput &output)
     if(driver_->getState().isReady())
     {
         can::Frame serial_request;
-        serial_request.id = can_id_+0x600;
+        serial_request.id = can_id_ + kRequestOffset;
         serial_request.dlc = (unsigned char)8;
         serial_request.is_error = 0;
         serial_request.is_rtr = 0;
@@ -207,12 +213,12 @@ SModelCanClient::GripperInput SModelCanClient::readInputs() const
     if(driver_->getState().isReady())
     {
         can::Frame serial_request;
-        serial_request.id = can_id_+0x600;
-        serial_request.dlc = (unsigned char)8;
+        serial_request.id = can_id_ + kRequestOffset;
+        serial_request.dlc = static_cast<unsigned char>(8);
         serial_request.is_error = 0;
         serial_request.is_rtr = 0;
         serial_request.is_extended = 0;
-        serial_request.data.assign((unsigned char)0);
+        serial_request.data.assign(static_cast<unsigned char>(0));
 
         serial_request.data[0] = 0x4F;
         serial_request.data[1] = 0x00;
