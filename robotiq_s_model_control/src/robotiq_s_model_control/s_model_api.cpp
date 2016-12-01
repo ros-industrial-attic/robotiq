@@ -106,63 +106,63 @@ void SModelAPI::setRaw(const SModelClientBase::GripperOutput &raw)
     command_ = raw;
 }
 
-void SModelAPI::getPosition(double &posA, double &posB, double &posC, double &posS)
+void SModelAPI::getPosition(double *posA, double *posB, double *posC, double *posS) const
 {
-    posA = (double)status_.gPOA/pos_to_ticks_ + pos_offset_;
-    posB = (double)status_.gPOB/pos_to_ticks_ + pos_offset_;
-    posC = (double)status_.gPOC/pos_to_ticks_ + pos_offset_;
-    posS = (double)status_.gPOS/sci_to_ticks_ + sci_offset_;
+    *posA = (double)status_.gPOA/pos_to_ticks_ + pos_offset_;
+    *posB = (double)status_.gPOB/pos_to_ticks_ + pos_offset_;
+    *posC = (double)status_.gPOC/pos_to_ticks_ + pos_offset_;
+    *posS = (double)status_.gPOS/sci_to_ticks_ + sci_offset_;
 }
 
-void SModelAPI::getPositionCmd(double &posA, double &posB, double &posC, double &posS)
+void SModelAPI::getPositionCmd(double *posA, double *posB, double *posC, double *posS) const
 {
-    posA = (double)status_.gPRA/pos_to_ticks_ + pos_offset_;
-    posB = (double)status_.gPRB/pos_to_ticks_ + pos_offset_;
-    posC = (double)status_.gPRC/pos_to_ticks_ + pos_offset_;
-    posS = (double)status_.gPRS/sci_to_ticks_ + sci_offset_;
+    *posA = (double)status_.gPRA/pos_to_ticks_ + pos_offset_;
+    *posB = (double)status_.gPRB/pos_to_ticks_ + pos_offset_;
+    *posC = (double)status_.gPRC/pos_to_ticks_ + pos_offset_;
+    *posS = (double)status_.gPRS/sci_to_ticks_ + sci_offset_;
 }
 
-void SModelAPI::getCurrent(double &curA, double &curB, double &curC, double &curS)
+void SModelAPI::getCurrent(double *curA, double *curB, double *curC, double *curS) const
 {
-    curA = (double)status_.gCUA/cur_to_ticks_;
-    curB = (double)status_.gCUB/cur_to_ticks_;
-    curC = (double)status_.gCUC/cur_to_ticks_;
-    curS = (double)status_.gCUS/cur_to_ticks_;
+    *curA = (double)status_.gCUA/cur_to_ticks_;
+    *curB = (double)status_.gCUB/cur_to_ticks_;
+    *curC = (double)status_.gCUC/cur_to_ticks_;
+    *curS = (double)status_.gCUS/cur_to_ticks_;
 }
 
-void SModelAPI::getGripperStatus(InitializationMode &gACT, GraspingMode &gMOD, ActionMode &gGTO, GripperStatus &gIMC, MotionStatus &gSTA)
+void SModelAPI::getGripperStatus(InitializationMode *gACT, GraspingMode *gMOD, ActionMode *gGTO, GripperStatus *gIMC, MotionStatus *gSTA) const
 {
-    gACT = (InitializationMode)status_.gACT;
-    gMOD = (GraspingMode)status_.gMOD;
-    gGTO = (ActionMode)status_.gGTO;
-    gIMC = (GripperStatus)status_.gIMC;
-    gSTA = (MotionStatus)status_.gSTA;
+    *gACT = (InitializationMode)status_.gACT;
+    *gMOD = (GraspingMode)status_.gMOD;
+    *gGTO = (ActionMode)status_.gGTO;
+    *gIMC = (GripperStatus)status_.gIMC;
+    *gSTA = (MotionStatus)status_.gSTA;
 }
 
-void SModelAPI::getFaultStatus(FaultStatus &gFLT)
+void SModelAPI::getFaultStatus(FaultStatus *gFLT) const
 {
-    gFLT = (FaultStatus)status_.gFLT;
+    *gFLT = (FaultStatus)status_.gFLT;
 }
 
-void SModelAPI::getObjectStatus(ObjectStatus &fA, ObjectStatus &fB, ObjectStatus &fC, ObjectStatus &fS)
+void SModelAPI::getObjectStatus(ObjectStatus *fA, ObjectStatus *fB, ObjectStatus *fC, ObjectStatus *fS) const
 {
-    fA = (ObjectStatus)status_.gDTA;
-    fB = (ObjectStatus)status_.gDTB;
-    fC = (ObjectStatus)status_.gDTC;
-    fS = (ObjectStatus)status_.gDTS;
+    *fA = (ObjectStatus)status_.gDTA;
+    *fB = (ObjectStatus)status_.gDTB;
+    *fC = (ObjectStatus)status_.gDTC;
+    *fS = (ObjectStatus)status_.gDTS;
 }
 
-void SModelAPI::getRaw(SModelClientBase::GripperInput &raw)
+void SModelAPI::getRaw(SModelClientBase::GripperInput *raw) const
 {
-    raw = status_;
+    *raw = status_;
 }
 
-void SModelAPI::getCommandPos(double &posA, double &posB, double &posC, double &posS)
+void SModelAPI::getCommandPos(double *posA, double *posB, double *posC, double *posS) const
 {
-    posA = (double)command_.rPRA/pos_to_ticks_ + pos_offset_;
-    posB = (double)command_.rPRB/pos_to_ticks_ + pos_offset_;
-    posC = (double)command_.rPRC/pos_to_ticks_ + pos_offset_;
-    posS = (double)command_.rPRS/sci_to_ticks_ + sci_offset_;
+    *posA = (double)command_.rPRA/pos_to_ticks_ + pos_offset_;
+    *posB = (double)command_.rPRB/pos_to_ticks_ + pos_offset_;
+    *posC = (double)command_.rPRC/pos_to_ticks_ + pos_offset_;
+    *posS = (double)command_.rPRS/sci_to_ticks_ + sci_offset_;
 }
 
 bool SModelAPI::isInitialized()

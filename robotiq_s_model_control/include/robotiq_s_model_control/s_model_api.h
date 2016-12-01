@@ -63,15 +63,15 @@ public:
     void setForce(const double &fA, const double &fB=0, const double &fC=0, const double &fS=0);
     void setRaw(const SModelClientBase::GripperOutput &raw);
 
-    void getPosition(double &posA, double &posB, double &posC, double &posS);
-    void getPositionCmd(double &posA, double &posB, double &posC, double &posS);
-    void getCurrent(double &curA, double &curB, double &curC, double &curS);
-    void getGripperStatus(InitializationMode &gACT,  GraspingMode &gMOD, ActionMode &gGTO, GripperStatus &gIMC, MotionStatus &gSTA);
-    void getFaultStatus(FaultStatus &gFLT);
-    void getObjectStatus(ObjectStatus &fA, ObjectStatus &fB, ObjectStatus &fC, ObjectStatus &fS);
-    void getRaw(SModelClientBase::GripperInput &raw);
+    void getPosition(double *posA, double *posB, double *posC, double *posS) const;
+    void getPositionCmd(double *posA, double *posB, double *posC, double *posS) const;
+    void getCurrent(double *curA, double *curB, double *curC, double *curS) const;
+    void getGripperStatus(InitializationMode *gACT,  GraspingMode *gMOD, ActionMode *gGTO, GripperStatus *gIMC, MotionStatus *gSTA) const;
+    void getFaultStatus(FaultStatus *gFLT) const;
+    void getObjectStatus(ObjectStatus *fA, ObjectStatus *fB, ObjectStatus *fC, ObjectStatus *fS) const;
+    void getRaw(SModelClientBase::GripperInput *raw) const;
 
-    void getCommandPos(double &posA, double &posB, double &posC, double &posS);
+    void getCommandPos(double *posA, double *posB, double *posC, double *posS) const;
 
     bool isInitialized();
     bool isReady();

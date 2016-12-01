@@ -41,7 +41,7 @@ void SModelDiagnostics::update()
 void SModelDiagnostics::getStatus(diagnostic_updater::DiagnosticStatusWrapper &stat)
 {
     robotiq::FaultStatus fs;
-    driver_->getFaultStatus(fs);
+    driver_->getFaultStatus(&fs);
 
     switch (fs)
     {
@@ -86,7 +86,7 @@ void SModelDiagnostics::getStatus(diagnostic_updater::DiagnosticStatusWrapper &s
     robotiq::GripperStatus gIMC;
     robotiq::MotionStatus gSTA;
 
-    driver_->getGripperStatus(gACT, gMOD, gGTO, gIMC, gSTA);
+    driver_->getGripperStatus(&gACT, &gMOD, &gGTO, &gIMC, &gSTA);
 
     stat.add("Initialization Status", toString(gACT));
     stat.add("Grasping Operation Mode Status", toString(gMOD));

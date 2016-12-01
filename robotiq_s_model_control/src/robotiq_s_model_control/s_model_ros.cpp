@@ -57,7 +57,7 @@ SModelROS::SModelROS(ros::NodeHandle &nh, boost::shared_ptr<SModelAPI> driver, s
 
 void SModelROS::publish()
 {
-    driver_->getRaw(input_status_msg_);
+    driver_->getRaw(&input_status_msg_);
     input_status_pub_.publish(input_status_msg_);
 }
 
