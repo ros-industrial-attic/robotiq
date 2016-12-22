@@ -1,0 +1,3 @@
+- git:
+    uri: https://github.com/smits/soem.git
+    local-name: smits/soem
