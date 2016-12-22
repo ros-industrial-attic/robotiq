@@ -5,17 +5,33 @@
   <maintainer email="sedwards@swri.org">Shaun Edwards</maintainer>
   <license>BSD</license>
   <url type="website">http://ros.org/wiki/robotiq</url>
+
   <author>Nicolas Lauzier (Robotiq inc.)</author>
+  <author email="althackston@gmail.com">Allison Thackston</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>controller_manager</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>hardware_interface</build_depend>
   <build_depend>message_generation</build_depend>
-  <build_depend>rospy</build_depend>
-  <build_depend>roscpp</build_depend>
   <build_depend>robotiq_ethercat</build_depend>
-  <run_depend>rospy</run_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>socketcan_interface</build_depend>
+  <build_depend>std_srvs</build_depend>
+
+  <run_depend>controller_manager</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>hardware_interface</run_depend>
   <run_depend>message_runtime</run_depend>
-  <run_depend>roscpp</run_depend>
   <run_depend>robotiq_ethercat</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>socketcan_interface</run_depend>
+  <run_depend>std_srvs</run_depend>
 
   <export>
 
