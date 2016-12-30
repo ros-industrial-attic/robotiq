@@ -7,15 +7,15 @@
 #include <boost/ref.hpp>
 #include <boost/interprocess/sync/scoped_lock.hpp>
 
-#include <soem/ethercattype.h>
-#include <soem/nicdrv.h>
-#include <soem/ethercatbase.h>
-#include <soem/ethercatmain.h>
-#include <soem/ethercatdc.h>
-#include <soem/ethercatcoe.h>
-#include <soem/ethercatfoe.h>
-#include <soem/ethercatconfig.h>
-#include <soem/ethercatprint.h>
+#include <ethercattype.h>
+#include <nicdrv.h>
+#include <ethercatbase.h>
+#include <ethercatmain.h>
+#include <ethercatdc.h>
+#include <ethercatcoe.h>
+#include <ethercatfoe.h>
+#include <ethercatconfig.h>
+#include <ethercatprint.h>
 
 #include <ros/ros.h>
 

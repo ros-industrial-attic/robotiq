@@ -14,10 +14,7 @@ catkin_package(
 
 include_directories(include
   ${catkin_INCLUDE_DIRS}
-  ## The following work around allows SOEM headers to include other SOEM headers.
-  ## SOEM headers assume all headers are installed in a flat directory structure
-  ## See https://github.com/smits/soem/issues/4 for more information.
-  ${soem_INCLUDE_DIRS}/soem
+  ${soem_INCLUDE_DIRS}
 )
 
 add_library(robotiq_ethercat
