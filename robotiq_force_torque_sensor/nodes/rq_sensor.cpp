@@ -50,11 +50,53 @@
 #include "robotiq_force_torque_sensor/ft_sensor.h"
 #include "robotiq_force_torque_sensor/sensor_accessor.h"
 
+typedef robotiq_force_torque_sensor::sensor_accessor::Request Request;
+
 static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret);
+static void decode_message_and_do(robotiq_force_torque_sensor::sensor_accessor::Request& req,
+								  robotiq_force_torque_sensor::sensor_accessor::Response& res);
+
 static void wait_for_other_connection(void);
 static int max_retries_(100);
 
 ros::Publisher sensor_pub_acc;
+
+/**
+ * @brief decode_message_and_do Decode the message received and do the associated action
+ * @param req
+ * @param res
+ */
+static void decode_message_and_do(robotiq_force_torque_sensor::sensor_accessor::Request& req,
+								  robotiq_force_torque_sensor::sensor_accessor::Response& res)
+{
+	if (req.command_id == Request::COMMAND_SET_ZERO)
+	{
+		ROS_INFO("Zeroing Sensor");
+		rq_state_do_zero_force_flag();
+		res.success = true;
+		res.res = "Done";
+		return;
+	}
+
+	if (req.command_id != Request::COMMAND_GET_FIRMWARE_VERSION &&
+		req.command_id != Request::COMMAND_GET_PRODUCTION_YEAR &&
+		req.command_id != Request::COMMAND_GET_SERIAL_NUMBER)
+	{
+		ROS_WARN("Unsupported command_id '%i', should be in [%i, %i, %i]",
+			 req.command_id,
+			 Request::COMMAND_GET_SERIAL_NUMBER,
+			 Request::COMMAND_GET_FIRMWARE_VERSION,
+			 Request::COMMAND_GET_PRODUCTION_YEAR);
+		res.success = false;
+		res.res = "Unsupported command_id";
+		return;
+	}
+
+	INT_8 buffer[512];
+	res.success = rq_state_get_command(req.command_id, buffer);
+	res.res = buffer;
+}
+
 
 /**
  * \brief Decode the message received and do the associated action
@@ -91,11 +133,20 @@ static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret)
 bool receiverCallback(robotiq_force_torque_sensor::sensor_accessor::Request& req,
 	robotiq_force_torque_sensor::sensor_accessor::Response& res)
 {
-	ROS_INFO("I heard: [%s]",req.command.c_str());
-	INT_8 buffer[512];
-	decode_message_and_do((char*)req.command.c_str(), buffer);
-	res.res = buffer;
-	ROS_INFO("I send: [%s]", res.res.c_str());
+	/// Support for old string-based interface
+	if (req.command.length())
+	{
+		ROS_WARN("Usage of command-string is deprecated, please use the numeric command_id");
+		ROS_INFO("I heard: [%s]",req.command.c_str());
+		INT_8 buffer[512];
+		decode_message_and_do((char*)req.command.c_str(), buffer);
+		res.res = buffer;
+		ROS_INFO("I send: [%s]", res.res.c_str());
+		return true;
+	}
+
+	/// New interface with numerical commands
+	decode_message_and_do(req, res);
 	return true;
 }
 

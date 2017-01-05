@@ -194,6 +194,36 @@ float rq_state_get_received_data(UINT_8 i)
 	}
 }
 
+
+
+/**
+ * \fn bool rq_state_get_command(INT_8 command, char *value)
+ * \brief Gets the value of high level information from the sensor
+ * \param command has to be in [1,2,4] corresponding to SerialNumber, FirmwareVersion and ProductionYear
+ * \param value A string
+ * \return true iff command is valid
+ */
+bool rq_state_get_command(INT_8 command, INT_8 * const  value)
+{
+	/// values correnspond to constants in sensor_accessor.srv
+	switch (command) {
+	case 1:
+		rq_com_get_str_serial_number( value);
+		break;
+	case 2:
+		rq_com_get_str_firmware_version( value);
+		break;
+	case 4:
+		rq_com_get_str_production_year( value);
+		break;
+	default:
+		return false;
+		break;
+	}
+	return true;
+}
+
+
 /**
  * \fn int rq_state_get_command(char* name, char *value)
  * \brief Gets the value of high level information from the sensor
