@@ -199,8 +199,8 @@ float rq_state_get_received_data(UINT_8 i)
 /**
  * \fn bool rq_state_get_command(INT_8 command, char *value)
  * \brief Gets the value of high level information from the sensor
- * \param command has to be in [1,2,4] corresponding to SerialNumber, FirmwareVersion and ProductionYear
- * \param value A string
+ * \param command has to be in [1, 2, 4, 8] corresponding to SerialNumber, FirmwareVersion and ProductionYear, Reset
+ * \param value return string with requested Data
  * \return true iff command is valid
  */
 bool rq_state_get_command(INT_8 command, INT_8 * const  value)
@@ -216,9 +216,13 @@ bool rq_state_get_command(INT_8 command, INT_8 * const  value)
 	case 4:
 		rq_com_get_str_production_year( value);
 		break;
-	default:
-		return false;
+	case 8:
+		rq_state_do_zero_force_flag();
+		strcpy(value, "Done");
 		break;
+	default:
+		strcpy(value, "Unsupported command_id");
+		return false;
 	}
 	return true;
 }
