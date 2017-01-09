@@ -207,16 +207,16 @@ bool rq_state_get_command(INT_8 command, INT_8 * const  value)
 {
 	/// values correnspond to constants in sensor_accessor.srv
 	switch (command) {
-	case 1:
+	case SensorAccessor::GET_SERIAL_NUMBER:
 		rq_com_get_str_serial_number( value);
 		break;
-	case 2:
+	case SensorAccessor::GET_FIRMWARE_VERSION:
 		rq_com_get_str_firmware_version( value);
 		break;
-	case 4:
+	case SensorAccessor::GET_PRODUCTION_YEAR:
 		rq_com_get_str_production_year( value);
 		break;
-	case 8:
+	case SensorAccessor::SET_ZERO:
 		rq_state_do_zero_force_flag();
 		strcpy(value, "Done");
 		break;
