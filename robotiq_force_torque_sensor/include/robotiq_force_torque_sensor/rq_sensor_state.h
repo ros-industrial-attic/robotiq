@@ -48,6 +48,20 @@
 #include <stdbool.h>
 
 
+/// (Re-)Definition of ROS-Service to keep this driver ROS-free
+/// Update after changes to srv/sensor_accessor.srv
+namespace SensorAccessor
+{
+  enum Command
+  {
+	 GET_SERIAL_NUMBER = 1,
+	 GET_FIRMWARE_VERSION = 2,
+	 GET_PRODUCTION_YEAR = 4,
+	 SET_ZERO = 8
+  };
+}
+
+
 enum rq_sensor_state_values 
 {
 	RQ_STATE_INIT,         ///< State that initialize the com. with the sensor
@@ -61,6 +75,8 @@ enum rq_sensor_state_values
 
 INT_8 rq_sensor_state(unsigned int max_retries);
 void rq_state_get_command(INT_8 const * const name, INT_8 * const  value);
+bool rq_state_get_command(INT_8 command, INT_8 * const  value);
+
 void rq_state_do_zero_force_flag(void);
 enum rq_sensor_state_values rq_sensor_get_current_state(void);
 bool rq_state_got_new_message(void);
