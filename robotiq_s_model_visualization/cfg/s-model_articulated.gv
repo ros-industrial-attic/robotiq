@@ -1,0 +1,41 @@
+digraph G {
+node [shape=box];
+"palm" [label="palm"];
+"finger_1_link_0" [label="finger_1_link_0"];
+"finger_1_link_1" [label="finger_1_link_1"];
+"finger_1_link_2" [label="finger_1_link_2"];
+"finger_1_link_3" [label="finger_1_link_3"];
+"finger_2_link_0" [label="finger_2_link_0"];
+"finger_2_link_1" [label="finger_2_link_1"];
+"finger_2_link_2" [label="finger_2_link_2"];
+"finger_2_link_3" [label="finger_2_link_3"];
+"finger_middle_link_0" [label="finger_middle_link_0"];
+"finger_middle_link_1" [label="finger_middle_link_1"];
+"finger_middle_link_2" [label="finger_middle_link_2"];
+"finger_middle_link_3" [label="finger_middle_link_3"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"palm" -> "palm_finger_1_joint" [label="xyz: -0.0455 0.0214 0.036 \nrpy: 3.14159 -7.34641e-06 1.57159"]
+"palm_finger_1_joint" -> "finger_1_link_0"
+"finger_1_link_0" -> "finger_1_joint_1" [label="xyz: 0.02 0 0 \nrpy: 0 -0 0"]
+"finger_1_joint_1" -> "finger_1_link_1"
+"finger_1_link_1" -> "finger_1_joint_2" [label="xyz: 0.05 -0.028 0 \nrpy: 0 0 -0.52"]
+"finger_1_joint_2" -> "finger_1_link_2"
+"finger_1_link_2" -> "finger_1_joint_3" [label="xyz: 0.039 0 0 \nrpy: 0 -0 0"]
+"finger_1_joint_3" -> "finger_1_link_3"
+"palm" -> "palm_finger_2_joint" [label="xyz: -0.0455 0.0214 -0.036 \nrpy: 3.14159 -7.34641e-06 1.57159"]
+"palm_finger_2_joint" -> "finger_2_link_0"
+"finger_2_link_0" -> "finger_2_joint_1" [label="xyz: 0.02 0 0 \nrpy: 0 -0 0"]
+"finger_2_joint_1" -> "finger_2_link_1"
+"finger_2_link_1" -> "finger_2_joint_2" [label="xyz: 0.05 -0.028 0 \nrpy: 0 0 -0.52"]
+"finger_2_joint_2" -> "finger_2_link_2"
+"finger_2_link_2" -> "finger_2_joint_3" [label="xyz: 0.039 0 0 \nrpy: 0 -0 0"]
+"finger_2_joint_3" -> "finger_2_link_3"
+"palm" -> "palm_finger_middle_joint" [label="xyz: 0.0455 0.0214 0 \nrpy: 0 -0 1.57"]
+"palm_finger_middle_joint" -> "finger_middle_link_0"
+"finger_middle_link_0" -> "finger_middle_joint_1" [label="xyz: 0.02 0 0 \nrpy: 0 -0 0"]
+"finger_middle_joint_1" -> "finger_middle_link_1"
+"finger_middle_link_1" -> "finger_middle_joint_2" [label="xyz: 0.05 -0.028 0 \nrpy: 0 0 -0.52"]
+"finger_middle_joint_2" -> "finger_middle_link_2"
+"finger_middle_link_2" -> "finger_middle_joint_3" [label="xyz: 0.039 0 0 \nrpy: 0 -0 0"]
+"finger_middle_joint_3" -> "finger_middle_link_3"
+}

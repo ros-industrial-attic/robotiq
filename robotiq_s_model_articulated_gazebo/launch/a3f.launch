@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="worlds/empty.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <!-- send gripper urdf to param server -->
+  <include file="$(find robotiq_s_model_visualization)/launch/a3f_upload.launch">
+  </include>
+
+  <!-- Start the publisher for robotiq a3f gripper: left hand -->
+  <node pkg="robot_state_publisher" type="state_publisher" name="robotiq_a3f_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <remap from="joint_states" to="/robotiq_hands/left_hand/joint_states" />
+  </node>
+
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.1 -timeout 120" respawn="false" output="screen" />
+
+  <!-- required for robot state and joint state -->
+  <include file="$(find robotiq_s_model_articulated_gazebo)/launch/controller_utils_a3f.launch"/>
+
+
+  <!-- launch gripper controllers -->
+  <!-- Gripper action controller (ros_control plugin effort_controllers/GripperActionController) -->
+  <rosparam file="$(find robotiq_s_model_articulated_gazebo)/controller/gripper_controller_a3f.yaml" command="load"/>
+
+  <node name="gripper_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn gripper_controller" respawn="false" output="screen"/>
+
+</launch>

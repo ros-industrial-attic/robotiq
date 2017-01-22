@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="a3f" >
+
+  <link name="world" />
+
+  <!-- gripper a3f in robotiq package -->
+  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/robotiq_hand_macro.urdf.xacro" />
+
+  <!-- fix gripper base link: palm, to world -->
+  <xacro:robotiq_hand prefix="l_" parent="world" reflect="-1">
+    <origin xyz="0.0 0.0 0.0" rpy="1.57 0.0 0.0" />
+  </xacro:robotiq_hand>
+
+  <!-- Gazebo macro for gripper -->
+   <!-- <xacro:robotiq_gripper_gazebo/> -->
+  <!-- Instantiate transmission file -->
+<!--  <xacro:robotiq_gripper_transmission prefix="" /> -->
+  <gazebo>
+    <plugin name="robotiq_hand_plugin" filename="libRobotiqHandPlugin.so">
+      <side>left</side>
+      <kp_position>5.0</kp_position>
+      <kd_position>0.5</kd_position>
+     </plugin>
+   </gazebo>
+
+</robot>

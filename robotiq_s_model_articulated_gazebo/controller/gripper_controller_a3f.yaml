@@ -1,0 +1,47 @@
+gripper_controller_a3f:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - l_palm_finger_1_joint
+    - l_palm_finger_2_joint
+    - l_palm_finger_middle_joint
+    - l_finger_middle_joint_1
+    - l_finger_middle_joint_paraproximal_actuating_hinge
+    - l_finger_middle_joint_proximal_actuating_hinge
+    - l_finger_1_joint_1
+    - l_finger_1_joint_paraproximal_actuating_hinge
+    - l_finger_1_joint_proximal_actuating_hinge
+    - l_finger_2_joint_1
+    - l_finger_2_joint_paraproximal_actuating_hinge
+    - l_finger_2_joint_proximal_actuating_hinge
+  gains:
+    l_palm_finger_1_joint: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_palm_finger_2_joint: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_palm_finger_middle_joint: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_middle_joint_1: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_middle_joint_paraproximal_actuating_hinge: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_middle_joint_proximal_actuating_hinge: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_1_joint_1: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_1_joint_paraproximal_actuating_hinge: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_1_joint_proximal_actuating_hinge: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_2_joint_1: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_2_joint_paraproximal_actuating_hinge: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+    l_finger_2_joint_proximal_actuating_hinge: {p: 0.6, i: 0.1, d: 0.1, i_clamp: 0.0}
+  constraints:
+    goal_time: 0.6
+    stopped_velocity_tolerance: 0.1
+    sdh_left_knuckle_joint: {trajectory: 0.1, goal: 0.1}
+    l_palm_finger_1_joint: {trajectory: 0.1, goal: 0.1}
+    l_palm_finger_2_joint: {trajectory: 0.1, goal: 0.1}
+    l_palm_finger_middle_joint: {trajectory: 0.1, goal: 0.1}
+    l_finger_middle_joint_1: {trajectory: 0.1, goal: 0.1}
+    l_finger_middle_joint_paraproximal_actuating_hinge: {trajectory: 0.1, goal: 0.1}
+    l_finger_middle_joint_proximal_actuating_hinge: {trajectory: 0.1, goal: 0.1}
+    l_finger_1_joint_1: {trajectory: 0.1, goal: 0.1}
+    l_finger_1_joint_paraproximal_actuating_hinge: {trajectory: 0.1, goal: 0.1}
+    l_finger_1_joint_proximal_actuating_hinge: {trajectory: 0.1, goal: 0.1}
+    l_finger_2_joint_1: {trajectory: 0.1, goal: 0.1}
+    l_finger_2_joint_paraproximal_actuating_hinge: {trajectory: 0.1, goal: 0.1}
+    l_finger_2_joint_proximal_actuating_hinge: {trajectory: 0.1, goal: 0.1}
+  stop_trajectory_duration: 0.5
+  state_publish_rate:  25
+  action_monitor_rate: 10
