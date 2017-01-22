@@ -1,0 +1,125 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"palm" [label="palm"];
+"finger_1_link_0" [label="finger_1_link_0"];
+"finger_1_link_1" [label="finger_1_link_1"];
+"finger_1_link_2" [label="finger_1_link_2"];
+"finger_1_link_3" [label="finger_1_link_3"];
+"finger_1_link_paradistal_hinge" [label="finger_1_link_paradistal_hinge"];
+"finger_1_link_median_actuating_hinge" [label="finger_1_link_median_actuating_hinge"];
+"finger_1_link_median_bar" [label="finger_1_link_median_bar"];
+"finger_1_link_paramedian_hinge" [label="finger_1_link_paramedian_hinge"];
+"finger_1_link_median_bar_underactuated" [label="finger_1_link_median_bar_underactuated"];
+"finger_1_link_paraproximal_actuating_hinge" [label="finger_1_link_paraproximal_actuating_hinge"];
+"finger_1_link_paraproximal_bar" [label="finger_1_link_paraproximal_bar"];
+"finger_1_link_proximal_actuating_hinge" [label="finger_1_link_proximal_actuating_hinge"];
+"finger_1_link_proximal_actuating_bar" [label="finger_1_link_proximal_actuating_bar"];
+"finger_2_link_0" [label="finger_2_link_0"];
+"finger_2_link_1" [label="finger_2_link_1"];
+"finger_2_link_2" [label="finger_2_link_2"];
+"finger_2_link_3" [label="finger_2_link_3"];
+"finger_2_link_paradistal_hinge" [label="finger_2_link_paradistal_hinge"];
+"finger_2_link_median_actuating_hinge" [label="finger_2_link_median_actuating_hinge"];
+"finger_2_link_median_bar" [label="finger_2_link_median_bar"];
+"finger_2_link_paramedian_hinge" [label="finger_2_link_paramedian_hinge"];
+"finger_2_link_median_bar_underactuated" [label="finger_2_link_median_bar_underactuated"];
+"finger_2_link_paraproximal_actuating_hinge" [label="finger_2_link_paraproximal_actuating_hinge"];
+"finger_2_link_paraproximal_bar" [label="finger_2_link_paraproximal_bar"];
+"finger_2_link_proximal_actuating_hinge" [label="finger_2_link_proximal_actuating_hinge"];
+"finger_2_link_proximal_actuating_bar" [label="finger_2_link_proximal_actuating_bar"];
+"finger_middle_link_0" [label="finger_middle_link_0"];
+"finger_middle_link_1" [label="finger_middle_link_1"];
+"finger_middle_link_2" [label="finger_middle_link_2"];
+"finger_middle_link_3" [label="finger_middle_link_3"];
+"finger_middle_link_paradistal_hinge" [label="finger_middle_link_paradistal_hinge"];
+"finger_middle_link_median_actuating_hinge" [label="finger_middle_link_median_actuating_hinge"];
+"finger_middle_link_median_bar" [label="finger_middle_link_median_bar"];
+"finger_middle_link_paramedian_hinge" [label="finger_middle_link_paramedian_hinge"];
+"finger_middle_link_median_bar_underactuated" [label="finger_middle_link_median_bar_underactuated"];
+"finger_middle_link_paraproximal_actuating_hinge" [label="finger_middle_link_paraproximal_actuating_hinge"];
+"finger_middle_link_paraproximal_bar" [label="finger_middle_link_paraproximal_bar"];
+"finger_middle_link_proximal_actuating_hinge" [label="finger_middle_link_proximal_actuating_hinge"];
+"finger_middle_link_proximal_actuating_bar" [label="finger_middle_link_proximal_actuating_bar"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "robotiq_hand_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"robotiq_hand_joint" -> "palm"
+"palm" -> "palm_finger_1_joint" [label="xyz: -0.0455 0.0214 0.036 \nrpy: 3.14159 -7.34641e-06 1.57159"]
+"palm_finger_1_joint" -> "finger_1_link_0"
+"finger_1_link_0" -> "finger_1_joint_1" [label="xyz: 0 0 0 \nrpy: 0 0 -2.0906"]
+"finger_1_joint_1" -> "finger_1_link_1"
+"finger_1_link_1" -> "finger_1_joint_2" [label="xyz: 0 0.05715 0 \nrpy: 0 -0 0"]
+"finger_1_joint_2" -> "finger_1_link_2"
+"finger_1_link_2" -> "finger_1_joint_3" [label="xyz: 0 0.039 0 \nrpy: 0 -0 2.0906"]
+"finger_1_joint_3" -> "finger_1_link_3"
+"finger_1_link_2" -> "finger_1_joint_paradistal_hinge" [label="xyz: 0 0.039 -0.01 \nrpy: 0 -0 0"]
+"finger_1_joint_paradistal_hinge" -> "finger_1_link_paradistal_hinge"
+"finger_1_link_1" -> "finger_1_joint_median_actuating_hinge" [label="xyz: 0 0.05715 0.01 \nrpy: 0 0 -0.37"]
+"finger_1_joint_median_actuating_hinge" -> "finger_1_link_median_actuating_hinge"
+"finger_1_link_median_actuating_hinge" -> "finger_1_joint_median_actuating_hinge_median_bar" [label="xyz: 0.01625 0.01516 0 \nrpy: 0 -0 2.3215"]
+"finger_1_joint_median_actuating_hinge_median_bar" -> "finger_1_link_median_bar"
+"finger_1_link_1" -> "finger_1_joint_paramedian_hinge" [label="xyz: 0 0.05715 -0.01 \nrpy: 0 -0 0"]
+"finger_1_joint_paramedian_hinge" -> "finger_1_link_paramedian_hinge"
+"finger_1_link_paramedian_hinge" -> "finger_1_joint_paramedian_hinge_median_bar_underactuated" [label="xyz: 0.01227 0.00329 0 \nrpy: 0 -0 1.5708"]
+"finger_1_joint_paramedian_hinge_median_bar_underactuated" -> "finger_1_link_median_bar_underactuated"
+"finger_1_link_0" -> "finger_1_joint_paraproximal_actuating_hinge" [label="xyz: 0 0 -0.01 \nrpy: 0 0 -2.0906"]
+"finger_1_joint_paraproximal_actuating_hinge" -> "finger_1_link_paraproximal_actuating_hinge"
+"finger_1_link_paraproximal_actuating_hinge" -> "finger_1_joint_paraproximal_bar" [label="xyz: 0.02286 0 0 \nrpy: 0 -0 1.57"]
+"finger_1_joint_paraproximal_bar" -> "finger_1_link_paraproximal_bar"
+"finger_1_link_0" -> "finger_1_joint_proximal_actuating_hinge" [label="xyz: 0 0 0.01 \nrpy: 0 0 -2.0906"]
+"finger_1_joint_proximal_actuating_hinge" -> "finger_1_link_proximal_actuating_hinge"
+"finger_1_link_proximal_actuating_hinge" -> "finger_1_joint_proximal_actuating_bar" [label="xyz: 0.02858 0 0 \nrpy: 0 -0 1.8616"]
+"finger_1_joint_proximal_actuating_bar" -> "finger_1_link_proximal_actuating_bar"
+"palm" -> "palm_finger_2_joint" [label="xyz: -0.0455 0.0214 -0.036 \nrpy: 3.14159 -7.34641e-06 1.57159"]
+"palm_finger_2_joint" -> "finger_2_link_0"
+"finger_2_link_0" -> "finger_2_joint_1" [label="xyz: 0 0 0 \nrpy: 0 0 -2.0906"]
+"finger_2_joint_1" -> "finger_2_link_1"
+"finger_2_link_1" -> "finger_2_joint_2" [label="xyz: 0 0.05715 0 \nrpy: 0 -0 0"]
+"finger_2_joint_2" -> "finger_2_link_2"
+"finger_2_link_2" -> "finger_2_joint_3" [label="xyz: 0 0.039 0 \nrpy: 0 -0 2.0906"]
+"finger_2_joint_3" -> "finger_2_link_3"
+"finger_2_link_2" -> "finger_2_joint_paradistal_hinge" [label="xyz: 0 0.039 -0.01 \nrpy: 0 -0 0"]
+"finger_2_joint_paradistal_hinge" -> "finger_2_link_paradistal_hinge"
+"finger_2_link_1" -> "finger_2_joint_median_actuating_hinge" [label="xyz: 0 0.05715 0.01 \nrpy: 0 0 -0.37"]
+"finger_2_joint_median_actuating_hinge" -> "finger_2_link_median_actuating_hinge"
+"finger_2_link_median_actuating_hinge" -> "finger_2_joint_median_actuating_hinge_median_bar" [label="xyz: 0.01625 0.01516 0 \nrpy: 0 -0 2.3215"]
+"finger_2_joint_median_actuating_hinge_median_bar" -> "finger_2_link_median_bar"
+"finger_2_link_1" -> "finger_2_joint_paramedian_hinge" [label="xyz: 0 0.05715 -0.01 \nrpy: 0 -0 0"]
+"finger_2_joint_paramedian_hinge" -> "finger_2_link_paramedian_hinge"
+"finger_2_link_paramedian_hinge" -> "finger_2_joint_paramedian_hinge_median_bar_underactuated" [label="xyz: 0.01227 0.00329 0 \nrpy: 0 -0 1.5708"]
+"finger_2_joint_paramedian_hinge_median_bar_underactuated" -> "finger_2_link_median_bar_underactuated"
+"finger_2_link_0" -> "finger_2_joint_paraproximal_actuating_hinge" [label="xyz: 0 0 -0.01 \nrpy: 0 0 -2.0906"]
+"finger_2_joint_paraproximal_actuating_hinge" -> "finger_2_link_paraproximal_actuating_hinge"
+"finger_2_link_paraproximal_actuating_hinge" -> "finger_2_joint_paraproximal_bar" [label="xyz: 0.02286 0 0 \nrpy: 0 -0 1.57"]
+"finger_2_joint_paraproximal_bar" -> "finger_2_link_paraproximal_bar"
+"finger_2_link_0" -> "finger_2_joint_proximal_actuating_hinge" [label="xyz: 0 0 0.01 \nrpy: 0 0 -2.0906"]
+"finger_2_joint_proximal_actuating_hinge" -> "finger_2_link_proximal_actuating_hinge"
+"finger_2_link_proximal_actuating_hinge" -> "finger_2_joint_proximal_actuating_bar" [label="xyz: 0.02858 0 0 \nrpy: 0 -0 1.8616"]
+"finger_2_joint_proximal_actuating_bar" -> "finger_2_link_proximal_actuating_bar"
+"palm" -> "palm_finger_middle_joint" [label="xyz: 0.0455 0.0214 0 \nrpy: 0 -0 1.57"]
+"palm_finger_middle_joint" -> "finger_middle_link_0"
+"finger_middle_link_0" -> "finger_middle_joint_1" [label="xyz: 0 0 0 \nrpy: 0 0 -2.0906"]
+"finger_middle_joint_1" -> "finger_middle_link_1"
+"finger_middle_link_1" -> "finger_middle_joint_2" [label="xyz: 0 0.05715 0 \nrpy: 0 -0 0"]
+"finger_middle_joint_2" -> "finger_middle_link_2"
+"finger_middle_link_2" -> "finger_middle_joint_3" [label="xyz: 0 0.039 0 \nrpy: 0 -0 2.0906"]
+"finger_middle_joint_3" -> "finger_middle_link_3"
+"finger_middle_link_2" -> "finger_middle_joint_paradistal_hinge" [label="xyz: 0 0.039 -0.01 \nrpy: 0 -0 0"]
+"finger_middle_joint_paradistal_hinge" -> "finger_middle_link_paradistal_hinge"
+"finger_middle_link_1" -> "finger_middle_joint_median_actuating_hinge" [label="xyz: 0 0.05715 0.01 \nrpy: 0 0 -0.37"]
+"finger_middle_joint_median_actuating_hinge" -> "finger_middle_link_median_actuating_hinge"
+"finger_middle_link_median_actuating_hinge" -> "finger_middle_joint_median_actuating_hinge_median_bar" [label="xyz: 0.01625 0.01516 0 \nrpy: 0 -0 2.3215"]
+"finger_middle_joint_median_actuating_hinge_median_bar" -> "finger_middle_link_median_bar"
+"finger_middle_link_1" -> "finger_middle_joint_paramedian_hinge" [label="xyz: 0 0.05715 -0.01 \nrpy: 0 -0 0"]
+"finger_middle_joint_paramedian_hinge" -> "finger_middle_link_paramedian_hinge"
+"finger_middle_link_paramedian_hinge" -> "finger_middle_joint_paramedian_hinge_median_bar_underactuated" [label="xyz: 0.01227 0.00329 0 \nrpy: 0 -0 1.5708"]
+"finger_middle_joint_paramedian_hinge_median_bar_underactuated" -> "finger_middle_link_median_bar_underactuated"
+"finger_middle_link_0" -> "finger_middle_joint_paraproximal_actuating_hinge" [label="xyz: 0 0 -0.01 \nrpy: 0 0 -2.0906"]
+"finger_middle_joint_paraproximal_actuating_hinge" -> "finger_middle_link_paraproximal_actuating_hinge"
+"finger_middle_link_paraproximal_actuating_hinge" -> "finger_middle_joint_paraproximal_bar" [label="xyz: 0.02286 0 0 \nrpy: 0 -0 1.57"]
+"finger_middle_joint_paraproximal_bar" -> "finger_middle_link_paraproximal_bar"
+"finger_middle_link_0" -> "finger_middle_joint_proximal_actuating_hinge" [label="xyz: 0 0 0.01 \nrpy: 0 0 -2.0906"]
+"finger_middle_joint_proximal_actuating_hinge" -> "finger_middle_link_proximal_actuating_hinge"
+"finger_middle_link_proximal_actuating_hinge" -> "finger_middle_joint_proximal_actuating_bar" [label="xyz: 0.02858 0 0 \nrpy: 0 -0 1.8616"]
+"finger_middle_joint_proximal_actuating_bar" -> "finger_middle_link_proximal_actuating_bar"
+}
