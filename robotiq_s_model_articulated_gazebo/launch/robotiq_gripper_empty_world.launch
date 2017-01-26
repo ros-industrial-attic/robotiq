@@ -8,8 +8,7 @@
   </include>
 
   <!-- upload gripper urdf to robot_description -->
-  <include file="$(find robotiq_s_model_visualization)/launch/robotiq_gripper_upload.launch">
-  </include>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find robotiq_s_model_visualization)/cfg/s-model_articulated.xacro'" />
 
   <!-- Start the publisher for the left hand (the only hand) -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robotiq_hands_l_hand_robot_state_publisher">
