@@ -68,8 +68,9 @@ int main(int argc, char **argv)
 
 	ros::NodeHandle n;
 
-	ros::ServiceClient client = n.serviceClient<robotiq_force_torque_sensor::sensor_accessor>("robotiq_force_torque_sensor_acc");
-	ros::Subscriber sub1 = n.subscribe("robotiq_force_torque_sensor",100,reCallback);
+    std::string node_name = "/robotiq_force_torque_sensor";
+    ros::ServiceClient client = n.serviceClient<robotiq_force_torque_sensor::sensor_accessor>(node_name+"/sensor_acc");
+    ros::Subscriber sub1 = n.subscribe(node_name+"/sensor", 100, reCallback);
 
 	robotiq_force_torque_sensor::sensor_accessor srv;
 
