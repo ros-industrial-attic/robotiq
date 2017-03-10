@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
   <name>robotiq_s_model_articulated_gazebo</name>
   <version>1.0.0</version>
   <description>Launch files for spawning the Robotiq s-model articulated gripper</description>
@@ -11,7 +11,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>gazebo_ros</run_depend>
-  <run_depend>robotiq_s_model_visualization</run_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>robotiq_s_model_visualization</exec_depend>
 
 </package>
