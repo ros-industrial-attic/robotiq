@@ -1,0 +1,1 @@
+- git: {local-name: soem, uri: 'https://github.com/UTNuclearRoboticsPublic/soem', version: master}
