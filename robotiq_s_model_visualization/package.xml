@@ -1,4 +1,5 @@
-<package>
+<?xml version="1.0"?>
+<package format="2">
   <name>robotiq_s_model_visualization</name>
   <version>1.0.0</version>
   <description>robotiq</description>
@@ -8,10 +9,7 @@
   <author>Nicolas Lauzier (Robotiq inc.)</author>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>urdf</build_depend>
-  <run_depend>urdf</run_depend>
 
-  <export>
+  <depend>urdf</depend>
 
-  </export>
 </package>
