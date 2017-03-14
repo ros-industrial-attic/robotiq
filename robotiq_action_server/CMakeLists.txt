@@ -28,7 +28,6 @@ add_executable(robotiq_c_model_action_server_node
     include/robotiq_action_server/robotiq_c_model_action_server.h)
 
 add_dependencies(robotiq_c_model_action_server_node
-  robotiq_action_server_generate_messages_cpp
   ${robotiq_action_server_EXPORTED_TARGETS}
   ${robotiq_c_model_control_EXPORTED_TARGETS})
 
@@ -41,13 +40,9 @@ add_executable(robotiq_action_server_client_test
   src/robotiq_action_server_client_test.cpp
 )
 
-add_dependencies(robotiq_action_server_client_test
-  robotiq_action_server_generate_messages_cpp
-  ${robotiq_action_server_EXPORTED_TARGETS})
-
- target_link_libraries(robotiq_action_server_client_test
-   ${catkin_LIBRARIES}
- )
+target_link_libraries(robotiq_action_server_client_test
+  ${catkin_LIBRARIES}
+)
 
 
 install(TARGETS robotiq_c_model_action_server_node
