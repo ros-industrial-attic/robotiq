@@ -39,8 +39,8 @@ Module baseSModel: defines a base class for handling command and status of the R
 After being instanciated, a 'client' member must be added to the object. This client depends on the communication protocol used by the Gripper. As an example, the ROS node 'SModelTcpNode.py' instanciate a robotiqBaseSModel and adds a client defined in the module comModbusTcp.
 """
 
-from   robotiq_s_model_control.msg import _SModel_robot_input  as inputMsg
-from   robotiq_s_model_control.msg import _SModel_robot_output as outputMsg
+from   robotiq_s_model_articulated_msgs.msg import SModelRobotInput  as inputMsg
+from   robotiq_s_model_articulated_msgs.msg import SModelRobotOutput as outputMsg
 
 class robotiqBaseSModel:
     """Base class (communication protocol agnostic) for sending commands and receiving the status of the Robotic S-Model gripper."""

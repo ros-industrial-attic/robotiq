@@ -52,7 +52,7 @@ static enum rq_sensor_state_values current_state = RQ_STATE_INIT;
 
 ///////////////////
 //Private functions
-static INT_8 rq_state_init_com();
+static INT_8 rq_state_init_com(std::string& ftdi_id);
 static void rq_state_read_info_high_lvl();
 static void rq_state_start_stream();
 static void rq_state_run(unsigned int max_retries);
@@ -65,14 +65,14 @@ static void rq_state_run(unsigned int max_retries);
  * \brief Manages the states of the sensor driver
  * \returns -1 if an error occurs, 0 otherwise
  */
-INT_8 rq_sensor_state(unsigned int max_retries)
+INT_8 rq_sensor_state(unsigned int max_retries, std::string& ftdi_id)
 {
 	INT_8 ret;
 
 	switch (current_state)
 	{
 	case RQ_STATE_INIT:
-		ret = rq_state_init_com();
+		ret = rq_state_init_com(ftdi_id);
 		if(ret == -1)
 		{
 			return -1;
@@ -105,9 +105,9 @@ INT_8 rq_sensor_state(unsigned int max_retries)
  * \brief Initialize communication with the sensor and set the
  *        next state to \ref RQ_STATE_READ_INFO
  */
-static INT_8 rq_state_init_com()
+static INT_8 rq_state_init_com(std::string& ftdi_id)
 {
-	if(rq_sensor_com() == -1)
+	if(rq_sensor_com(ftdi_id) == -1)
 	{
 		return -1;
 	}
@@ -193,40 +193,6 @@ float rq_state_get_received_data(UINT_8 i)
 		return 0.0;
 	}
 }
-
-
-
-/**
- * \fn bool rq_state_get_command(INT_8 command, char *value)
- * \brief Gets the value of high level information from the sensor
- * \param command has to be in [1, 2, 4, 8] corresponding to SerialNumber, FirmwareVersion and ProductionYear, Reset
- * \param value return string with requested Data
- * \return true iff command is valid
- */
-bool rq_state_get_command(INT_8 command, INT_8 * const  value)
-{
-	/// values correnspond to constants in sensor_accessor.srv
-	switch (command) {
-	case SensorAccessor::GET_SERIAL_NUMBER:
-		rq_com_get_str_serial_number( value);
-		break;
-	case SensorAccessor::GET_FIRMWARE_VERSION:
-		rq_com_get_str_firmware_version( value);
-		break;
-	case SensorAccessor::GET_PRODUCTION_YEAR:
-		rq_com_get_str_production_year( value);
-		break;
-	case SensorAccessor::SET_ZERO:
-		rq_state_do_zero_force_flag();
-		strcpy(value, "Done");
-		break;
-	default:
-		strcpy(value, "Unsupported command_id");
-		return false;
-	}
-	return true;
-}
-
 
 /**
  * \fn int rq_state_get_command(char* name, char *value)
