@@ -34,7 +34,7 @@ include_directories(
 add_executable(s_model_joint_states src/s_model_joint_states.cpp)
 
 ## Add cmake target dependencies of the executable/library
-add_dependencies(s_model_joint_states robotiq_s_model_control_generate_messages_cpp)
+add_dependencies(s_model_joint_states robotiq_s_model_control_generate_messages_cpp robotiq_s_model_articulated_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(s_model_joint_states

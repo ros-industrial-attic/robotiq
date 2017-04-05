@@ -148,13 +148,11 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 	ros::param::param<int>("~max_retries", max_retries_, 100);
         std::string ftdi_id;
-        ros::param::get("~serial_id", ftdi_id);
+        n.getParam("serial_id", ftdi_id);
 
 	INT_8 bufStream[512];
 	robotiq_force_torque_sensor::ft_sensor msgStream;
 	INT_8 ret; 
-
-        ROS_INFO("Trying to connect to a sensor at /dev/%s", ftdi_id.c_str());
 
 	//If we can't initialize, we return an error
 	ret = rq_sensor_state(max_retries_, ftdi_id);
