@@ -62,10 +62,10 @@ def mainLoop(address):
     rospy.init_node('robotiqSModel')
 
     #The Gripper status is published on the topic named 'SModelRobotInput'
-    pub = rospy.Publisher('SModelRobotInput', inputMsg())
+    pub = rospy.Publisher('SModelRobotInput', inputMsg)
 
     #The Gripper command is received from the topic named 'SModelRobotOutput'
-    rospy.Subscriber('SModelRobotOutput', outputMsg(), gripper.refreshCommand)    
+    rospy.Subscriber('SModelRobotOutput', outputMsg, gripper.refreshCommand)    
     
 
     #We loop
