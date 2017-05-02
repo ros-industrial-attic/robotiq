@@ -155,7 +155,7 @@ class robotiqBaseSModel:
         status = self.client.getStatus(16);
 
         #Message to output
-        message = inputMsg.SModel_robot_input()
+        message = inputMsg()
 
         #Assign the values to their respective variables
         message.gACT = (status[0] >> 0) & 0x01;
