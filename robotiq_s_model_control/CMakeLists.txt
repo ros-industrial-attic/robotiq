@@ -30,6 +30,7 @@ include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${robotiq_ethercat_INCLUDE_DIRS}
+  ${robotiq_s_model_articulated_msgs_INCLUDE_DIRS}
 )
 
 add_executable(s_model_ethercat_node

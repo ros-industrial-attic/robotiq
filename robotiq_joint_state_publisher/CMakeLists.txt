@@ -28,6 +28,7 @@ catkin_package(
 ## Specify additional locations of header files
 include_directories(
     ${catkin_INCLUDE_DIRS}
+    ${robotiq_s_model_articulated_msgs_INCLUDE_DIRS}
 )
 
 ## Declare a cpp executable
