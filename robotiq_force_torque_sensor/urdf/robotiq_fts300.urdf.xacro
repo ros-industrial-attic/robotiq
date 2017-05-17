@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotiq_fts150">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotiq_fts300">
 
-    <xacro:macro name="robotiq_fts150" params="parent prefix *origin">
+    <xacro:macro name="robotiq_fts300" params="parent prefix *origin">
 
         <!-- mount the fts to the robot -->
         <joint name="${prefix}fts_fix" type="fixed" >
@@ -21,7 +21,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotiq_force_torque_sensor/meshes/visual/robotiq_fts150.stl"/>
+                    <mesh filename="package://robotiq_force_torque_sensor/meshes/visual/robotiq_fts300.dae"/>
                 </geometry>
                 <material name="black"/>
             </visual>
@@ -29,7 +29,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotiq_force_torque_sensor/meshes/collision/robotiq_fts150.stl"/>
+                    <mesh filename="package://robotiq_force_torque_sensor/meshes/collision/robotiq_fts300.dae"/>
                 </geometry>
             </collision>
         </link>

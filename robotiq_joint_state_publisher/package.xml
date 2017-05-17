@@ -14,12 +14,14 @@
   <build_depend>message_generation</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>robotiq_s_model_control</build_depend>
+  <build_depend>robotiq_s_model_articulated_msgs</build_depend>
   
   <run_depend>roscpp</run_depend>
   <run_depend>roslib</run_depend>
   <run_depend>message_runtime</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>robotiq_s_model_control</run_depend>
+  <run_depend>robotiq_s_model_articulated_msgs</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

@@ -28,13 +28,14 @@ catkin_package(
 ## Specify additional locations of header files
 include_directories(
     ${catkin_INCLUDE_DIRS}
+    ${robotiq_s_model_articulated_msgs_INCLUDE_DIRS}
 )
 
 ## Declare a cpp executable
 add_executable(s_model_joint_states src/s_model_joint_states.cpp)
 
 ## Add cmake target dependencies of the executable/library
-add_dependencies(s_model_joint_states robotiq_s_model_control_generate_messages_cpp)
+add_dependencies(s_model_joint_states ${robotiq_s_model_control_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${robotiq_s_model_articulated_msgs_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(s_model_joint_states

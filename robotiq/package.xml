@@ -12,6 +12,7 @@
   <run_depend>robotiq_s_model_control</run_depend>
   <run_depend>robotiq_c_model_control</run_depend>
   <run_depend>robotiq_force_torque_sensor</run_depend>
+  <run_depend>robotiq_s_model_articulated_msgs</run_depend>
 
   <export>
     <metapackage/>

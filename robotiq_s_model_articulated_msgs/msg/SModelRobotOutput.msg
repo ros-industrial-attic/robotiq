@@ -30,6 +30,9 @@ uint8 rATR
 # 0x0 - Normal.
 # 0x1 - Enable Individual Control of Fingers A, B and C.
 
+# Looks like a command was forgotten. Adding back rGLV
+uint8 rGLV
+
 uint8 rICF
 
 # rICS: Individual Control of Scissor. The scissor axis moves independenly from

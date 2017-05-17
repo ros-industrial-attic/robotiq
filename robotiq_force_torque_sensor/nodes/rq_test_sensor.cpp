@@ -77,13 +77,7 @@ int main(int argc, char **argv)
 	while (ros::ok())
 	{
 	if(count == 10000000){
-
-		/// Deprecated Interface
-		// srv.request.command = "SET ZRO";
-
-		/// New Interface with numerical commands
-		srv.request.command_id = srv.request.COMMAND_SET_ZERO;
-
+		srv.request.command = "SET ZRO";
 		if(client.call(srv)){
 			ROS_INFO("ret: %s", srv.response.res.c_str());
 		}
