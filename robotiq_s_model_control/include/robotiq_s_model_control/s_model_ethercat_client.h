@@ -1,8 +1,8 @@
 #ifndef S_MODEL_ETHERCAT_CLIENT_H
 #define S_MODEL_ETHERCAT_CLIENT_H
 
-#include <robotiq_s_model_control/SModel_robot_output.h>
-#include <robotiq_s_model_control/SModel_robot_input.h>
+#include <robotiq_s_model_articulated_msgs/SModelRobotOutput.h>
+#include <robotiq_s_model_articulated_msgs/SModelRobotInput.h>
 
 // Forward declaration of EtherCatManager
 namespace robotiq_ethercat
@@ -22,8 +22,8 @@ namespace robotiq_s_model_control
 class SModelEtherCatClient
 {
 public:
-  typedef robotiq_s_model_control::SModel_robot_output GripperOutput;
-  typedef robotiq_s_model_control::SModel_robot_input GripperInput;
+  typedef robotiq_s_model_articulated_msgs::SModelRobotOutput GripperOutput;
+  typedef robotiq_s_model_articulated_msgs::SModelRobotInput GripperInput;
 
   /**
    * \brief Constructs a control interface to a S Model Robotiq gripper on

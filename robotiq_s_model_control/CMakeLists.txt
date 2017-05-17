@@ -11,15 +11,9 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 ###################################
 ## catkin message generation     ##
 ###################################
-add_message_files(
-  FILES
-  SModel_robot_input.msg
-  SModel_robot_output.msg
-)
 
 catkin_python_setup()
 
-generate_messages()
 
 ###################################
 ## catkin specific configuration ##
@@ -49,7 +43,7 @@ target_link_libraries(s_model_ethercat_node
    ${catkin_LIBRARIES}
 )
 
-add_dependencies(s_model_ethercat_node robotiq_s_model_control_generate_messages_cpp)
+add_dependencies(s_model_ethercat_node robotiq_s_model_control_generate_messages_cpp robotiq_s_model_articulated_msgs_generate_messages_cpp)
 #############
 ## Install ##
 #############

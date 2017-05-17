@@ -4,7 +4,7 @@
 #include <boost/ref.hpp>
 
 #include "robotiq_s_model_control/s_model_ethercat_client.h"
-#include <robotiq_s_model_control/SModel_robot_input.h>
+#include <robotiq_s_model_articulated_msgs/SModelRobotInput.h>
 #include "robotiq_ethercat/ethercat_manager.h"
 
 

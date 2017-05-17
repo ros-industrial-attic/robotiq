@@ -47,8 +47,8 @@ import rospy
 import robotiq_s_model_control.baseSModel
 import robotiq_modbus_tcp.comModbusTcp
 import os, sys
-from robotiq_s_model_control.msg import _SModel_robot_input  as inputMsg
-from robotiq_s_model_control.msg import _SModel_robot_output as outputMsg
+from robotiq_s_model_articulated_msgs.msg import SModelRobotInput  as inputMsg
+from robotiq_s_model_articulated_msgs.msg import SModelRobotOutput as outputMsg
 
 def mainLoop(address):
     
@@ -62,10 +62,10 @@ def mainLoop(address):
     rospy.init_node('robotiqSModel')
 
     #The Gripper status is published on the topic named 'SModelRobotInput'
-    pub = rospy.Publisher('SModelRobotInput', inputMsg.SModel_robot_input, queue_size=1)
+    pub = rospy.Publisher('SModelRobotInput', inputMsg)
 
     #The Gripper command is received from the topic named 'SModelRobotOutput'
-    rospy.Subscriber('SModelRobotOutput', outputMsg.SModel_robot_output, gripper.refreshCommand)    
+    rospy.Subscriber('SModelRobotOutput', outputMsg, gripper.refreshCommand)    
     
 
     #We loop
