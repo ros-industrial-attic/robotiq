@@ -73,7 +73,7 @@ enum rq_sensor_state_values
 		                   ///< the sensor
 };
 
-INT_8 rq_sensor_state(unsigned int max_retries);
+INT_8 rq_sensor_state(unsigned int max_retries, INT_8 const * const device);
 void rq_state_get_command(INT_8 const * const name, INT_8 * const  value);
 bool rq_state_get_command(INT_8 command, INT_8 * const  value);
 

@@ -135,10 +135,10 @@ HANDLE hSerial;
 /**
  * \fn void rq_sensor_com(void)
  * \brief Discovers and initialize the communication with the sensor
- * \details The functions loops  through all the serial com ports 
+ * \details The functions tries the given device, if it is not null. Else it loops through all the serial com ports
  *          and polls them to discover the sensor
  */
-INT_8 rq_sensor_com()
+INT_8 rq_sensor_com(INT_8 const * const device)
 {
 #ifdef __unix__ //For Unix
 	UINT_8 device_found = 0;
@@ -152,18 +152,26 @@ INT_8 rq_sensor_com()
 		return -1;
 	}
 
-	//Loops through the files in the /sys/class/tty/ directory
-	while ((entrydirectory = readdir(dir)) != NULL && device_found == 0)
-	{
-		//Look for a serial device
-		if (strstr(entrydirectory->d_name, "ttyS") || 
-			strstr(entrydirectory->d_name, "ttyUSB"))
-		{
-			device_found = rq_com_identify_device(entrydirectory->d_name);
-		}
-	}
+    if(device != NULL){
+        //Try the device which was passed as a parameter
+        device_found = rq_com_identify_device(device);
+    }else{
 
-	closedir(dir);
+        //Loops through the files in the /sys/class/tty/ directory
+        while ((entrydirectory = readdir(dir)) != NULL && device_found == 0)
+        {
+            //Look for a serial device
+            if (strstr(entrydirectory->d_name, "ttyS") ||
+                strstr(entrydirectory->d_name, "ttyUSB") ||
+                strstr(entrydirectory->d_name, "rfcomm"))
+
+            {
+                device_found = rq_com_identify_device(entrydirectory->d_name);
+            }
+        }
+
+        closedir(dir);
+    }
 
 	if (device_found == 0)
 	{
