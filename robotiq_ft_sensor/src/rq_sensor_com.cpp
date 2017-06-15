@@ -170,7 +170,8 @@ INT_8 rq_sensor_com()
     {
         //Look for a serial device
         if (strstr(entrydirectory->d_name, "ttyS") ||
-            strstr(entrydirectory->d_name, "ttyUSB"))
+            strstr(entrydirectory->d_name, "ttyUSB") ||
+            strstr(entrydirectory->d_name, "rfcomm"))
         {
             device_found = rq_com_identify_device(entrydirectory->d_name);
         }
