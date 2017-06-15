@@ -48,12 +48,14 @@ from math import ceil
 
 class communication:	
 
-   def __init__(self):
+   def __init__(self, retry=False):
+      """Setting the retry parameter to True will lead to retries until an answer is delivered."""
       self.client = None
+      self.retry = retry
       
    def connectToDevice(self, device):
       """Connection to the client - the method takes the IP address (as a string, e.g. '192.168.1.11') as an argument."""
-      self.client = ModbusSerialClient(method='rtu',port=device,stopbits=1, bytesize=8, baudrate=115200, timeout=0.2)
+      self.client = ModbusSerialClient(method='rtu',port=device,stopbits=1, bytesize=8, baudrate=115200, timeout=0.05)
       if not self.client.connect():
           print "Unable to connect to %s" % device
           return False
@@ -76,16 +78,30 @@ class communication:
       for i in range(0, len(data)/2):
          message.append((data[2*i] << 8) + data[2*i+1])
 
-      #To do!: Implement try/except 
-      self.client.write_registers(0x03E8, message, unit=0x0009)
+      if self.retry:
+         while True:
+            response = self.client.write_registers(0x03E8, message, unit=0x0009)
+            if response:
+               break
+      else:
+         # To do!: Implement try/except
+         self.client.write_registers(0x03E8, message, unit=0x0009)
 
    def getStatus(self, numBytes):
       """Sends a request to read, wait for the response and returns the Gripper status. The method gets the number of bytes to read as an argument"""
       numRegs = int(ceil(numBytes/2.0))
 
-      #To do!: Implement try/except 
       #Get status from the device
-      response = self.client.read_holding_registers(0x07D0, numRegs, unit=0x0009)
+      if self.retry:
+         while True:
+            response = self.client.read_holding_registers(0x07D0, numRegs, unit=0x0009)
+            if response:
+               break
+      else:
+         # To do!: Implement try/except
+         response = self.client.read_holding_registers(0x07D0, numRegs, unit=0x0009)
+         if not response:
+            print("Could not read registers on gripper. Please check connection and chosen device.")
 
       #Instantiate output as an empty list
       output = []
