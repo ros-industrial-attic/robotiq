@@ -44,6 +44,8 @@ The module depends on pymodbus (http://code.google.com/p/pymodbus/) for the Modb
 """
 
 from pymodbus.client.sync import ModbusSerialClient
+from pymodbus.register_read_message import ReadHoldingRegistersResponse
+from pymodbus.register_write_message import WriteMultipleRegistersResponse
 from math import ceil
 
 class communication:	
@@ -81,7 +83,7 @@ class communication:
       if self.retry:
          while True:
             response = self.client.write_registers(0x03E8, message, unit=0x0009)
-            if response:
+            if isinstance(response, WriteMultipleRegistersResponse):
                break
       else:
          # To do!: Implement try/except
@@ -95,7 +97,7 @@ class communication:
       if self.retry:
          while True:
             response = self.client.read_holding_registers(0x07D0, numRegs, unit=0x0009)
-            if response:
+            if isinstance(response, ReadHoldingRegistersResponse):
                break
       else:
          # To do!: Implement try/except
