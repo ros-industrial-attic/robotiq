@@ -72,6 +72,12 @@ INT_8 rq_sensor_state(unsigned int max_retries, INT_8 const * const device)
 	switch (current_state)
 	{
 	case RQ_STATE_INIT:
+	    //first make sure there is no stream running
+	    rq_com_listen_stream();
+        if(rq_com_get_valid_stream() == true){
+            current_state = RQ_STATE_RUN;
+        }
+
 		ret = rq_state_init_com(device);
 		if(ret == -1)
 		{
