@@ -73,10 +73,16 @@ INT_8 rq_sensor_state(unsigned int max_retries, const std::string& ftdi_id)
 	switch (current_state)
 	{
 	case RQ_STATE_INIT:
+	    //first make sure there is no stream running
+	    rq_com_listen_stream();
+            if(rq_com_get_valid_stream() == true){
+                current_state = RQ_STATE_RUN;
+            }
+
 		ret = rq_state_init_com(ftdi_id);
 		if(ret == -1)
 		{
-            return -1;
+                    return -1;
 		}
 		break;
 
