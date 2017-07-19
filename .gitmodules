@@ -1,0 +1,3 @@
+[submodule "soem"]
+	path = soem
+	url = https://github.com/UTNuclearRoboticsPublic/soem.git
