@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_s_model_articulated_gazebo_plugins)
-set (CMAKE_CXX_STANDARD 11)
 
 find_package(catkin REQUIRED COMPONENTS std_msgs gazebo_plugins actionlib tf image_transport control_msgs trajectory_msgs geometry_msgs sensor_msgs roscpp gazebo_ros robotiq_s_model_articulated_msgs)
 
@@ -19,6 +18,8 @@ link_directories(
 catkin_package(
    DEPENDS gazebo_plugins gazebo_ros robotiq_s_model_articulated_msgs roscpp
 )
+
+add_compile_options(-std=c++11)
 
 add_library(RobotiqHandPlugin src/RobotiqHandPlugin.cpp)
 set_target_properties(RobotiqHandPlugin PROPERTIES LINK_FLAGS "${ld_flags}")
