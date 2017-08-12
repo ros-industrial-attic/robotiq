@@ -1,4 +1,4 @@
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="s-model_mesh">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:macro name="s-model_mesh" params="prefix">
 		<!-- link list -->
 		<link name="${prefix}palm">
@@ -80,5 +80,4 @@
 		</joint>
 		<!-- end of joint list -->
 	</xacro:macro>
-
 </robot>

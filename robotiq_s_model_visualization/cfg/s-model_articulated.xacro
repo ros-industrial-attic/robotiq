@@ -10,7 +10,7 @@ s-model_articulated - articulated version of the robotiq s-model,
 	<xacro:s-model_articulated prefix=""/>
 
 <!--
-	<include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
+	<xacro:include filename="$(find robotiq_s_model_visualization)/cfg/s-model_finger_articulated_macro.xacro" />
 	<xacro:s-model_finger_articulated prefix=""/>
 -->
 </robot>
