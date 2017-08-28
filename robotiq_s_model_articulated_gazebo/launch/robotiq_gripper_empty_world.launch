@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
+  <arg name="sim" default="true"/>
+
   <!-- startup simulated world --> 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" default="worlds/empty.world"/>
@@ -9,6 +11,7 @@
 
   <!-- upload gripper urdf to robot_description -->
   <include file="$(find robotiq_s_model_visualization)/launch/robotiq_gripper_upload.launch">
+      <arg name="sim" value="$(arg sim)"/>
   </include>
 
   <!-- Start the publisher for the left hand (the only hand) -->

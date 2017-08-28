@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <launch>
 
-   <param name="robot_description" command="$(find xacro)/xacro.py '$(find robotiq_s_model_visualization)/cfg/robotiq_hand.urdf.xacro'" />
+  <arg name="sim" default="$(optenv SIM !!NO_SIM_SET!!)"/>
+
+  <group unless="$(arg sim)">
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find robotiq_s_model_visualization)/cfg/robotiq_hand.urdf.xacro'" />
+  </group>
+
+  <group if="$(arg sim)">
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find robotiq_s_model_visualization)/cfg/robotiq_hand_with_gazebo_plugin.urdf.xacro'" />
+  </group>
+
 
 </launch>
