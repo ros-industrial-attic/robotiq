@@ -2,28 +2,27 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_ethercat)
 
 find_package(catkin REQUIRED COMPONENTS
-  soem
   roscpp
+  soem
 )
-
 catkin_package(
    INCLUDE_DIRS include
    LIBRARIES robotiq_ethercat
-   CATKIN_DEPENDS soem roscpp
+   CATKIN_DEPENDS roscpp soem
 )
+
 
 include_directories(include
   ${catkin_INCLUDE_DIRS}
-  ## The following work around allows SOEM headers to include other SOEM headers.
-  ## SOEM headers assume all headers are installed in a flat directory structure
-  ## See https://github.com/smits/soem/issues/4 for more information.
-  ${soem_INCLUDE_DIRS}/soem
+  ${soem_INCLUDE_DIRS}
 )
 
 add_library(robotiq_ethercat
  include/robotiq_ethercat/ethercat_manager.h
  src/ethercat_manager.cpp
 )
+
+target_link_libraries(robotiq_ethercat ${catkin_LIBRARIES})
 
 install(TARGETS robotiq_ethercat
    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
