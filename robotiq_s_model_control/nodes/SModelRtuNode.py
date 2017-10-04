@@ -51,13 +51,7 @@ def mainLoop(device):
 
 if __name__ == '__main__':
     try:
-        # TODO: Add verification that the argument is an IP address
-        mainLoop(sys.argv[1])
-    except rospy.ROSInterruptException:
-        pass
-
-if __name__ == '__main__':
-    try:
         # TODO: Add verification that the argument is a valid device
         mainLoop(sys.argv[1])
-    except rospy.ROSInterruptException: pass
+    except rospy.ROSInterruptException: 
+        pass
