@@ -46,6 +46,7 @@
 
 #include "rq_int.h"
 #include <stdbool.h>
+#include <string>
 
 
 /// (Re-)Definition of ROS-Service to keep this driver ROS-free
@@ -62,18 +63,19 @@ namespace SensorAccessor
 }
 
 
-enum rq_sensor_state_values 
+enum rq_sensor_state_values
 {
 	RQ_STATE_INIT,         ///< State that initialize the com. with the sensor
 	RQ_STATE_READ_INFO,    ///< State that reads the firmware version,
 	                       ///< serial number and production year
 	RQ_STATE_START_STREAM, ///< State that start the sensor in streaming
 	                       ///< mode
-	RQ_STATE_RUN           ///< State that reads the streaming data from 
+	RQ_STATE_RUN           ///< State that reads the streaming data from
 		                   ///< the sensor
 };
 
 INT_8 rq_sensor_state(unsigned int max_retries);
+INT_8 rq_sensor_state(unsigned int max_retries, const std::string& ftdi_id);
 void rq_state_get_command(INT_8 const * const name, INT_8 * const  value);
 bool rq_state_get_command(INT_8 command, INT_8 * const  value);
 
