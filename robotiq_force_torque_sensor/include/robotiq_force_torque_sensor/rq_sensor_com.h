@@ -46,10 +46,12 @@
 #include "rq_int.h"
 #include <stdio.h>
  #include <stdbool.h>
+#include <string>
 
 #define MP_BUFF_SIZE    1024
 
-INT_8 rq_sensor_com(void);
+INT_8 rq_sensor_com();
+INT_8 rq_sensor_com(const std::string&);
 void rq_sensor_com_read_info_high_lvl(void);
 INT_8 rq_com_start_stream(void);
 void rq_com_listen_stream(void);
