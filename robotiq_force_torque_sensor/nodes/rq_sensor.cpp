@@ -50,11 +50,39 @@
 #include "robotiq_force_torque_sensor/ft_sensor.h"
 #include "robotiq_force_torque_sensor/sensor_accessor.h"
 
-static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret);
-static void wait_for_other_connection(void);
+typedef robotiq_force_torque_sensor::sensor_accessor::Request Request;
 static int max_retries_(100);
+std::string ftdi_id;
 
 ros::Publisher sensor_pub_acc;
+
+
+/**
+ * @brief decode_message_and_do Decode the message received and do the associated action
+ * @param req request (of which the command_id is used)
+ * @param res result with requested data
+ * @return true iff a valid command_id was given in the request
+ */
+static bool decode_message_and_do(robotiq_force_torque_sensor::sensor_accessor::Request& req,
+								  robotiq_force_torque_sensor::sensor_accessor::Response& res)
+{
+	INT_8 buffer[100];
+	res.success = rq_state_get_command(req.command_id, buffer);
+	res.res = buffer;
+
+	if (!res.success)
+	{
+		ROS_WARN("Unsupported command_id '%i', should be in [%i, %i, %i, %i]",
+			 req.command_id,
+			 Request::COMMAND_GET_SERIAL_NUMBER,
+			 Request::COMMAND_GET_FIRMWARE_VERSION,
+			 Request::COMMAND_GET_PRODUCTION_YEAR,
+			 Request::COMMAND_SET_ZERO);
+	}
+
+	return res.success;
+}
+
 
 /**
  * \brief Decode the message received and do the associated action
@@ -73,7 +101,7 @@ static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret)
 
 	strncpy(get_or_set, &buff[0], 3);
 	strncpy(nom_var, &buff[4], strlen(buff) -3);
-	
+
 	if(strstr(get_or_set, "GET"))
 	{
 		rq_state_get_command(nom_var, ret);
@@ -91,19 +119,38 @@ static void decode_message_and_do(INT_8 const  * const buff, INT_8 * const ret)
 bool receiverCallback(robotiq_force_torque_sensor::sensor_accessor::Request& req,
 	robotiq_force_torque_sensor::sensor_accessor::Response& res)
 {
-	ROS_INFO("I heard: [%s]",req.command.c_str());
-	INT_8 buffer[512];
-	decode_message_and_do((char*)req.command.c_str(), buffer);
-	res.res = buffer;
-	ROS_INFO("I send: [%s]", res.res.c_str());
+	/// Support for old string-based interface
+	if (req.command.length())
+	{
+		ROS_WARN_ONCE("Usage of command-string is deprecated, please use the numeric command_id");
+		ROS_INFO("I heard: [%s]",req.command.c_str());
+		INT_8 buffer[512];
+		decode_message_and_do((char*)req.command.c_str(), buffer);
+		res.res = buffer;
+		ROS_INFO("I send: [%s]", res.res.c_str());
+		return true;
+	}
+
+	/// New interface with numerical commands
+	decode_message_and_do(req, res);
 	return true;
+}
+
+static INT_8 sensor_state_machine()
+{
+    if (ftdi_id.empty())
+    {
+        return rq_sensor_state(max_retries_);
+    }
+
+    return rq_sensor_state(max_retries_, ftdi_id);
 }
 
 /**
  * \fn static void wait_for_other_connection()
  * \brief Each second, checks for a sensor that has been connected
  */
-static void wait_for_other_connection(void)
+static void wait_for_other_connection()
 {
 	INT_8 ret;
 
@@ -112,8 +159,8 @@ static void wait_for_other_connection(void)
 		ROS_INFO("Waiting for sensor connection...");
 		usleep(1000000);//Attend 1 seconde.
 
-		ret = rq_sensor_state(max_retries_);
-		if(ret == 0)
+        ret = sensor_state_machine();
+        if(ret == 0)
 		{
 			ROS_INFO("Sensor connected!");
 			break;
@@ -147,32 +194,41 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "robotiq_force_torque_sensor");
 	ros::NodeHandle n;
 	ros::param::param<int>("~max_retries", max_retries_, 100);
+    ros::param::get("~serial_id", ftdi_id);
+    if (!ftdi_id.empty())
+    {
+        ROS_INFO("Trying to connect to a sensor at /dev/%s", ftdi_id.c_str());
+    }
+    else
+    {
+        ROS_INFO("No device filename specified. Will attempt to discover Robotiq force torque sensor.");
+    }
 
 	INT_8 bufStream[512];
 	robotiq_force_torque_sensor::ft_sensor msgStream;
-	INT_8 ret; 
+	INT_8 ret;
 
 	//If we can't initialize, we return an error
-	ret = rq_sensor_state(max_retries_);
+	ret = sensor_state_machine();
 	if(ret == -1)
 	{
 		wait_for_other_connection();
 	}
 
 	//Reads basic info on the sensor
-	ret = rq_sensor_state(max_retries_);
+	ret = sensor_state_machine();
 	if(ret == -1)
 	{
 		wait_for_other_connection();
 	}
 
 	//Starts the stream
-	ret = rq_sensor_state(max_retries_);
+	ret = sensor_state_machine();
 	if(ret == -1)
 	{
 		wait_for_other_connection();
 	}
-	
+
 	ros::Publisher sensor_pub = n.advertise<robotiq_force_torque_sensor::ft_sensor>("robotiq_force_torque_sensor", 512);
 	ros::Publisher wrench_pub = n.advertise<geometry_msgs::WrenchStamped>("robotiq_force_torque_wrench", 512);
 	ros::ServiceServer service = n.advertiseService("robotiq_force_torque_sensor_acc", receiverCallback);
@@ -184,10 +240,9 @@ int main(int argc, char **argv)
 	ROS_INFO("Starting Sensor");
 	while(ros::ok())
 	{
-		ret = rq_sensor_state(max_retries_);
-
-		if(ret == -1)
-		{
+        ret = sensor_state_machine();
+        if (ret == -1)
+        {
 			wait_for_other_connection();
 		}
 

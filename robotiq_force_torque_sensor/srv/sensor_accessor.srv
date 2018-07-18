@@ -1,3 +1,9 @@
-string command
+uint8 COMMAND_GET_SERIAL_NUMBER=1
+uint8 COMMAND_GET_FIRMWARE_VERSION=2
+uint8 COMMAND_GET_PRODUCTION_YEAR=4
+uint8 COMMAND_SET_ZERO=8
+uint8 command_id
+string command  # deprecated, please use command_id with a value of COMMAND_*
 ---
+bool success
 string res
