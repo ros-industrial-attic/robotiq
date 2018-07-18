@@ -171,13 +171,13 @@
   </xacro:macro>
 
   <xacro:macro name="right_outer_knuckle_joint" params="prefix">
-    <joint name="right_outer_knuckle_joint" type="revolute">
+    <joint name="${prefix}right_outer_knuckle_joint" type="revolute">
       <origin xyz="0 0.030601 0.054905" rpy="${pi / 2 + .725} 0 ${pi}" />
       <parent link="${prefix}robotiq_arg2f_base_link" />
       <child link="${prefix}right_outer_knuckle" />
       <axis xyz="1 0 0" />
       <limit lower="0" upper="0.725" velocity="2.0" effort="1000" />
-    <mimic joint="finger_joint" multiplier="-1" offset="0" />
+    <mimic joint="${prefix}finger_joint" multiplier="-1" offset="0" />
     </joint>
     <xacro:finger_joints prefix="${prefix}" fingerprefix="right" reflect="-1.0"/>
   </xacro:macro>
