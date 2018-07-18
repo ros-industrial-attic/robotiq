@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_s_model_articulated_gazebo_plugins)
+add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS std_msgs gazebo_plugins actionlib tf image_transport control_msgs trajectory_msgs geometry_msgs sensor_msgs roscpp gazebo_ros robotiq_s_model_articulated_msgs)
 
