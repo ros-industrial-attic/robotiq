@@ -16,9 +16,6 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(PkgConfig)
 
-###################################
-## catkin message generation     ##
-###################################
 add_message_files(
   FILES
   SModel_robot_input.msg
@@ -33,14 +30,6 @@ generate_dynamic_reconfigure_options(
   cfg/SModel.cfg
 )
 
-###################################
-## catkin specific configuration ##
-###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-## LIBRARIES: libraries you create in this project that dependent projects also need
-## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
     LIBRARIES ${PROJECT_NAME}
     CATKIN_DEPENDS
@@ -97,24 +86,15 @@ target_link_libraries(s_model_can_node
   ${catkin_LIBRARIES}
 )
 
-#############
-## Install ##
-#############
-
-# all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/groovy/api/catkin/html/adv_user_guide/variables.html
-
 install(PROGRAMS nodes/SModelSimpleController.py nodes/SModelStatusListener.py 
 	nodes/SModelTcpNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-## Mark executables and/or libraries for installation
 install(TARGETS ${PROJECT_NAME} s_model_can_node s_model_ethercat_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-## Mark cpp header files for installation
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
