@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robotiq_fts150">
+
+    <xacro:macro name="robotiq_fts150" params="parent prefix *origin">
+
+        <!-- mount the fts to the robot -->
+        <joint name="${prefix}fts_fix" type="fixed" >
+            <!--In most cases origin would be flange adapter plate: <origin xyz="0 0 0.009" rpy="0 0 0"/> /-->
+            <insert_block name="origin" />
+            <parent link="${parent}" />
+            <child link="${prefix}fts_robotside" />
+        </joint>
+
+        <link name="${prefix}fts_robotside">
+            <inertial>
+                <origin xyz="0 0 0.01875" rpy="0 0 0"/>
+                <mass value="0.65"/>
+                <inertia ixx="0.000661171875" ixy="0" ixz="0" iyy="0.000661171875" iyz="0" izz="0.00117" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/visual/robotiq_fts150.stl"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/collision/robotiq_fts150.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- virtual measurement frame -->
+        <joint name="${prefix}measurment_joint" type="fixed" >
+            <origin xyz="0 0 0.01625" rpy="0 0 0" />
+            <parent link="${prefix}fts_robotside" />
+            <child link="${prefix}robotiq_ft_frame_id" />
+        </joint>
+        <link name="${prefix}robotiq_ft_frame_id"/>
+
+        <!-- toolside frame -->
+        <joint name="${prefix}toolside_joint" type="fixed" >
+            <origin xyz="0 0 0.0375" rpy="0 0 0" />
+            <parent link="${prefix}fts_robotside" />
+            <child link="${prefix}fts_toolside" />
+        </joint>
+        <link name="${prefix}fts_toolside"/>
+
+    </xacro:macro>
+</robot>

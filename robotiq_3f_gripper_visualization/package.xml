@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_3f_gripper_visualization</name>
+  <version>1.0.0</version>
+  <description>robotiq</description>
+  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <license>BSD</license>
+  <url type="website">http://ros.org/wiki/robotiq</url>
+  <author>Nicolas Lauzier (Robotiq inc.)</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>urdf</depend>
+
+</package>

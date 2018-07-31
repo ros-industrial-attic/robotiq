@@ -8,11 +8,11 @@
   <url type="website">http://ros.org/wiki/robotiq</url>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <exec_depend>robotiq_s_model_visualization</exec_depend>
+  <exec_depend>robotiq_3f_gripper_visualization</exec_depend>
   <exec_depend>robotiq_modbus_tcp</exec_depend>
-  <exec_depend>robotiq_s_model_control</exec_depend>
-  <exec_depend>robotiq_c_model_control</exec_depend>
-  <exec_depend>robotiq_force_torque_sensor</exec_depend>
+  <exec_depend>robotiq_3f_gripper_control</exec_depend>
+  <exec_depend>robotiq_2f_gripper_control</exec_depend>
+  <exec_depend>robotiq_ft_sensor</exec_depend>
 
   <export>
     <metapackage/>

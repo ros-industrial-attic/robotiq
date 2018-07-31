@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_3f_gripper_joint_state_publisher</name>
+  <version>1.0.0</version>
+  <description>Publishes joint states of Robotiq 3F gripper</description>
+  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <license>3-clause BSD</license>
+  <author email="jack.thompson@utexas.edu">Jack Thompson</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>roslib</depend>
+  <depend>sensor_msgs</depend>
+  <depend>robotiq_3f_gripper_control</depend>
+
+  <build_depend>message_generation</build_depend>
+  
+  <exec_depend>message_runtime</exec_depend>
+
+
+</package>
