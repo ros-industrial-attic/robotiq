@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+<!-- 
+    Please note that the base link of the 2f gripper is
+    "${prefix}robotiq_85_adapter_link"
+ -->
+
+<robot name="robotiq_c2_model" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:include filename="$(find robotiq_2f_c2_gripper_visualization)/urdf/robotiq_c2_model_macro.xacro" />
+    <xacro:robotiq_c2_model prefix=""/>
+</robot>

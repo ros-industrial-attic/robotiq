@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_3f_gripper_articulated_msgs</name>
+  <version>1.0.0</version>
+  <description>Messages for the robotiq_3f_gripper_articulated model.</description>
+
+  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <license>Apache 2.0</license>
+  <author email="dash@clearpathrobotics.com">Devon Ash</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>std_msgs</depend>
+
+  <build_depend>message_generation</build_depend>
+
+  <exec_depend>message_runtime</exec_depend>
+
+</package>

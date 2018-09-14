@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2016, Toyota Research Institute. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+ -->
+<launch>
+  <arg name="prefix" default="" />
+  <arg name="can_device" default="can0" />
+  <arg name="can_id" default="11" />
+  <arg name="gripper_name" default="gripper" />
+
+  <node name="$(arg gripper_name)" pkg="robotiq_3f_gripper_control" type="robotiq_3f_gripper_can_node" output="screen" >
+    <param name="can_device" value="$(arg can_device)" />
+    <param name="can_id" value="$(arg can_id)" />
+    <param name="prefix" value="$(arg prefix)" />
+    <param name="hw_name" value="$(arg gripper_name)" />
+  </node>
+
+  <group ns="$(arg gripper_name)">
+    <rosparam subst_value="True">
+      ## joint_state_controller
+      $(arg prefix)joint_state_controller:
+          type: joint_state_controller/JointStateController
+          publish_rate: 50
+
+      ## joint_group_position_controller
+      $(arg prefix)hand_group_position_controller:
+          type: position_controllers/JointGroupPositionController
+          joints:
+           - $(arg prefix)finger_1_joint_1
+           - $(arg prefix)finger_2_joint_1
+           - $(arg prefix)finger_middle_joint_1
+           - $(arg prefix)palm_finger_1_joint
+
+      ## single command controller
+      $(arg prefix)hand_simple_controller:
+          type: position_controllers/JointPositionController
+          joint: $(arg prefix)finger_1_joint_1
+    </rosparam>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+      output="screen" args="$(arg prefix)joint_state_controller $(arg prefix)hand_simple_controller" />
+
+  </group>
+</launch>
