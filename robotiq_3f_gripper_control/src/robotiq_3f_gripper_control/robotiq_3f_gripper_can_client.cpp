@@ -65,7 +65,7 @@ void Robotiq3FGripperCanClient::writeOutputs(const GripperOutput &output)
         serial_request.is_error = 0;
         serial_request.is_rtr = 0;
         serial_request.is_extended = 0;
-        serial_request.data.assign((unsigned char)0);
+        serial_request.data.fill((unsigned char)0);
 
         serial_request.data[0] = 0x2F;
         serial_request.data[1] = 0x00;
@@ -218,7 +218,7 @@ Robotiq3FGripperCanClient::GripperInput Robotiq3FGripperCanClient::readInputs() 
         serial_request.is_error = 0;
         serial_request.is_rtr = 0;
         serial_request.is_extended = 0;
-        serial_request.data.assign(static_cast<unsigned char>(0));
+        serial_request.data.fill(static_cast<unsigned char>(0));
 
         serial_request.data[0] = 0x4F;
         serial_request.data[1] = 0x00;
