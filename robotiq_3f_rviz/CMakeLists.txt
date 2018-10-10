@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -123,6 +124,7 @@ include_directories(
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/robotiq_3f_rviz.cpp
 # )
+add_library(${PROJECT_NAME} src/robotiq_3f_rviz.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -148,6 +150,7 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} Qt5::Widgets)
 
 #############
 ## Install ##
@@ -183,6 +186,19 @@ include_directories(
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+
+install(TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(FILES
+  plugin_description.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(DIRECTORY icons/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/icons)
 
 #############
 ## Testing ##

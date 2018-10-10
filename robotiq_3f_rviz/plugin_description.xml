@@ -1,0 +1,9 @@
+<library path="lib/librobotiq_3f_rviz">
+  <class name="robotiq/Robotiq3FingerPanel"
+         type="robotiq_3f_rviz::Robotiq3FingerPanel"
+         base_class_type="rviz::Panel">
+    <description>
+      Simple control of Robotiq 3-Finger Adaptive Robot Gripper
+    </description>
+  </class>
+</library>

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>robotiq_3f_rviz</name>
-  <version>0.0.0</version>
-  <description>The robotiq_3f_rviz package</description>
+  <version>1.0.0</version>
+  <description>RViz plugin for Robotiq 3-Finger Adaptive Robot Gripper</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -49,17 +49,20 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>robotiq_s_model_articulated_msgs</build_depend>
-  <build_depend>rviz</build_depend>
-  <build_export_depend>robotiq_s_model_articulated_msgs</build_export_depend>
-  <build_export_depend>rviz</build_export_depend>
-  <exec_depend>robotiq_s_model_articulated_msgs</exec_depend>
-  <exec_depend>rviz</exec_depend>
+
+  <build_depend>qtbase5-dev</build_depend>
+
+  <exec_depend>libqt5-core</exec_depend>
+  <exec_depend>libqt5-gui</exec_depend>
+  <exec_depend>libqt5-widgets</exec_depend>
+
+  <depend>rviz</depend>
+  <depend>robotiq_s_model_articulated_msgs</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->
-
+    <rviz plugin="${prefix}/plugin_description.xml"/>
   </export>
 </package>
