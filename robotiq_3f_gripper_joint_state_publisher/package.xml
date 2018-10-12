@@ -3,7 +3,7 @@
   <name>robotiq_3f_gripper_joint_state_publisher</name>
   <version>1.0.0</version>
   <description>Publishes joint states of Robotiq 3F gripper</description>
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <license>3-clause BSD</license>
   <author email="jack.thompson@utexas.edu">Jack Thompson</author>
 

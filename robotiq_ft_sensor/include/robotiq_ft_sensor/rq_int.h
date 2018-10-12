@@ -37,7 +37,7 @@
  *  \file rq_int.h
  *  \date June 19, 2014
  *  \author Jonathan Savoie <jonathan.savoie@robotiq.com>
- *  \maintainer Nicolas Lauzier <nicolas@robotiq.com>
+ *  \maintainer Jean-Philippe Roberge <ros@robotiq.com>
  */
 
 #ifndef RQ_INT_H_

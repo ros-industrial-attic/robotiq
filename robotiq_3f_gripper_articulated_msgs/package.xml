@@ -4,7 +4,7 @@
   <version>1.0.0</version>
   <description>Messages for the robotiq_3f_gripper_articulated model.</description>
 
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <license>Apache 2.0</license>
   <author email="dash@clearpathrobotics.com">Devon Ash</author>
 

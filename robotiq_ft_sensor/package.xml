@@ -3,7 +3,7 @@
   <name>robotiq_ft_sensor</name>
   <version>1.0.0</version>
   <description>Package for reading data from a Robotiq Force Torque Sensor</description>
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <author email="jsavoie20@gmail.com">Jonathan Savoie</author>
   <url type="website">http://ros.org/wiki/robotiq</url>
 

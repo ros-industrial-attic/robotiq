@@ -6,7 +6,7 @@
   <license>BSD</license>
   <url type="website">http://ros.org/wiki/robotiq</url>
   <author email="ryan@rwsinnet.com">Ryan Sinnet</author>
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
 
   <buildtool_depend>catkin</buildtool_depend>
 
