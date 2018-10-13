@@ -4,7 +4,7 @@
   <version>1.0.0</version>
   <description>Launch files for spawning the Robotiq robotiq-3f-gripper articulated gripper</description>
 
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <author email="dash@clearpathrobotics.com">Devon Ash</author>
 
   <license>BSD</license>

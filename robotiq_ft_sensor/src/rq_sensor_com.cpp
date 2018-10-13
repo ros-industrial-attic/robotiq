@@ -37,7 +37,7 @@
  * \file rq_sensor_com.c
  * \date June 18, 2014
  *  \author Jonathan Savoie <jonathan.savoie@robotiq.com>
- *  \maintainer Nicolas Lauzier <nicolas@robotiq.com>
+ *  \maintainer Jean-Philippe Roberge <ros@robotiq.com>
  */
 
 //////////

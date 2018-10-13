@@ -3,7 +3,7 @@
   <name>robotiq</name>
   <version>1.0.0</version>
   <description>ROS drivers for Robotiq Adaptive Grippers and Robotiq Force Torque Sensor</description>
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <license>BSD</license>
   <url type="website">http://ros.org/wiki/robotiq</url>
 

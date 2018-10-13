@@ -2,7 +2,7 @@
 This package provides an interface for interfacing with an ethercat network. With the current architecture, a single process is associated with a single network and that process must be aware of all slaves it will communicate with.
 
 ### Maintainer
-- Jean-Philippe Roberge (j-p.roberge@robotiq.com)
+- Jean-Philippe Roberge (ros@robotiq.com)
 
 ## Common Issues
 Please note:

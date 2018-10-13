@@ -9,7 +9,7 @@
   </description>
 
   <author>Jonathan Meyer</author>
-  <maintainer email="j-p.roberge@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
