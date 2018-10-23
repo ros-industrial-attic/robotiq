@@ -41,3 +41,9 @@ target_link_libraries(robotiq_3f_gripper_joint_states
     ${catkin_LIBRARIES}
 )
 
+install(TARGETS robotiq_3f_gripper_joint_states
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
