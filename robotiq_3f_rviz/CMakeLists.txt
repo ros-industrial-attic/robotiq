@@ -12,7 +12,7 @@ set(CMAKE_AUTOUIC ON)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  robotiq_s_model_articulated_msgs
+  robotiq_3f_gripper_articulated_msgs
   rviz
 )
 

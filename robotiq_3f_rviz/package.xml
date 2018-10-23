@@ -57,7 +57,7 @@
   <exec_depend>libqt5-widgets</exec_depend>
 
   <depend>rviz</depend>
-  <depend>robotiq_s_model_articulated_msgs</depend>
+  <depend>robotiq_3f_gripper_articulated_msgs</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
