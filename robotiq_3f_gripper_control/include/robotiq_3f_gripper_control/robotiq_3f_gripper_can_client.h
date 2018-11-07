@@ -76,8 +76,8 @@ private:
     GripperInput input_;
     GripperOutput output_;
 
-    can::CommInterface::FrameListener::Ptr frame_listener_;
-    can::StateInterface::StateListener::Ptr state_listener_;
+    can::CommInterface::FrameListenerConstSharedPtr frame_listener_;
+    can::StateInterface::StateListenerConstSharedPtr state_listener_;
 
     void frameCallback(const can::Frame &f);
     void stateCallback(const can::State &s);
