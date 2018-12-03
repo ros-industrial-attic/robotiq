@@ -10,7 +10,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://robotiq_2f_140_gripper_visualization/meshes/visual/robotiq_arg2f_base_link.stl" />
+          <mesh filename="package://robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_base_link.dae" scale="0.001 0.001 0.001"/>
         </geometry>
         <material name="">
           <color rgba="0.1 0.1 0.1 1" />
@@ -19,7 +19,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://robotiq_2f_140_gripper_visualization/meshes/collision/robotiq_arg2f_base_link.stl" />
+           <mesh filename="package://robotiq_2f_85_gripper_visualization/meshes/collision/robotiq_arg2f_base_link.stl" />
         </geometry>
       </collision>
     </link>
