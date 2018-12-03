@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_2f_85_gripper_visualization</name>
+  <version>1.0.0</version>
+  <description>Robotiq ARG 2-Finger 85mm model</description>
+  <license>BSD</license>
+  <url type="website">http://ros.org/wiki/robotiq</url>
+  <author email="daniels.ordonez@gmail.com">Daniel Ordonez</author>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>urdf</exec_depend>
+
+</package>
