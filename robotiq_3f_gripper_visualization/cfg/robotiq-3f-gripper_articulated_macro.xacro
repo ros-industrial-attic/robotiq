@@ -16,7 +16,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		<link name="${prefix}palm">
 			<visual>
 				<geometry>
-                                        <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/palm.STL" />
+                                        <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/palm.dae" />
 				</geometry>
 				<material name="gray">
 					<color rgba="0.2 0.2 0.2 1"/>

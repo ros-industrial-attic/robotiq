@@ -16,7 +16,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_0.STL" />
+          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_0.dae" />
         </geometry>
         <material name="green">
           <color rgba="0 1 0 1"/>
@@ -48,7 +48,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
       <visual>
         <origin rpy="0 0 ${3.1416/2}" xyz="0 0.05717 0"/>
         <geometry>
-          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_1.STL" />
+          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_1.dae" />
         </geometry>
         <material name="green"/>
       </visual>
@@ -83,7 +83,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
       <visual>
         <origin rpy="0 0 ${3.1416/2}" xyz="0 0.03810 0.0075"/>
         <geometry>
-          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_2.STL" />
+          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_2.dae" />
         </geometry>
         <material name="green"/>
       </visual>
@@ -116,7 +116,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_3.STL" />
+          <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/link_3.dae" />
         </geometry>
         <material name="green"/>
       </visual>
@@ -711,7 +711,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
       <link name="${prefix}palm">
         <visual>
           <geometry>
-            <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/palm.STL" />
+            <mesh filename="package://robotiq_3f_gripper_visualization/meshes/robotiq-3f-gripper_articulated/visual/palm.dae" />
           </geometry>
           <material name="green">
             <color rgba="0 1 0 1"/>
