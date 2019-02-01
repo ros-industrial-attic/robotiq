@@ -4,11 +4,10 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
-        - /Status1
         - /RobotModel1
-        - /RobotModel1/Links1
-      Splitter Ratio: 0.494145125
+        - /RobotModel1/Link/Joint Tree1
+        - /RobotModel1/Link/Joint Tree1/robotiq_arg2f_base_link1
+      Splitter Ratio: 0.581532419
     Tree Height: 813
   - Class: rviz/Selection
     Name: Selection
@@ -32,6 +31,134 @@ Panels:
 Visualization Manager:
   Class: ""
   Displays:
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Link/Joint Tree:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Tree of links and joints
+        robotiq_arg2f_base_link:
+          Details:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          Value: true
+          finger_joint:
+            Details:
+              Show Axes: false
+              Show Joint Axis: false
+            Value: true
+            left_outer_knuckle:
+              Details:
+                Alpha: 1
+                Show Axes: false
+                Show Trail: false
+              Value: true
+              left_outer_finger_joint:
+                Details:
+                  Show Axes: false
+                Value: true
+                left_outer_finger:
+                  Details:
+                    Alpha: 1
+                    Show Axes: false
+                    Show Trail: false
+                  Value: true
+                  left_inner_finger_joint:
+                    Details:
+                      Show Axes: false
+                      Show Joint Axis: false
+                    Value: true
+                    left_inner_finger:
+                      Details:
+                        Alpha: 1
+                        Show Axes: false
+                        Show Trail: false
+                      Value: true
+                      left_inner_finger_pad_joint:
+                        Details:
+                          Show Axes: false
+                        Value: true
+                        left_inner_finger_pad:
+                          Details:
+                            Alpha: 1
+                            Show Axes: false
+                            Show Trail: false
+                          Value: true
+          left_inner_knuckle_joint:
+            Details:
+              Show Axes: false
+              Show Joint Axis: false
+            Value: true
+            left_inner_knuckle:
+              Details:
+                Alpha: 1
+                Show Axes: false
+                Show Trail: false
+              Value: true
+          right_inner_knuckle_joint:
+            Details:
+              Show Axes: false
+              Show Joint Axis: false
+            Value: true
+            right_inner_knuckle:
+              Details:
+                Alpha: 1
+                Show Axes: false
+                Show Trail: false
+              Value: true
+          right_outer_knuckle_joint:
+            Details:
+              Show Axes: false
+              Show Joint Axis: false
+            Value: true
+            right_outer_knuckle:
+              Details:
+                Alpha: 1
+                Show Axes: false
+                Show Trail: false
+              Value: true
+              right_outer_finger_joint:
+                Details:
+                  Show Axes: false
+                Value: true
+                right_outer_finger:
+                  Details:
+                    Alpha: 1
+                    Show Axes: false
+                    Show Trail: false
+                  Value: true
+                  right_inner_finger_joint:
+                    Details:
+                      Show Axes: false
+                      Show Joint Axis: false
+                    Value: true
+                    right_inner_finger:
+                      Details:
+                        Alpha: 1
+                        Show Axes: false
+                        Show Trail: false
+                      Value: true
+                      right_inner_finger_pad_joint:
+                        Details:
+                          Show Axes: false
+                        Value: true
+                        right_inner_finger_pad:
+                          Details:
+                            Alpha: 1
+                            Show Axes: false
+                            Show Trail: false
+                          Value: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -50,91 +177,6 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        left_inner_finger:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_inner_finger_pad:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_inner_knuckle:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_outer_finger:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_outer_knuckle:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_inner_finger:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_inner_finger_pad:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_inner_knuckle:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_outer_finger:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_outer_knuckle:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robotiq_arg2f_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-      Name: RobotModel
-      Robot Description: robot_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Class: rviz/TF
-      Enabled: false
-      Frame Timeout: 15
-      Frames:
-        All Enabled: true
-      Marker Scale: 1
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Tree:
-        {}
-      Update Interval: 0
-      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -175,10 +217,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.265203208
+      Pitch: 0.400203109
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.0272364803
+      Yaw: 0.257229745
     Saved: ~
 Window Geometry:
   Displays:
@@ -186,7 +228,7 @@ Window Geometry:
   Height: 1026
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000010000000000000300000003bcfc0200000005fb000000100044006900730070006c0061007900730100000028000003bc000000d700fffffffb0000001200530065006c0065006300740069006f006e0000000186000000a50000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001d0000000c90000006100fffffffb0000000a00560069006500770073000000024100000159000000ad00fffffffb0000000800540069006d00650000000369000000990000003b00ffffff0000038a000003bc00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000001ff000003bcfc0200000005fb000000100044006900730070006c0061007900730100000028000003bc000000d700fffffffb0000001200530065006c0065006300740069006f006e0000000186000000a50000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001d0000000c90000006100fffffffb0000000a00560069006500770073000000024100000159000000ad00fffffffb0000000800540069006d00650000000369000000990000003b00ffffff00000479000003bc00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -195,6 +237,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1680
-  X: 1920
+  Width: 1662
+  X: 258
   Y: 24

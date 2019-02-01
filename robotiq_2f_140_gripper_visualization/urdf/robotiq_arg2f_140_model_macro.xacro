@@ -172,7 +172,7 @@
 
   <xacro:macro name="inner_finger_joint" params="prefix fingerprefix">
     <joint name="${prefix}${fingerprefix}_inner_finger_joint" type="revolute">
-      <origin xyz="0 0.0817554015893473 -0.0282203446692936" rpy="-.725 0 0" />
+      <origin xyz="0 0.0817554015893473 -0.0282203446692936" rpy="-0.725 0 0" />
       <parent link="${prefix}${fingerprefix}_outer_finger" />
       <child link="${prefix}${fingerprefix}_inner_finger" />
       <axis xyz="1 0 0" />
@@ -198,7 +198,7 @@
       <parent link="${prefix}robotiq_arg2f_base_link" />
       <child link="${prefix}left_outer_knuckle" />
       <axis xyz="-1 0 0" />
-      <limit lower="0" upper="0.775" velocity="2.0" effort="1000" />
+      <limit lower="0" upper="0.7" velocity="2.0" effort="1000" />
     </joint>
     <xacro:finger_joints prefix="${prefix}" fingerprefix="left" reflect="1.0"/>
   </xacro:macro>
