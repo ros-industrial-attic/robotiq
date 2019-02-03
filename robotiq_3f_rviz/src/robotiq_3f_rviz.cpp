@@ -28,58 +28,104 @@ private slots:
     void on_button_close_clicked();
 
     // sliders
-    void on_slider_position_valueChanged();
-    void on_slider_force_valueChanged();
-    void on_slider_speed_valueChanged();
+    void on_slider_position_valueChanged(const int value);
+    void on_slider_force_valueChanged(const int value);
+    void on_slider_speed_valueChanged(const int value);
 
-    void on_check_send_clicked(bool checked);
+    void on_check_send_clicked(const bool checked);
 
 private:
+    void send();    // publish message
+    void auto_send_check(); // check for auto send
+    void set_mode(const uint8_t mode);
+    void set_PRA(const uint8_t PRA);
+
+private:
+    Ui::Robotiq3FingerForm ui;
+
     typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput RQ3Fout;
 
     ros::NodeHandle n;
-    ros::Publisher pub_out;
+    ros::Publisher pub_command;
 
-    RQ3Fout msg;    // current state
+    RQ3Fout command;    // current state
+
+    std::atomic_bool auto_send = ATOMIC_FLAG_INIT;
 
 };
 
 Robotiq3FingerPanel::Robotiq3FingerPanel(QWidget* parent) : rviz::Panel(parent) {
     // setup ROS
-    pub_out = n.advertise<RQ3Fout>("Robotiq3FGripperRobotOutput", 1);
+    pub_command = n.advertise<RQ3Fout>("Robotiq3FGripperRobotOutput", 1);
 
     // load ui form and auto-connect slots
-    Ui::Robotiq3FingerForm ui;
     ui.setupUi(this);
 }
 
 void Robotiq3FingerPanel::on_button_send_clicked() {
-    pub_out.publish(msg);
+    send();
 }
 
-void Robotiq3FingerPanel::on_button_on_clicked() {}
+void Robotiq3FingerPanel::on_button_on_clicked() {
+    command = RQ3Fout();
+    command.rACT = 1;
+    command.rGTO = 1;
+    command.rSPA = 255;
+    command.rFRA = 150;
+    auto_send_check();
+}
 
-void Robotiq3FingerPanel::on_button_off_clicked() {}
+void Robotiq3FingerPanel::on_button_off_clicked() {
+    command = RQ3Fout();
+    command.rACT = 0;
+    auto_send_check();
+}
 
-void Robotiq3FingerPanel::on_button_basic_clicked() {}
+void Robotiq3FingerPanel::on_button_basic_clicked() { set_mode(0); }
 
-void Robotiq3FingerPanel::on_button_wide_clicked() {}
+void Robotiq3FingerPanel::on_button_wide_clicked() { set_mode(2); }
 
-void Robotiq3FingerPanel::on_button_pinch_clicked() {}
+void Robotiq3FingerPanel::on_button_pinch_clicked() { set_mode(1); }
 
-void Robotiq3FingerPanel::on_button_scissor_clicked() {}
+void Robotiq3FingerPanel::on_button_scissor_clicked() { set_mode(3); }
 
-void Robotiq3FingerPanel::on_button_open_clicked() {}
+void Robotiq3FingerPanel::on_button_open_clicked() { set_PRA(0); }
 
-void Robotiq3FingerPanel::on_button_close_clicked() {}
+void Robotiq3FingerPanel::on_button_close_clicked() { set_PRA(255); }
 
-void Robotiq3FingerPanel::on_slider_position_valueChanged() {}
+void Robotiq3FingerPanel::on_slider_position_valueChanged(const int value) {
+    set_PRA(uint8_t(value));
+}
 
-void Robotiq3FingerPanel::on_slider_force_valueChanged() {}
+void Robotiq3FingerPanel::on_slider_force_valueChanged(const int value) {
+    command.rFRA = uint8_t(value);
+    auto_send_check();
+}
 
-void Robotiq3FingerPanel::on_slider_speed_valueChanged() {}
+void Robotiq3FingerPanel::on_slider_speed_valueChanged(const int value) {
+    command.rSPA = uint8_t(value);
+    auto_send_check();
+}
 
-void Robotiq3FingerPanel::on_check_send_clicked(bool checked) {}
+void Robotiq3FingerPanel::on_check_send_clicked(const bool checked) {
+    ui.button_send->setDown(checked);
+    ui.button_send->setDisabled(checked);
+    auto_send = checked;
+}
+
+void Robotiq3FingerPanel::send() { pub_command.publish(command); }
+
+void Robotiq3FingerPanel::auto_send_check() { if(auto_send) { send(); } }
+
+void Robotiq3FingerPanel::set_mode(const uint8_t mode) {
+    command.rMOD = mode;
+    auto_send_check();
+}
+
+void Robotiq3FingerPanel::set_PRA(const uint8_t PRA) {
+    command.rPRA = PRA;
+    auto_send_check();
+}
 
 } // robotiq_3f_rviz
 
