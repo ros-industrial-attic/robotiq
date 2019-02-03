@@ -2,6 +2,7 @@
 #include <ui_panel.h>   // generated from "panel.ui" using CMAKE_AUTOMOC
 #include <ros/ros.h>
 #include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
 
 namespace robotiq_3f_rviz {
 
@@ -10,6 +11,7 @@ class Robotiq3FingerPanel : public rviz::Panel {
 public:
     Robotiq3FingerPanel(QWidget* parent = nullptr);
 
+// slots
 private slots:
     // auto-connected slots: on_<object_name>_<signal_name>(<signal parameters>)
 
@@ -34,29 +36,37 @@ private slots:
 
     void on_check_send_clicked(const bool checked);
 
+// typdefs
+private:
+    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput RQ3Fout;
+    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput RQ3Fin;
+
+// methods
 private:
     void send();    // publish message
     void auto_send_check(); // check for auto send
     void set_mode(const uint8_t mode);
     void set_PRA(const uint8_t PRA);
+    void on_status(const RQ3Fin &status);
+    void set_button_active(QPushButton *button, const bool active);
 
+// members
 private:
     Ui::Robotiq3FingerForm ui;
 
-    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput RQ3Fout;
-
     ros::NodeHandle n;
     ros::Publisher pub_command;
+    ros::Subscriber sub_status;
 
     RQ3Fout command;    // current state
 
     std::atomic_bool auto_send = ATOMIC_FLAG_INIT;
-
 };
 
 Robotiq3FingerPanel::Robotiq3FingerPanel(QWidget* parent) : rviz::Panel(parent) {
     // setup ROS
     pub_command = n.advertise<RQ3Fout>("Robotiq3FGripperRobotOutput", 1);
+    sub_status = n.subscribe("Robotiq3FGripperRobotInput", 1, &Robotiq3FingerPanel::on_status, this);
 
     // load ui form and auto-connect slots
     ui.setupUi(this);
@@ -125,6 +135,21 @@ void Robotiq3FingerPanel::set_mode(const uint8_t mode) {
 void Robotiq3FingerPanel::set_PRA(const uint8_t PRA) {
     command.rPRA = PRA;
     auto_send_check();
+}
+
+void Robotiq3FingerPanel::on_status(const RQ3Fin &status) {
+    set_button_active(ui.button_on, status.gACT==1);
+    set_button_active(ui.button_off, status.gACT==0);
+
+    set_button_active(ui.button_basic, status.gMOD==0);
+    set_button_active(ui.button_pinch, status.gMOD==1);
+    set_button_active(ui.button_wide, status.gMOD==2);
+    set_button_active(ui.button_scissor, status.gMOD==3);
+}
+
+void Robotiq3FingerPanel::set_button_active(QPushButton *button, const bool active) {
+    const QString style = active ? "QPushButton {color: red;}" : "QPushButton {}";
+    button->setStyleSheet(style);
 }
 
 } // robotiq_3f_rviz
