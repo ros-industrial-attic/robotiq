@@ -82,13 +82,13 @@ void Robotiq3FingerPanel::on_button_on_clicked() {
     command.rGTO = 1;
     command.rSPA = 255;
     command.rFRA = 150;
-    auto_send_check();
+    send();
 }
 
 void Robotiq3FingerPanel::on_button_off_clicked() {
     command = RQ3Fout();
     command.rACT = 0;
-    auto_send_check();
+    send();
 }
 
 void Robotiq3FingerPanel::on_button_basic_clicked() { set_mode(0); }
