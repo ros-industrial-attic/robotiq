@@ -110,11 +110,21 @@ void Robotiq3FingerPanel::on_slider_position_valueChanged(const int value) {
 void Robotiq3FingerPanel::on_slider_force_valueChanged(const int value) {
     command.rFRA = uint8_t(value);
     auto_send_check();
+
+    // force: 15 + value * 0.175 N (max: 60 N)
+    static constexpr double min_force = 15;
+    static constexpr double delta_force = 0.175;
+    ui.force_value->setNum(int(min_force+value*delta_force));
 }
 
 void Robotiq3FingerPanel::on_slider_speed_valueChanged(const int value) {
     command.rSPA = uint8_t(value);
     auto_send_check();
+
+    // speed: 22 + value * 0.34 mm/s (max: 110 mm/s)
+    static constexpr double min_speed = 22;
+    static constexpr double delta_speed = 0.34;
+    ui.speed_value->setNum(int(min_speed+value*delta_speed));
 }
 
 void Robotiq3FingerPanel::on_check_send_clicked(const bool checked) {
@@ -145,6 +155,19 @@ void Robotiq3FingerPanel::on_status(const RQ3Fin &status) {
     set_button_active(ui.button_pinch, status.gMOD==1);
     set_button_active(ui.button_wide, status.gMOD==2);
     set_button_active(ui.button_scissor, status.gMOD==3);
+
+    // individual finger position
+    ui.pos_a->setNum(status.gPOA);
+    ui.pos_b->setNum(status.gPOB);
+    ui.pos_c->setNum(status.gPOC);
+    ui.pos_s->setNum(status.gPOS);
+
+    // individual finger current
+    // current: 0.1 * value mA
+    ui.cur_a->setNum(0.1*status.gCUA);
+    ui.cur_b->setNum(0.1*status.gCUB);
+    ui.cur_c->setNum(0.1*status.gCUC);
+    ui.cur_s->setNum(0.1*status.gCUS);
 }
 
 void Robotiq3FingerPanel::set_button_active(QPushButton *button, const bool active) {
