@@ -3,6 +3,7 @@
 #include <ros/ros.h>
 #include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
 #include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
+#include <atomic>
 
 namespace robotiq_3f_rviz {
 
