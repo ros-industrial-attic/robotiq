@@ -42,6 +42,7 @@ Command-line interface for sending simple commands to a ROS node controlling a 3
 This serves as an example for publishing messages on the 'Robotiq3FGripperRobotOutput' topic using the 'Robotiq3FGripper_robot_output' msg type for sending commands to a 3F gripper gripper. In this example, only the simple control mode is implemented. For using the advanced control mode, please refer to the Robotiq support website (support.robotiq.com).
 """
 
+from __future__ import print_function
 import roslib; roslib.load_manifest('robotiq_3f_gripper_control')
 import rospy
 from robotiq_3f_gripper_articulated_msgs.msg import Robotiq3FGripperRobotOutput
@@ -140,7 +141,7 @@ def askForCommand(command):
 ##    currentCommand += ', rSPS = ' + str(command.rSPS)
 ##    currentCommand += ', rFRS = ' + str(command.rFRS)
 
-    print currentCommand
+    print(currentCommand)
 
     strAskForCommand  = '-----\nAvailable commands\n\n'
     strAskForCommand += 'r: Reset\n'
