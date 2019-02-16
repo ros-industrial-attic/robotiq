@@ -44,7 +44,7 @@ This serves as an example for publishing messages on the 'Robotiq3FGripperRobotO
 
 import roslib; roslib.load_manifest('robotiq_3f_gripper_control')
 import rospy
-from robotiq_3f_gripper_control.msg import _Robotiq3FGripper_robot_output  as outputMsg
+from robotiq_3f_gripper_articulated_msgs.msg import Robotiq3FGripperRobotOutput
 from time import sleep
 
 
@@ -52,14 +52,14 @@ def genCommand(char, command):
     """Update the command according to the character entered by the user."""    
         
     if char == 'a':
-        command = outputMsg.Robotiq3FGripper_robot_output();
+        command = Robotiq3FGripperRobotOutput();
         command.rACT = 1
         command.rGTO = 1
         command.rSPA = 255
         command.rFRA = 150
 
     if char == 'r':
-        command = outputMsg.Robotiq3FGripper_robot_output();
+        command = Robotiq3FGripperRobotOutput();
         command.rACT = 0
 
     if char == 'c':
@@ -166,9 +166,9 @@ def publisher():
 
     rospy.init_node('Robotiq3FGripperSimpleController')
     
-    pub = rospy.Publisher('Robotiq3FGripperRobotOutput', outputMsg.Robotiq3FGripper_robot_output)
+    pub = rospy.Publisher('Robotiq3FGripperRobotOutput', Robotiq3FGripperRobotOutput)
 
-    command = outputMsg.Robotiq3FGripper_robot_output();
+    command = Robotiq3FGripperRobotOutput();
 
     while not rospy.is_shutdown():
 

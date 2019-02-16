@@ -39,8 +39,8 @@ Module baseRobotiq3FGripper: defines a base class for handling command and statu
 After being instanciated, a 'client' member must be added to the object. This client depends on the communication protocol used by the Gripper. As an example, the ROS node 'Robotiq3FGripperTcpNode.py' instanciate a robotiqbaseRobotiq3FGripper and adds a client defined in the module comModbusTcp.
 """
 
-from   robotiq_3f_gripper_control.msg import _Robotiq3FGripper_robot_input  as inputMsg
-from   robotiq_3f_gripper_control.msg import _Robotiq3FGripper_robot_output as outputMsg
+from robotiq_3f_gripper_articulated_msgs.msg import Robotiq3FGripperRobotInput
+from robotiq_3f_gripper_articulated_msgs.msg import Robotiq3FGripperRobotOutput
 
 class robotiqbaseRobotiq3FGripper:
     """Base class (communication protocol agnostic) for sending commands and receiving the status of the Robotic 3F gripper gripper."""
@@ -155,7 +155,7 @@ class robotiqbaseRobotiq3FGripper:
         status = self.client.getStatus(16);
 
         #Message to output
-        message = inputMsg.Robotiq3FGripper_robot_input()
+        message = Robotiq3FGripperRobotInput()
 
         #Assign the values to their respective variables
         message.gACT = (status[0] >> 0) & 0x01;

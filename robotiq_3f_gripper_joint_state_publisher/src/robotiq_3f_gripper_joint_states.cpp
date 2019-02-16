@@ -39,8 +39,8 @@
 #include <csignal>
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_input.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_output.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
 
 
 const double DEG_TO_RAD = M_PI/180.0;
@@ -107,7 +107,7 @@ class Robotiq3 {
   }
   
   inline double scissorJoint() const;							///< Joint value for so-called scissor joint
-  void callback(const robotiq_3f_gripper_control::Robotiq3FGripper_robot_input::ConstPtr &msg);	///< Callback function for "Robotiq3FGripperRobotInput" topic
+  void callback(const robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput::ConstPtr &msg);	///< Callback function for "Robotiq3FGripperRobotInput" topic
   Finger finger_left;									///< Robotiq FINGER A
   Finger finger_right;									///< Robotiq FINGER B
   Finger finger_middle;									///< Robotiq FINGER C
@@ -132,7 +132,7 @@ inline double Robotiq3::scissorJoint() const {
 /**
  * Callback function for "Robotiq3FGripperRobotInput" topic.
  */
-void Robotiq3::callback(const robotiq_3f_gripper_control::Robotiq3FGripper_robot_input::ConstPtr &msg) {
+void Robotiq3::callback(const robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput::ConstPtr &msg) {
   finger_left = Finger(msg->gPOA);		// set left finger position
   finger_right = Finger(msg->gPOB);		// set right finger position
   finger_middle = Finger(msg->gPOC);		// set middle finger position

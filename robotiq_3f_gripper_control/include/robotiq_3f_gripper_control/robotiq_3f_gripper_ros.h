@@ -27,8 +27,8 @@
 
 #include <ros/ros.h>
 #include <std_srvs/Trigger.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_input.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_output.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
 #include <robotiq_3f_gripper_control/robotiq_3f_gripper_api.h>
 #include <dynamic_reconfigure/server.h>
 #include <robotiq_3f_gripper_control/Robotiq3FGripperConfig.h>
@@ -52,7 +52,7 @@ public:
 
     void handleReconfigure(robotiq_3f_gripper_control::Robotiq3FGripperConfig &config, uint32_t level=0);
 
-    void handleRawCmd(const robotiq_3f_gripper_control::Robotiq3FGripper_robot_output::ConstPtr &msg);
+    void handleRawCmd(const robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput::ConstPtr &msg);
 
     void updateConfig(const robotiq_3f_gripper_control::Robotiq3FGripperConfig &config);
     void getCurrentConfig(robotiq_3f_gripper_control::Robotiq3FGripperConfig &config);
@@ -81,7 +81,7 @@ private:
     boost::recursive_mutex reconfigure_mutex_;
     robotiq_3f_gripper_control::Robotiq3FGripperConfig config_;
 
-    robotiq_3f_gripper_control::Robotiq3FGripper_robot_input input_status_msg_;
+    robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput input_status_msg_;
 
 };
 } //end namespace robotiq_3f_gripper_control
