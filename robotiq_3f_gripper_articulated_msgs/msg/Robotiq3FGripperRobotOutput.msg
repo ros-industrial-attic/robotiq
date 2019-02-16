@@ -24,6 +24,12 @@ uint8 rGTO
 
 uint8 rATR
 
+# rGLV: Glove mode
+# 0x0 - Glove mode off
+# 0x1 - Glove mode on
+
+uint8 rGLV
+
 # rICF: Individual Control of Fingers mode. Each finger receives its own command
 # unless the gripper is in the Scissor Grasping Mode and the Independent Control
 # of Scissor (rICS) is not activated.
