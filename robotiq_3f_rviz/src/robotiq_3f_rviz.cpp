@@ -1,8 +1,8 @@
 # include <rviz/panel.h>
 #include <ui_panel.h>   // generated from "panel.ui" using CMAKE_AUTOMOC
 #include <ros/ros.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_output.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_input.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
 #include <atomic>
 
 namespace robotiq_3f_rviz {
@@ -39,8 +39,8 @@ private slots:
 
 // typdefs
 private:
-    typedef robotiq_3f_gripper_control::Robotiq3FGripper_robot_output RQ3Fout;
-    typedef robotiq_3f_gripper_control::Robotiq3FGripper_robot_input RQ3Fin;
+    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput RQ3Fout;
+    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput RQ3Fin;
 
 // methods
 private:
