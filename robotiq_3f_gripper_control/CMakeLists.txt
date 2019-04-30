@@ -6,25 +6,17 @@ find_package(catkin REQUIRED COMPONENTS
   diagnostic_updater
   dynamic_reconfigure
   hardware_interface
-  message_generation
   robotiq_ethercat
   roscpp
   rospy
   socketcan_interface
   std_srvs
+  robotiq_3f_gripper_articulated_msgs
 )
 
 find_package(PkgConfig)
 
-add_message_files(
-  FILES
-  Robotiq3FGripper_robot_input.msg
-  Robotiq3FGripper_robot_output.msg
-)
-
 catkin_python_setup()
-
-generate_messages()
 
 generate_dynamic_reconfigure_options(
   cfg/Robotiq3FGripper.cfg
@@ -37,12 +29,12 @@ catkin_package(
         diagnostic_updater
         dynamic_reconfigure
         hardware_interface
-        message_runtime
         robotiq_ethercat
         roscpp
         rospy
         socketcan_interface
         std_srvs
+        robotiq_3f_gripper_articulated_msgs
 )
 
 include_directories(
@@ -61,7 +53,6 @@ target_link_libraries(${PROJECT_NAME}
 )
 add_dependencies(${PROJECT_NAME}
   ${PROJECT_NAME}_gencfg
-  ${PROJECT_NAME}_generate_messages_cpp
   ${catkin_EXPORTED_TARGETS}
 )
 

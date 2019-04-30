@@ -39,7 +39,7 @@ Robotiq3FGripperROS::Robotiq3FGripperROS(ros::NodeHandle &nh, boost::shared_ptr<
     shutdown_srv_ = nh_.advertiseService("shutdown", &Robotiq3FGripperROS::handleShutdown, this);
 
     //! advertise topics
-    input_status_pub_ = nh.advertise<robotiq_3f_gripper_control::Robotiq3FGripper_robot_input>("input", 10);
+    input_status_pub_ = nh.advertise<robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput>("input", 10);
 
     //! subscribers
     output_sub_ = nh.subscribe("output", 10, &Robotiq3FGripperROS::handleRawCmd, this);
@@ -185,7 +185,7 @@ void Robotiq3FGripperROS::getCurrentConfig(robotiq_3f_gripper_control::Robotiq3F
     config = config_;
 }
 
-void Robotiq3FGripperROS::handleRawCmd(const robotiq_3f_gripper_control::Robotiq3FGripper_robot_output::ConstPtr &msg)
+void Robotiq3FGripperROS::handleRawCmd(const robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput::ConstPtr &msg)
 {
     ROS_DEBUG_NAMED("RobotiqCANROS", "entered handle_raw_cmd");
     driver_->setRaw(*msg);

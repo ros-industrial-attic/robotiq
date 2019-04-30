@@ -26,8 +26,8 @@
 #define ROBOTIQ_3F_GRIPPER_CLIENT_BASE_H
 
 #include <ros/ros.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_output.h>
-#include <robotiq_3f_gripper_control/Robotiq3FGripper_robot_input.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
+#include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
 
 namespace robotiq_3f_gripper_control
 {
@@ -35,8 +35,8 @@ namespace robotiq_3f_gripper_control
 class Robotiq3FGripperClientBase
 {
 public:
-    typedef robotiq_3f_gripper_control::Robotiq3FGripper_robot_output GripperOutput;
-    typedef robotiq_3f_gripper_control::Robotiq3FGripper_robot_input GripperInput;
+    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotOutput GripperOutput;
+    typedef robotiq_3f_gripper_articulated_msgs::Robotiq3FGripperRobotInput GripperInput;
 
     virtual void init(ros::NodeHandle nh) {}
 

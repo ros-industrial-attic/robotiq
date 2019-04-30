@@ -21,9 +21,6 @@
   <depend>rospy</depend>
   <depend>socketcan_interface</depend>
   <depend>std_srvs</depend>
-
-  <build_depend>message_generation</build_depend>
-
-  <exec_depend>message_runtime</exec_depend>
+  <depend>robotiq_3f_gripper_articulated_msgs</depend>
 
 </package>
