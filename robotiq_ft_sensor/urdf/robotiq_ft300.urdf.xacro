@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<!-- Develped by: Daniel Ordonez 20.06.2019 - daniels.ordonez@gmail.com-->
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robotiq_fts150">
+
+    <!-- Macro function to instanciate URDF model of the FT300 force-torque sensor with mounting plate
+
+        Example use: 
+        ```
+            // Import this macro function
+            <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_ft300.urdf.xacro" />
+            
+            // Instanciate sensor instance and connect it to robot flange
+            <xacro:robotiq_ft300 parent="robot_flange_link" prefix="">
+                <origin xyz="0 0 0" rpy="0 0 0"/> 
+            </xacro:robotiq_ft300>
+        ```
+    -->
+    <xacro:macro name="robotiq_ft300" params="parent prefix *origin">
+
+        <!-- mount the fts to the robot -->
+        <joint name="${prefix}ft300_fix" type="fixed">
+            <insert_block name="origin" />
+            <parent link="${parent}" />
+            <child link="${prefix}ft300_mounting_plate" />
+        </joint>
+
+       
+        <!-- Link representing the FT300 force-torque sensor -->
+        <link name="${prefix}ft300_sensor">
+            <inertial>
+                <origin xyz="0 0 ${-17 / 1000}" rpy="0 0 0"/>
+                <mass value="0.300"/>
+                <inertia ixx="${262 / 1000000}" ixy="0" ixz="${1 / 1000000}" iyy="${265 / 1000000}" iyx="0" iyz="${1 / 1000000}" izz="${219 / 1000000}" izx="${-1 / 1000000}" izy="${1 / 1000000}"/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/visual/robotiq_ft300.STL"/>
+                </geometry>
+                <material name="Robotiq-Black">
+                    <color rgba="0.2 0.2 0.2 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/collision/robotiq_ft300.STL"/>
+                </geometry>
+            </collision>
+        </link>
+        
+        <!-- Link representing the FT300 mounting plate -->
+        <link name="${prefix}ft300_mounting_plate">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/visual/mountings/robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119.STL"/>
+                </geometry>
+                <material name="Robotiq-Grey">
+                    <color rgba="0.4 0.4 0.4 1.0"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/collision/mountings/robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119.STL"/>
+                </geometry>
+            </collision>
+        </link>
+
+         <!-- Connect force sensor with mounting/coupling plate -->
+        <joint name="${prefix}ft300_mounting_plate" type="fixed">
+            <origin xyz="0 0 0.0415" rpy="0 ${pi} 0"/> 
+            <parent link="${prefix}ft300_mounting_plate" />
+            <child link="${prefix}ft300_sensor" />
+        </joint>
+
+        <!-- FORCE REFERENCE FRAME _______________________________________________________________________________
+            As specified in the documentation:
+            - The Z axis passes through the center of the depression with positive direction in the tool direction.
+            - The X axis traces a symmetric line centered on the connector; the positive direction
+                points the opposite way away from the connector.
+            - The Y axis uses the right hand thumb rule according to X-Z. -->
+        <joint name="${prefix}measurment_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 ${pi} ${-pi/2}" />
+            <parent link="${prefix}ft300_sensor" />
+            <child link="${prefix}robotiq_ft_frame_id" />
+        </joint>
+
+        <link name="${prefix}robotiq_ft_frame_id"/>
+
+    </xacro:macro>
+</robot>
