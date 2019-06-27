@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+This file shows how to import, instanciate and connect the sensor model to a given link
+-->
+<robot name="robotiq_arg2f_80_model" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!--Import macro for left arm gripper-->
+  <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_ft300.urdf.xacro" />
+  
+  <!--Base frame for reference-->
+  <link name="world" />
+
+  <xacro:robotiq_ft300 parent="world" prefix="">
+		<origin xyz="0 0 0" rpy="0 0 0"/> 
+	</xacro:robotiq_ft300>
+
+
+</robot>
