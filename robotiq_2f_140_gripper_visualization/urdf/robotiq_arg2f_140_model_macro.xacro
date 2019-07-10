@@ -192,7 +192,7 @@
 
   <xacro:include filename="$(find robotiq_2f_140_gripper_visualization)/urdf/robotiq_arg2f.xacro" />
 
-  <xacro:macro name="finger_joint" params="prefix">
+  <xacro:macro name="finger_joint" params="prefix pad">
     <joint name="${prefix}finger_joint" type="revolute">
       <origin xyz="0 -0.030601 0.054905" rpy="${pi / 2 + .725} 0 0" />
       <parent link="${prefix}robotiq_arg2f_base_link" />
@@ -200,10 +200,10 @@
       <axis xyz="-1 0 0" />
       <limit lower="0" upper="0.7" velocity="2.0" effort="1000" />
     </joint>
-    <xacro:finger_joints prefix="${prefix}" fingerprefix="left" reflect="1.0"/>
+    <xacro:finger_joints prefix="${prefix}" fingerprefix="left" reflect="1.0" pad="${pad}" />
   </xacro:macro>
 
-  <xacro:macro name="right_outer_knuckle_joint" params="prefix">
+  <xacro:macro name="right_outer_knuckle_joint" params="prefix pad">
     <joint name="${prefix}right_outer_knuckle_joint" type="revolute">
       <origin xyz="0 0.030601 0.054905" rpy="${pi / 2 + .725} 0 ${pi}" />
       <parent link="${prefix}robotiq_arg2f_base_link" />
@@ -212,15 +212,15 @@
       <limit lower="-0.725" upper="0.725" velocity="2.0" effort="1000" />
     <mimic joint="${prefix}finger_joint" multiplier="-1" offset="0" />
     </joint>
-    <xacro:finger_joints prefix="${prefix}" fingerprefix="right" reflect="-1.0"/>
+    <xacro:finger_joints prefix="${prefix}" fingerprefix="right" reflect="-1.0" pad="${pad}" />
   </xacro:macro>
 
-  <xacro:macro name="robotiq_arg2f_140" params="prefix">
+  <xacro:macro name="robotiq_arg2f_140" params="prefix pad:=1">
     <xacro:robotiq_arg2f_base_link prefix="${prefix}"/>
-    <xacro:finger_links prefix="${prefix}" fingerprefix="left" stroke="140"/>
-    <xacro:finger_links prefix="${prefix}" fingerprefix="right" stroke="140"/>
-    <xacro:finger_joint prefix="${prefix}"/>
-    <xacro:right_outer_knuckle_joint prefix="${prefix}"/>
+    <xacro:finger_links prefix="${prefix}" fingerprefix="left" stroke="140" pad="${pad}" />
+    <xacro:finger_links prefix="${prefix}" fingerprefix="right" stroke="140" pad="${pad}" />
+    <xacro:finger_joint prefix="${prefix}" pad="${pad}"/>
+    <xacro:right_outer_knuckle_joint prefix="${prefix}" pad="${pad}" />
     <xacro:robotiq_arg2f_transmission prefix="${prefix}"/>
   </xacro:macro>
 </robot>
