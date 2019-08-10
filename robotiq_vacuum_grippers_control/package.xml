@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_vacuum_grippers_control</name>
+  <version>1.0.0</version>
+  <description>Package to control the vacuum grippers (currently the EPick and AirPick) from Robotiq inc.</description>
+  <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
+  <license>BSD</license>
+  <url type="website">http://ros.org/wiki/robotiq</url>
+  <author>Jean-Philippe Roberge and Nicolas Lauzier (Robotiq inc.)</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>roscpp</depend>
+  <depend>robotiq_ethercat</depend>
+
+  <build_depend>message_generation</build_depend>
+
+  <exec_depend>message_runtime</exec_depend>
+
+</package>
