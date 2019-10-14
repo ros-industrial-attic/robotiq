@@ -10,7 +10,7 @@
 
 ## Travis - Continuous Integration
 
-Status: [![Build Status](https://travis-ci.org/ros-industrial/robotiq.svg?branch=kinetic-devel)](https://travis-ci.org/ros-industrial/robotiq)
+Status: [![Build Status](https://travis-ci.com/ros-industrial/robotiq.svg?branch=kinetic-devel)](https://travis-ci.com/ros-industrial/robotiq)
 
 ## ROS Buildfarm
 
