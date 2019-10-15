@@ -764,7 +764,7 @@ static UINT_16 rq_com_compute_crc(UINT_8 const * adr, INT_32 length )
 			//If the last bit is a 1
 			if (CRC_calc & 0x0001)
 			{
-				CRC_calc =  (CRC_calc >> 1)^ 0xA001;	//Shifts 1 bit to the right and XOR with a polynomial factor
+				CRC_calc =  (CRC_calc >> 1)^ 0xA001;	//Shifts 1 bit to the right and XOR with the polynomial factor
 			}
 			else
 			{
