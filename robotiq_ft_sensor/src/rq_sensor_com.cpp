@@ -195,7 +195,7 @@ INT_8 rq_sensor_com()
 			if (!GetCommState(hSerial, &dcb)){
 				CloseHandle(hSerial);
 				hSerial = INVALID_HANDLE_VALUE;
-				continue;//Permet de recommencer la boucle
+				continue;//Allows to start the loop again
 			}
 			dcb.BaudRate = CBR_19200;
 			dcb.ByteSize = 8;
@@ -218,7 +218,7 @@ INT_8 rq_sensor_com()
 			/* Setup port */
 			if(!SetCommState(hSerial, &dcb)){
 				CloseHandle(hSerial);
-				continue;//Permet de recommencer la boucle
+				continue;//Allows to start the loop again
 			}
 			COMMTIMEOUTS timeouts={0};
 			timeouts.ReadIntervalTimeout=0;
@@ -229,7 +229,7 @@ INT_8 rq_sensor_com()
 			if(!SetCommTimeouts(hSerial, &timeouts)){
 				CloseHandle(hSerial);
 				hSerial = INVALID_HANDLE_VALUE;
-				continue;//Permet de recommencer la boucle
+				continue;//Allows to start the loop again
 			}
 			if (rq_com_tentative_connexion() == 1){
 				return 0;
@@ -378,7 +378,7 @@ void rq_com_listen_stream(void)
 		rq_com_timer_for_stream_detection = 0;
 	}
 
-	//Copie les données au bout du buffer 2
+	//Copying the data at the end of buffer 2
 	for(i = 0; i < rq_com_rcv_len; i++)
 	{
 		//If the buffer overflows, set the index to the beginning
@@ -450,7 +450,7 @@ void rq_com_listen_stream(void)
 
 		if(last_byte > 0)
 		{
-			//On shift le buffer 2 afin de ne garder que ce qui dépasse le dernier caractère du dernier message complet
+			//Shifts the buffer 2 to keep only what's after the last caracter of the last complete message.
 			for(i = 0; i < (rq_com_rcv_len2 - last_byte - 1); i++)
 			{
 				rq_com_rcv_buff2[i] = rq_com_rcv_buff2[last_byte + 1 + i];
@@ -643,7 +643,7 @@ static INT_8 rq_com_send_fc_16(INT_32 base, INT_32 n, UINT_16 const * const data
  */
 void rq_sensor_com_read_info_high_lvl(void)
 {
-	UINT_16 registers[4] = {0};//table de registre
+	UINT_16 registers[4] = {0};//register table
 	UINT_64 serial_number = 0;
 	INT_32 result = 0;
 
@@ -742,15 +742,15 @@ static UINT_16 rq_com_compute_crc(UINT_8 const * adr, INT_32 length )
 		return 0;
 	}
 
-	//Tant qu'il reste des bytes dans le message
+	//While there are bytes left in the message
 	while (j < length)
 	{
-		//Si c'est le premier byte
+		//If it's the first byte
 		if (j==0)
 		{
 			CRC_calc ^= *adr & 0xFF;
 		}
-		//Sinon on utilisera un XOR sur le word
+		//Else we'll use an XOR on the word
 		else
 		{
 			CRC_calc ^= *adr;
@@ -758,23 +758,23 @@ static UINT_16 rq_com_compute_crc(UINT_8 const * adr, INT_32 length )
 
 		k=0;
 
-		//Tant que le byte n'est pas complété
+		//While the byte is not completed
 		while (k < 8)
 		{
-			//Si le dernier bit est un 1
+			//If the last bit is a 1
 			if (CRC_calc & 0x0001)
 			{
-				CRC_calc =  (CRC_calc >> 1)^ 0xA001;	//Shift de 1 bit vers la droite et XOR avec le facteur polynomial
+				CRC_calc =  (CRC_calc >> 1)^ 0xA001;	//Shifts 1 bit to the right and XOR with the polynomial factor
 			}
 			else
 			{
-				CRC_calc >>= 1;			//Shift de 1 bit vers la droite
+				CRC_calc >>= 1;			//Shifts 1 bit to the right
 			}
 
 			k++;
 		}
 
-		//Incrémente l'adresse et le compteur d'adresse
+		//Increments address and address counter
 		adr++;
 		j++;
 	}
@@ -796,13 +796,13 @@ static void rq_com_send_fc_03_request(UINT_16 base, UINT_16 n)
 	UINT_8 words[2];
 	UINT_16 CRC;
 
-	//Si le nombre de registre est impair
+	//Manage if the number of bytes to write is odd or even
 	if(n % 2 != 0)
 	{
 		n += 1;
 	}
 
-	//Scinder en LSB et MSB
+	//Split the address and the number of bytes between MSB ans LSB
 	reg[0]   = (UINT_8)(base >> 8); //MSB to the left
 	reg[1]   = (UINT_8)(base & 0x00FF); //LSB to the right
 	words[0] = (UINT_8)((n/2) >> 8); //MSB to the left
@@ -896,7 +896,7 @@ static INT_32 rq_com_wait_for_fc_03_echo(UINT_8 * const data)
 		//Verifies the crc and the slave ID
 		if(CRC != (UINT_16)((buf[length - 1] * 256) + (buf[length - 2])))
 		{
-			//On clear le buffer
+			//Clears the buffer
 			buf[0] = 0;
 			length = 0;
 			return 0;
