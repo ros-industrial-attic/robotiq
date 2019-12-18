@@ -6,7 +6,7 @@
         <!-- mount the fts to the robot -->
         <joint name="${prefix}fts_fix" type="fixed" >
             <!--In most cases origin would be flange adapter plate: <origin xyz="0 0 0.009" rpy="0 0 0"/> /-->
-            <insert_block name="origin" />
+            <xacro:insert_block name="origin" />
             <parent link="${parent}" />
             <child link="${prefix}fts_robotside" />
         </joint>
