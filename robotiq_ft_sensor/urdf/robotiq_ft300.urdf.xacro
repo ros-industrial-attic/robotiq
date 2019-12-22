@@ -21,7 +21,7 @@
 
         <!-- mount the fts to the robot -->
         <joint name="${prefix}ft300_fix" type="fixed">
-            <insert_block name="origin" />
+            <xacro:insert_block name="origin" />
             <parent link="${parent}" />
             <child link="${prefix}ft300_mounting_plate" />
         </joint>
