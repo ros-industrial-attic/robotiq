@@ -2,7 +2,7 @@
 <package format="2">
   <name>robotiq_3f_gripper_control</name>
   <version>1.0.0</version>
-  <description>Package to control a 3F gripper Gripper from Robotiq inc.</description>
+  <description><p>Package to control a 3F gripper Gripper from Robotiq inc.</p></description>
   <maintainer email="ros@robotiq.com">Jean-Philippe Roberge</maintainer>
   <license>BSD</license>
   <url type="website">http://ros.org/wiki/robotiq</url>

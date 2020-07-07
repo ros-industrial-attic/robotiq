@@ -128,7 +128,7 @@ include_directories(
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/robotiq_3f_rviz.cpp
 # )
-add_library(${PROJECT_NAME} src/robotiq_3f_rviz.cpp)
+add_library(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries

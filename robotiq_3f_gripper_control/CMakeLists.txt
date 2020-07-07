@@ -6,12 +6,12 @@ find_package(catkin REQUIRED COMPONENTS
   diagnostic_updater
   dynamic_reconfigure
   hardware_interface
+  robotiq_3f_gripper_articulated_msgs
   robotiq_ethercat
   roscpp
   rospy
   socketcan_interface
   std_srvs
-  robotiq_3f_gripper_articulated_msgs
 )
 
 find_package(PkgConfig)
@@ -29,12 +29,12 @@ catkin_package(
         diagnostic_updater
         dynamic_reconfigure
         hardware_interface
+        robotiq_3f_gripper_articulated_msgs
         robotiq_ethercat
         roscpp
         rospy
         socketcan_interface
         std_srvs
-        robotiq_3f_gripper_articulated_msgs
 )
 
 include_directories(
@@ -68,8 +68,8 @@ target_link_libraries(robotiq_3f_gripper_ethercat_node
 )
 
 add_executable(robotiq_3f_gripper_can_node
-  src/${PROJECT_NAME}/robotiq_3f_gripper_can_client.cpp
   src/robotiq_3f_gripper_can_node.cpp
+  src/${PROJECT_NAME}/robotiq_3f_gripper_can_client.cpp
 )
 
 target_link_libraries(robotiq_3f_gripper_can_node
@@ -80,7 +80,7 @@ target_link_libraries(robotiq_3f_gripper_can_node
 install(PROGRAMS nodes/Robotiq3FGripperSimpleController.py nodes/Robotiq3FGripperStatusListener.py
         nodes/Robotiq3FGripperTcpNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-install(TARGETS ${PROJECT_NAME} robotiq_3f_gripper_can_node robotiq_3f_gripper_ethercat_node
+install(TARGETS robotiq_3f_gripper_can_node ${PROJECT_NAME} robotiq_3f_gripper_ethercat_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

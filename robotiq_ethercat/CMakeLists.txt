@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_ethercat)
 
 find_package(catkin REQUIRED COMPONENTS
-  soem
   roscpp
+  soem
 )
 
 catkin_package(
    INCLUDE_DIRS include
-   LIBRARIES robotiq_ethercat
-   CATKIN_DEPENDS soem roscpp
+   LIBRARIES ${PROJECT_NAME}
+   CATKIN_DEPENDS roscpp soem
 )
 
 include_directories(include
@@ -20,12 +20,12 @@ include_directories(include
   ${soem_INCLUDE_DIRS}/soem
 )
 
-add_library(robotiq_ethercat
- include/robotiq_ethercat/ethercat_manager.h
+add_library(${PROJECT_NAME}
+ include/${PROJECT_NAME}/ethercat_manager.h
  src/ethercat_manager.cpp
 )
 
-install(TARGETS robotiq_ethercat
+install(TARGETS ${PROJECT_NAME}
    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
