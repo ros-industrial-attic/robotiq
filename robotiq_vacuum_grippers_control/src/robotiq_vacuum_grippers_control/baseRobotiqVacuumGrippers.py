@@ -41,6 +41,7 @@ After being instanciated, a 'client' member must be added to the object. This cl
 
 from   robotiq_vacuum_grippers_control.msg import _RobotiqVacuumGrippers_robot_input  as inputMsg
 from   robotiq_vacuum_grippers_control.msg import _RobotiqVacuumGrippers_robot_output as outputMsg
+import time
 
 class robotiqbaseRobotiqVacuumGrippers:
     """Base class (communication protocol agnostic) for sending commands and receiving the status of the Robotic Vacuum grippers"""
@@ -105,22 +106,39 @@ class robotiqbaseRobotiqVacuumGrippers:
 
     def getStatus(self):
         """Request the status from the gripper and return it in the RobotiqVacuumGrippers_robot_input msg type."""
+	try:
+	   #Acquire status from the Gripper
+	   status = self.client.getStatus(6);
 
-        #Acquire status from the Gripper
-        status = self.client.getStatus(6);
+	   #Message to output
+	   message = inputMsg.RobotiqVacuumGrippers_robot_input()
 
-        #Message to output
-        message = inputMsg.RobotiqVacuumGrippers_robot_input()
+	   #Assign the values to their respective variables
+	   message.gACT = (status[0] >> 0) & 0x01;
+	   message.gMOD = (status[0] >> 1) & 0x03;        
+	   message.gGTO = (status[0] >> 3) & 0x01;
+	   message.gSTA = (status[0] >> 4) & 0x03;
+	   message.gOBJ = (status[0] >> 6) & 0x03;
+	   message.gFLT =  status[2]
+	   message.gPR  =  status[3]
+	   message.gPO  =  status[4]
+	
+	except:
+	   time.sleep(1)	 #Small delay for in case of synchronization issues	
+	   #Acquire status from the Gripper
+	   status = self.client.getStatus(6);
 
-        #Assign the values to their respective variables
-        message.gACT = (status[0] >> 0) & 0x01;
-        message.gMOD = (status[0] >> 1) & 0x03;        
-        message.gGTO = (status[0] >> 3) & 0x01;
-        message.gSTA = (status[0] >> 4) & 0x03;
-        message.gOBJ = (status[0] >> 6) & 0x03;
-        message.gFLT =  status[2]
-        message.gPR  =  status[3]
-        message.gPO  =  status[4]
+	   #Message to output
+	   message = inputMsg.RobotiqVacuumGrippers_robot_input()
 
+	   #Assign the values to their respective variables
+	   message.gACT = (status[0] >> 0) & 0x01;
+	   message.gMOD = (status[0] >> 1) & 0x03;        
+	   message.gGTO = (status[0] >> 3) & 0x01;
+	   message.gSTA = (status[0] >> 4) & 0x03;
+	   message.gOBJ = (status[0] >> 6) & 0x03;
+	   message.gFLT =  status[2]
+	   message.gPR  =  status[3]
+	   message.gPO  =  status[4]
         return message
         
