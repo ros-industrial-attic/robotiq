@@ -37,8 +37,8 @@
 
 /// \brief A plugin that implements the Robotiq 3-Finger Adaptative Gripper.
 /// The plugin exposes the next parameters via SDF tags:
-///   * <side> Determines if we are controlling the left or right hand. This is
-///            a required parameter and the allowed values are 'left' or 'right'
+///   * <prefix> Defines a prefix that is used for the joints and the topics. 
+///              This parameter is optional.
 ///   * <kp_position> P gain for the PID that controls the position
 ///                   of the joints. This parameter is optional.
 ///   * <ki_position> I gain for the PID that controls the position
@@ -186,18 +186,6 @@ class RobotiqHandPlugin : public gazebo::ModelPlugin
   /// \brief Max. joint speed (rad/s). Finger is 125mm and tip speed is 110mm/s.
   private: static constexpr double MaxVelocity = 0.88;
 
-  /// \brief Default topic name for sending control updates to the left hand.
-  private: static const std::string DefaultLeftTopicCommand;
-
-  /// \brief Default topic name for receiving state updates from the left hand.
-  private: static const std::string DefaultLeftTopicState;
-
-  /// \brief Default topic name for sending control updates to the right hand.
-  private: static const std::string DefaultRightTopicCommand;
-
-  /// \brief Default topic name for receiving state updates from the right hand.
-  private: static const std::string DefaultRightTopicState;
-
   /// \brief ROS NodeHandle.
   private: boost::scoped_ptr<ros::NodeHandle> rosNode;
 
@@ -271,8 +259,14 @@ class RobotiqHandPlugin : public gazebo::ModelPlugin
   /// \brief Pointer to the SDF of this plugin.
   private: sdf::ElementPtr sdf;
 
-  /// \brief Used to select between 'left' or 'right' hand.
-  private: std::string side;
+  /// \brief Used to select a prefix for the hand.
+  private: std::string prefix;
+
+  /// \brief Topic name for sending control updates to the hand.
+  private: std::string topicCommand;
+
+  /// \brief Topic name for receiving state updates from the hand.
+  private: std::string topicState;
 
   /// \brief Vector containing all the joint names.
   private: std::vector<std::string> jointNames;
