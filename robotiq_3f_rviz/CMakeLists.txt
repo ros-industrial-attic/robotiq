@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_3f_rviz)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
