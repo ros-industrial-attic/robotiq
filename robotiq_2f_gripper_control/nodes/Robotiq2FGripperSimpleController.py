@@ -48,6 +48,10 @@ import rospy
 from robotiq_2f_gripper_control.msg import _Robotiq2FGripper_robot_output  as outputMsg
 from time import sleep
 
+try:
+    input = raw_input
+except NameError:
+    pass
 
 def genCommand(char, command):
     """Update the command according to the character entered by the user."""
@@ -130,7 +134,7 @@ def askForCommand(command):
 
     strAskForCommand += '-->'
 
-    return raw_input(strAskForCommand)
+    return input(strAskForCommand)
 
 def publisher():
     """Main loop which requests new commands and publish them on the Robotiq2FGripperRobotOutput topic."""

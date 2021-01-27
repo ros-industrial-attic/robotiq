@@ -50,6 +50,10 @@ roslib.load_manifest('robotiq_3f_gripper_control')
 import rospy
 from robotiq_3f_gripper_articulated_msgs.msg import Robotiq3FGripperRobotOutput
 
+try:
+    input = raw_input
+except NameError:
+    pass
 
 def genCommand(char, command):
     """Update the command according to the character entered by the user."""
@@ -161,7 +165,7 @@ def askForCommand(command):
 
     strAskForCommand += '-->'
 
-    return raw_input(strAskForCommand)
+    return input(strAskForCommand)
 
 
 def publisher():
