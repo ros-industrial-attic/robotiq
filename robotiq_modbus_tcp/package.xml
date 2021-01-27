@@ -10,7 +10,6 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend condition="$ROS_PYTHON_VERSION == 2">python-pymodbus</depend>
-  <depend condition="$ROS_PYTHON_VERSION == 3">python3-pymodbus</depend>
+  <depend>python3-pymodbus</depend>
   <depend>rospy</depend>
 </package>
