@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import numpy as np
 
 import roslib
@@ -166,12 +168,12 @@ def main():
     if gripper.is_reset():
         gripper.reset()
         gripper.activate()
-    print gripper.close(block=True)
+    print(gripper.close(block=True))
     while not rospy.is_shutdown():
-        print gripper.open(block=False)
+        print(gripper.open(block=False))
         rospy.sleep(0.11)
         gripper.stop()
-        print gripper.close(block=False)
+        print(gripper.close(block=False))
         rospy.sleep(0.1)
         gripper.stop()
 
