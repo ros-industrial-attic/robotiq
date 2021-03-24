@@ -10,5 +10,45 @@
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
+
+    <!-- To fix broken gripper in gazebo according to the following issue-->
+    <!--https://github.com/ros-industrial/robotiq/issues/150-->
+    <gazebo>
+             <!-- loading plugin: mimic joints works in gazebo now-->
+             <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_4">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}right_outer_knuckle_joint</mimicJoint>
+                <!--<multiplier>-1.0</multiplier>-->
+                <!--<offset>0.0</offset>-->
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_2">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}left_inner_finger_joint</mimicJoint>
+                <!--<multiplier>1.0</multiplier>-->
+                <!--<offset>0.0</offset>-->
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_5">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}right_inner_finger_joint</mimicJoint>
+                <!--<multiplier>1.0</multiplier>-->
+                <!--<offset>0.0</offset>-->
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_3">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}left_inner_knuckle_joint</mimicJoint>
+                <!--<multiplier>-1.0</multiplier>-->
+                <!--<offset>0.0</offset>-->
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_5">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}right_inner_knuckle_joint</mimicJoint>
+                <!--<multiplier>-1.0</multiplier>-->
+                <!--<offset>0.0</offset>-->
+            </plugin>
+        </gazebo>
+
+
+
+
   </xacro:macro>
 </robot>
