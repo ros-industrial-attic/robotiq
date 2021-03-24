@@ -4,7 +4,7 @@
     <transmission name="${prefix}finger_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}finger_joint">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}finger_joint_motor">
         <mechanicalReduction>1</mechanicalReduction>
