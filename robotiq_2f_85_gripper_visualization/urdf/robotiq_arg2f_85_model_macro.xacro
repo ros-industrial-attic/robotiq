@@ -137,7 +137,7 @@
 
   <xacro:macro name="inner_knuckle_joint" params="prefix fingerprefix reflect">
     <joint name="${prefix}${fingerprefix}_inner_knuckle_joint" type="revolute">
-      <origin xyz="0 ${reflect * -0.0127} 0.06142" rpy="${pi / 2 + .725} 0 ${(reflect - 1) * pi / 2}" />
+      <!-- <origin xyz="0 ${reflect * -0.0127} 0.06142" rpy="${pi / 2 + .725} 0 ${(reflect - 1) * pi / 2}" /> -->
       <origin xyz="0 ${reflect * -0.0127} 0.06142" rpy="0 0 ${(1 + reflect) * pi / 2}"/>
       <parent link="${prefix}robotiq_arg2f_base_link" />
       <child link="${prefix}${fingerprefix}_inner_knuckle" />
