@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="robotiq_arg2f_gazebo" params="prefix">
+    <!-- To fix broken gripper in gazebo according to the following issue-->
+    <!--https://github.com/ros-industrial/robotiq/issues/150-->
+        <gazebo>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_1">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}right_outer_knuckle_joint</mimicJoint>
+                <multiplier>-1.0</multiplier>
+                <offset>0.0</offset>
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_2">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}left_inner_knuckle_joint</mimicJoint>
+                <multiplier>-1.0</multiplier>
+                <offset>0.0</offset>
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_3">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}right_inner_knuckle_joint</mimicJoint>
+                <multiplier>-1.0</multiplier>
+                <offset>0.0</offset>
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_4">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}left_inner_finger_joint</mimicJoint>
+                <multiplier>1.0</multiplier>
+                <offset>0.0</offset>
+            </plugin>
+            <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_140_5">
+                <joint>${prefix}finger_joint</joint>
+                <mimicJoint>${prefix}right_inner_finger_joint</mimicJoint>
+                <multiplier>1.0</multiplier>
+                <offset>0.0</offset>
+            </plugin>
+        </gazebo>
+
+    </xacro:macro>
+
+</robot>
