@@ -1,5 +1,16 @@
 # Robotiq
 
+## Status
+
+As of 2021-05-28, it would appear this repository is ***unmaintained***.
+
+Robotiq is not maintaining the packages in this repository and the last active maintainer ([jproberge](https://github.com/jproberge)) does not appear to be active any more.
+
+The ROS-Industrial consortia are not involved: for historical reasons, the `robotiq` repository is hosted on the `ros-industrial` Github organisation, but there is no direct link with any of the other repositories there.
+
+Please direct support requests to [dof.robotiq.com](https://dof.robotiq.com/). The tracker here is not monitored by Robotiq employees.
+
+
 ## ROS Distro Support
 
 |         | Indigo | Jade | Kinetic | Melodic |
@@ -20,7 +31,7 @@ Status: [![Build Status](https://travis-ci.com/ros-industrial/robotiq.svg?branch
 
 [![support level: community](https://img.shields.io/badge/support%20level-community-lightgray.png)](http://rosindustrial.org/news/2016/10/7/better-supporting-a-growing-ros-industrial-software-platform)
 
-[ROS-Industrial][] robotiq meta-package.  See the [ROS wiki][] page for more information. 
+Robotiq meta-package.  See the [ROS wiki][] page for more information. 
 
 ## License
 
@@ -31,7 +42,6 @@ Status: [![Build Status](https://travis-ci.com/ros-industrial/robotiq.svg?branch
 
 This repo holds source code for all versions > groovy. For those versions <= groovy see: [SVN repo][]
 
-[ROS-Industrial]: http://www.ros.org/wiki/Industrial
 [ROS wiki]: http://ros.org/wiki/robotiq
 [SVN repo]: https://code.google.com/p/swri-ros-pkg/source/browse
 
