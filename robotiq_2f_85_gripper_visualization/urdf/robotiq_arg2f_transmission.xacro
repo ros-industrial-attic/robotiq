@@ -4,11 +4,17 @@
     <transmission name="${prefix}finger_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}finger_joint">
-        <hardwareInterface>PositionJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <!--<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>-->
       </joint>
       <actuator name="${prefix}finger_joint_motor">
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
+
+  <!--Gazebo mimic joints-->    
+  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85.gazebo.xacro" />
+
+        
   </xacro:macro>
 </robot>
