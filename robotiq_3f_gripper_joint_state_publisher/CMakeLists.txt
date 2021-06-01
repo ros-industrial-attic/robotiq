@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_3f_gripper_joint_state_publisher)
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED
+find_package(catkin REQUIRED COMPONENTS
+  message_generation
+  robotiq_3f_gripper_control
   roscpp
   roslib
   sensor_msgs
-  robotiq_3f_gripper_control
-  )
+ )
 
 ###################################
 ## catkin specific configuration ##
@@ -18,7 +19,7 @@ find_package(catkin REQUIRED
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- CATKIN_DEPENDS roscpp roslib sensor_msgs robotiq_3f_gripper_control
+ CATKIN_DEPENDS message_runtime robotiq_3f_gripper_control roscpp roslib sensor_msgs
 )
 
 ###########

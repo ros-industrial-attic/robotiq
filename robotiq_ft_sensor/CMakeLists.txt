@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_ft_sensor)
 
 find_package(catkin REQUIRED COMPONENTS
+  message_generation
   roscpp
   std_msgs
-  message_generation
 )
 
 

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robotiq_3f_gripper_articulated_gazebo_plugins)
 add_compile_options(-std=c++11)
 
-find_package(catkin REQUIRED COMPONENTS std_msgs gazebo_plugins actionlib tf image_transport control_msgs trajectory_msgs geometry_msgs sensor_msgs roscpp gazebo_ros robotiq_3f_gripper_articulated_msgs)
+find_package(catkin REQUIRED COMPONENTS actionlib angles control_msgs gazebo_msgs gazebo_plugins gazebo_ros geometry_msgs image_transport message_generation robotiq_3f_gripper_articulated_msgs roscpp sensor_msgs std_msgs tf trajectory_msgs)
 
 find_package(gazebo REQUIRED)
 
@@ -12,12 +12,12 @@ include_directories(
   ${GAZEBO_INCLUDE_DIRS}
 )
 
-link_directories(
-  ${GAZEBO_LIBRARY_DIRS}
-)
+#link_directories(
+#  ${GAZEBO_LIBRARY_DIRS}
+#)
 
 catkin_package(
-   DEPENDS gazebo_plugins gazebo_ros robotiq_3f_gripper_articulated_msgs roscpp
+   CATKIN_DEPENDS control_msgs gazebo_msgs geometry_msgs robotiq_3f_gripper_articulated_msgs sensor_msgs std_msgs trajectory_msgs
 )
 
 add_library(RobotiqHandPlugin src/RobotiqHandPlugin.cpp)
