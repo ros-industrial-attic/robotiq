@@ -203,6 +203,22 @@ int main(int argc, char **argv)
     {
         ROS_INFO("No device filename specified. Will attempt to discover Robotiq force torque sensor.");
     }
+    // read symlink
+    if (!ftdi_id.empty())
+    {
+      char ftdi_id_buf[512];
+      size_t count = readlink(("/dev/" + ftdi_id).c_str(), ftdi_id_buf, sizeof(ftdi_id_buf));
+      if (count > 0)
+      {
+        ftdi_id_buf[count] = '\0';
+        ftdi_id = std::string(ftdi_id_buf);
+      }
+      else
+      {
+        ROS_FATAL("cannot read file descriptor at /dev/%s", ftdi_id.c_str());
+        return 1;
+      }
+    }
 
 	INT_8 bufStream[512];
         robotiq_ft_sensor::ft_sensor msgStream;
