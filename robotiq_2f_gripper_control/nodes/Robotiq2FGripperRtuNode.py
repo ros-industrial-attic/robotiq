@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Software License Agreement (BSD License)
 #
@@ -51,7 +51,7 @@ from robotiq_2f_gripper_control.msg import _Robotiq2FGripper_robot_input  as inp
 from robotiq_2f_gripper_control.msg import _Robotiq2FGripper_robot_output as outputMsg
 
 def mainLoop(device):
-    
+
     #Gripper is a 2F with a TCP connection
     gripper = robotiq_2f_gripper_control.baseRobotiq2FGripper.robotiqbaseRobotiq2FGripper()
     gripper.client = robotiq_modbus_rtu.comModbusRtu.communication()
@@ -66,14 +66,14 @@ def mainLoop(device):
 
     #The Gripper command is received from the topic named 'Robotiq2FGripperRobotOutput'
     rospy.Subscriber('Robotiq2FGripperRobotOutput', outputMsg.Robotiq2FGripper_robot_output, gripper.refreshCommand)
-    
+
 
     #We loop
     while not rospy.is_shutdown():
 
       #Get and publish the Gripper status
       status = gripper.getStatus()
-      pub.publish(status)     
+      pub.publish(status)
 
       #Wait a little
       #rospy.sleep(0.05)
@@ -83,7 +83,7 @@ def mainLoop(device):
 
       #Wait a little
       #rospy.sleep(0.05)
-            
+
 if __name__ == '__main__':
     try:
         mainLoop(sys.argv[1])

@@ -16,7 +16,7 @@
 */
 /*
     This file has been modified from the original, by Devon Ash
-*/ 
+*/
 
 #include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotInput.h>
 #include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
@@ -24,19 +24,10 @@
 #include <string>
 #include <vector>
 
-/*
-
-Due to necessity, I had to change the PID.hh file's definition from private members to public to allow public access of its members. They're private in 1.9 and getter functions aren't implemented until gazebo 3.0. I thought that was silly, and so I hacked around it. The functions directly access the private members by necessity. It can only change if Gazebo patches 1.9 and 2.2 to include getters for it.
-
-I'm not sure exactly where the dependency chain includes PID.hh for the first time, so I've encapsulated all of the gazebo includes. Not pretty, but it works. If you're reading this and know of a better soln', feel free to change it.
-
-*/
-#define private public 
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/common/Time.hh>
 #include <gazebo/physics/physics.hh>
 #include <robotiq_3f_gripper_articulated_gazebo_plugins/RobotiqHandPlugin.h>
-#undef private
 
 // Default topic names initialization.
 const std::string RobotiqHandPlugin::DefaultLeftTopicCommand  =
@@ -148,7 +139,7 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
     if (this->sdf->HasElement("kd_position"))
     {
       this->posePID[i].SetDGain(this->sdf->Get<double>("kd_position"));
-      std::cout << "dGain after overloading: " << this->posePID[i].dGain
+      std::cout << "dGain after overloading: " << this->posePID[i].GetDGain()
                 << std::endl;
     }
 
@@ -227,13 +218,13 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
   {
     gzlog << "Position PID parameters for joint ["
           << this->fingerJoints[i]->GetName() << "]:"     << std::endl
-          << "\tKP: "     << this->posePID[i].pGain  << std::endl
-          << "\tKI: "     << this->posePID[i].iGain  << std::endl
-          << "\tKD: "     << this->posePID[i].dGain  << std::endl
-          << "\tIMin: "   << this->posePID[i].iMin   << std::endl
-          << "\tIMax: "   << this->posePID[i].iMax   << std::endl
-          << "\tCmdMin: " << this->posePID[i].cmdMin << std::endl
-          << "\tCmdMax: " << this->posePID[i].cmdMax << std::endl
+          << "\tKP: "     << this->posePID[i].GetPGain()  << std::endl
+          << "\tKI: "     << this->posePID[i].GetIGain()  << std::endl
+          << "\tKD: "     << this->posePID[i].GetDGain()  << std::endl
+          << "\tIMin: "   << this->posePID[i].GetIMin()   << std::endl
+          << "\tIMax: "   << this->posePID[i].GetIMax()   << std::endl
+          << "\tCmdMin: " << this->posePID[i].GetCmdMin() << std::endl
+          << "\tCmdMax: " << this->posePID[i].GetCmdMax() << std::endl
           << std::endl;
   }
   gzlog << "Topic for sending hand commands: ["   << controlTopicName
@@ -270,7 +261,7 @@ bool RobotiqHandPlugin::VerifyCommand(
          this->VerifyField("rPRB", 0, 255, _command->rACT) &&
          this->VerifyField("rSPB", 0, 255, _command->rACT) &&
          this->VerifyField("rFRB", 0, 255, _command->rACT) &&
-         this->VerifyField("rPRC", 0, 255, _command->rACT) && 
+         this->VerifyField("rPRC", 0, 255, _command->rACT) &&
          this->VerifyField("rSPC", 0, 255, _command->rACT) &&
          this->VerifyField("rFRC", 0, 255, _command->rACT) &&
          this->VerifyField("rPRS", 0, 255, _command->rACT) &&
