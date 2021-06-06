@@ -63,7 +63,8 @@ namespace
     double dist_per_tick = (params.max_gap_ - params.min_gap_) / 255;
     double eff_per_tick = (params.max_effort_ - params.min_effort_) / 255;
 
-    result.position = input.gPO * dist_per_tick + params.min_gap_;
+
+    result.position = params.max_gap_ - input.gPO * dist_per_tick; 
     result.effort = input.gCU * eff_per_tick + params.min_effort_;
     result.stalled = input.gOBJ == 0x1 || input.gOBJ == 0x2;
     result.reached_goal = input.gPO == goal_pos;
