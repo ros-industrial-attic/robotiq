@@ -170,7 +170,8 @@ INT_8 rq_sensor_com()
     {
         //Look for a serial device
         if (strstr(entrydirectory->d_name, "ttyS") ||
-            strstr(entrydirectory->d_name, "ttyUSB"))
+            strstr(entrydirectory->d_name, "ttyUSB") ||
+            strstr(entrydirectory->d_name, "rfcomm"))
         {
             device_found = rq_com_identify_device(entrydirectory->d_name);
         }
@@ -1182,6 +1183,7 @@ static UINT_8 rq_com_identify_device(INT_8 const * const d_name)
 	strcat(dirParent, d_name);
 	strcpy(port_com, dirParent);
 	fd_connexion = open(port_com, O_RDWR | O_NOCTTY | O_NDELAY | O_EXCL);
+	usleep(1000000);
 
     //The serial port is open
     if (fd_connexion != -1)
