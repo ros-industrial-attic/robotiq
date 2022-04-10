@@ -62,7 +62,7 @@ def mainLoop(device):
     rospy.init_node('robotiq2FGripper')
 
     #The Gripper status is published on the topic named 'Robotiq2FGripperRobotInput'
-    pub = rospy.Publisher('Robotiq2FGripperRobotInput', inputMsg.Robotiq2FGripper_robot_input)
+    pub = rospy.Publisher('Robotiq2FGripperRobotInput', inputMsg.Robotiq2FGripper_robot_input, queue_size=1)
 
     #The Gripper command is received from the topic named 'Robotiq2FGripperRobotOutput'
     rospy.Subscriber('Robotiq2FGripperRobotOutput', outputMsg.Robotiq2FGripper_robot_output, gripper.refreshCommand)
