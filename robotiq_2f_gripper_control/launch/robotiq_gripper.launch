@@ -1,24 +1,14 @@
 <launch>
 
-    <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_dev" default="/dev/input/js0" />
 
-     <node pkg="joy" type="joy_node" name="joy_node">
-      <param name="dev" value="$(arg joy_dev)" />
-      <param name="deadzone" value="0.3" />
-      <param name="autorepeat_rate" value="50" />
-    </node>
+  <node pkg="joy" type="joy_node" name="joy_node">
+    <param name="dev" value="$(arg joy_dev)" />
+    <param name="deadzone" value="0.3" />
+    <param name="autorepeat_rate" value="50" />
+  </node>
 
-    <node pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" name="Robotiq2FGripperRtuNode" output="screen" args="/dev/ttyUSB0"/>
+  <node pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" name="Robotiq2FGripperRtuNode" output="screen" args="/dev/ttyUSB0" />
+  <node pkg="robotiq_2f_gripper_control" type="joy_controller.py" name="joy_controller" output="screen"></node>
 
-
-    <node pkg="robotiq_2f_gripper_control"  type="joy_controller.py" name="joy_controller"  output="screen">    
-
-    </node>
-    
 </launch>
-
-
-
-
-
-<!--   <param name="device" type="string" value="/dev/ttyUSB0" />   -->
