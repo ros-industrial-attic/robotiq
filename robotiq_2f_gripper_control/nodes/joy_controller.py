@@ -22,12 +22,6 @@ def joy_listener():
 
 #GLOBAL TEMP
 command = outputMsg.Robotiq2FGripper_robot_output()
-# command.rACT = 0
-# command.rATR = 0
-# command.rFR = 0
-# command.GTO = 0
-# command.rPR = 0
-# command.rSP = 0
 
 
 # called when joy cmd_joy message is received
