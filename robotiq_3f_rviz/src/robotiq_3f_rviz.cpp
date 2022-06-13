@@ -1,4 +1,4 @@
-# include <rviz/panel.h>
+#include <rviz/panel.h>
 #include <ui_panel.h>   // generated from "panel.ui" using CMAKE_AUTOMOC
 #include <ros/ros.h>
 #include <robotiq_3f_gripper_articulated_msgs/Robotiq3FGripperRobotOutput.h>
@@ -181,4 +181,4 @@ void Robotiq3FingerPanel::set_button_active(QPushButton *button, const bool acti
 #include "robotiq_3f_rviz.moc"
 
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(robotiq_3f_rviz::Robotiq3FingerPanel,rviz::Panel )
+PLUGINLIB_EXPORT_CLASS(robotiq_3f_rviz::Robotiq3FingerPanel, rviz::Panel)
