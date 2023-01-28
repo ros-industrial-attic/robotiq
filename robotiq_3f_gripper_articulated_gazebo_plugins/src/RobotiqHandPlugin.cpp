@@ -24,13 +24,6 @@
 #include <string>
 #include <vector>
 
-/*
-
-Due to necessity, I had to change the PID.hh file's definition from private members to public to allow public access of its members. They're private in 1.9 and getter functions aren't implemented until gazebo 3.0. I thought that was silly, and so I hacked around it. The functions directly access the private members by necessity. It can only change if Gazebo patches 1.9 and 2.2 to include getters for it.
-
-I'm not sure exactly where the dependency chain includes PID.hh for the first time, so I've encapsulated all of the gazebo includes. Not pretty, but it works. If you're reading this and know of a better soln', feel free to change it.
-
-*/
 
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/common/Time.hh>
