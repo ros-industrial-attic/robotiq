@@ -11,7 +11,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>python-pymodbus</depend>
+  <depend>python3-pymodbus</depend>
   <depend>rospy</depend>
 
 </package>
