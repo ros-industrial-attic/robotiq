@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="robotiq_hande_gripper_transmission" params="prefix">
+
+    <transmission name="${prefix}hande_left_finger_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}hande_left_finger_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}hande_left_finger_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    
+    <!-- <transmission name="${prefix}hande_right_finger_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}hande_right_finger_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}hande_right_finger_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission> -->
+    
+    <!-- Mimic joints -->
+    <gazebo>
+      <plugin filename="libgazebo_mimic_joint_plugin.so" name="${prefix}mimic_robotiq_hande">
+        <joint>${prefix}hande_left_finger_joint</joint>
+        <mimicJoint>${prefix}hande_right_finger_joint</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <offset>0.0</offset>
+      </plugin>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
+

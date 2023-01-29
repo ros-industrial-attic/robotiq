@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="robotiq_hande_gripper" >
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <!-- <robotNamespace>/</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS> -->
+    </plugin>
+
+  </gazebo>
+
+  <!-- robotiq_hande_gripper -->
+  <xacro:include filename="$(find robotiq_description)/urdf/robotiq_hande_gripper.urdf.xacro" />
+
+
+  <link name="gripper_root_link">
+    <visual>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01" />
+      <origin xyz="0.0 0.0 0.0" />
+      <inertia ixx = "0.000001" ixy = "0.000000" ixz = "0.000000"
+           iyx = "0.000000" iyy = "0.000001" iyz = "0.000000"
+           izx = "0.000000" izy = "0.000000" izz = "0.000001" />
+    </inertial>
+  </link>
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "gripper_root_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <!-- gripper -->
+  <xacro:robotiq_hande_gripper prefix="" parent="gripper_root_link" >
+    <origin xyz="0.0 0 0.005" rpy="0 0 0"/>
+  </xacro:robotiq_hande_gripper>
+
+</robot>
