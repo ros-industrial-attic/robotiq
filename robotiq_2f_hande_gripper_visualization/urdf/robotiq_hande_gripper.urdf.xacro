@@ -5,7 +5,7 @@
   Author: Cristian Beltran
 -->
 
-  <xacro:include filename="$(find robotiq_description)/urdf/robotiq_hande_gripper.transmission.xacro" />
+  <xacro:include filename="$(find robotiq_2f_hande_gripper_visualization)/urdf/robotiq_hande_gripper.transmission.xacro" />
   
   <xacro:macro name="robotiq_hande_gripper" params="prefix parent *origin">
 
@@ -24,7 +24,7 @@
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_description/meshes/hande/hand-e.dae" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotiq_2f_hande_gripper_visualization/meshes/visual/hand-e.dae" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="Dark">
           <color rgba=".1 0.1 0.1 1.0"/>
@@ -33,7 +33,7 @@
       <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_description/meshes/hande/hand-e-collision.dae" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotiq_2f_hande_gripper_visualization/meshes/collision/hand-e-collision.dae" scale="1.0 1.0 1.0"/>
         </geometry>
       </collision>
     </link>
@@ -46,7 +46,7 @@
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_description/meshes/hande/finger_1.dae" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotiq_2f_hande_gripper_visualization/meshes/visual/finger_1.dae" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="DarkGray">
           <color rgba=".4 0.4 0.4 1.0"/>
@@ -55,7 +55,7 @@
       <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_description/meshes/hande/finger_1-collision.dae" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotiq_2f_hande_gripper_visualization/meshes/collision/finger_1-collision.dae" scale="1.0 1.0 1.0"/>
         </geometry>
       </collision>
     </link>
@@ -68,7 +68,7 @@
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_description/meshes/hande/finger_2.dae" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotiq_2f_hande_gripper_visualization/meshes/visual/finger_2.dae" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="DarkGray">
           <color rgba=".4 0.4 0.4 1.0"/>
@@ -77,7 +77,7 @@
       <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotiq_description/meshes/hande/finger_2-collision.dae" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotiq_2f_hande_gripper_visualization/meshes/collision/finger_2-collision.dae" scale="1.0 1.0 1.0"/>
         </geometry>
       </collision>
     </link>
