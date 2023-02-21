@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotiq_2f_hande_gripper_visualization</name>
+  <version>0.1.0</version>
+  <description>The robotiq_description package</description>
+
+  <maintainer email="jack.naylor@sydney.edu.au">Jack Naylor</maintainer>
+  <license>BSD</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>rospy</depend>
+  <!-- <depend>openrave_catkin</depend> -->
+
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>urdf</exec_depend>
+  <exec_depend>xacro</exec_depend>
+</package>
