@@ -113,7 +113,7 @@ def askForCommand(command):
     currentCommand += ', rFR = '   + str(command.rFR )
 
 
-    print currentCommand
+    print(currentCommand)
 
     strAskForCommand  = '-----\nAvailable commands\n\n'
     strAskForCommand += 'r: Reset\n'
@@ -128,7 +128,7 @@ def askForCommand(command):
     
     strAskForCommand += '-->'
 
-    return raw_input(strAskForCommand)
+    return input(strAskForCommand)
 
 def publisher():
     """Main loop which requests new commands and publish them on the Robotiq2FGripperRobotOutput topic."""

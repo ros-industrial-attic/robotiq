@@ -55,33 +55,33 @@ class robotiqbaseRobotiq2FGripper:
     def verifyCommand(self, command):
         """Function to verify that the value of each variable satisfy its limits."""
     	   	
-   	#Verify that each variable is in its correct range
-   	command.rACT = max(0, command.rACT)
-   	command.rACT = min(1, command.rACT)
-   	
-   	command.rGTO = max(0, command.rGTO)
-   	command.rGTO = min(1, command.rGTO)
+        #Verify that each variable is in its correct range
+        command.rACT = max(0, command.rACT)
+        command.rACT = min(1, command.rACT)
+        
+        command.rGTO = max(0, command.rGTO)
+        command.rGTO = min(1, command.rGTO)
 
-   	command.rATR = max(0, command.rATR)
-   	command.rATR = min(1, command.rATR)
-   	
-   	command.rPR  = max(0,   command.rPR)
-   	command.rPR  = min(255, command.rPR)   	
+        command.rATR = max(0, command.rATR)
+        command.rATR = min(1, command.rATR)
+        
+        command.rPR  = max(0,   command.rPR)
+        command.rPR  = min(255, command.rPR)   	
 
-   	command.rSP  = max(0,   command.rSP)
-   	command.rSP  = min(255, command.rSP)   	
+        command.rSP  = max(0,   command.rSP)
+        command.rSP  = min(255, command.rSP)   	
 
-   	command.rFR  = max(0,   command.rFR)
-   	command.rFR  = min(255, command.rFR) 
+        command.rFR  = max(0,   command.rFR)
+        command.rFR  = min(255, command.rFR) 
    	
-   	#Return the modified command
-   	return command
+        #Return the modified command
+        return command
 
     def refreshCommand(self, command):
         """Function to update the command which will be sent during the next sendCommand() call."""
     
-	#Limit the value of each variable
-    	command = self.verifyCommand(command)
+	    #Limit the value of each variable
+        command = self.verifyCommand(command)
 
         #Initiate command as an empty list
         self.message = []
