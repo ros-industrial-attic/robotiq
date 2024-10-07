@@ -161,7 +161,7 @@ def askForCommand(command):
 
     strAskForCommand += '-->'
 
-    return raw_input(strAskForCommand)
+    return input(strAskForCommand)
 
 
 def publisher():

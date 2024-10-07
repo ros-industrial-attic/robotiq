@@ -128,7 +128,7 @@ def askForCommand(command):
     
     strAskForCommand += '-->'
 
-    return raw_input(strAskForCommand)
+    return input(strAskForCommand)
 
 def publisher():
     """Main loop which requests new commands and publish them on the Robotiq2FGripperRobotOutput topic."""
